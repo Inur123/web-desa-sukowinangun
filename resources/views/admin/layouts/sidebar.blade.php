@@ -11,24 +11,27 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="flex-1 p-4">
-        <ul class="space-y-2">
-            <li>
-                <a href="{{ route('dashboard') }}"
-                    class="flex items-center px-4 py-3 text-primary bg-primary/10 rounded-lg font-medium">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href=""
-                    class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors">
-                    <i class="fas fa-newspaper mr-3"></i>
-                    <span>Kelola Berita</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+   <nav class="flex-1 p-4">
+    <ul class="space-y-2">
+        <li>
+            <a href="{{ route('dashboard') }}"
+                class="flex items-center px-4 py-3 rounded-lg font-medium
+                {{ request()->routeIs('dashboard') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('posts.index') }}"
+                class="flex items-center px-4 py-3 rounded-lg font-medium
+                {{ request()->routeIs('posts.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                <i class="fas fa-newspaper mr-3"></i>
+                <span>Kelola Berita</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
 
     <!-- User Info -->
     <div class="p-4 border-t border-gray-200">
