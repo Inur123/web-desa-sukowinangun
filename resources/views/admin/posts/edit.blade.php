@@ -40,14 +40,17 @@
                 </div>
 
                 {{-- Ringkasan --}}
-                <div>
-                    <label for="summary" class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
-                    <textarea id="summary" name="summary" rows="3"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">{{ old('summary', $post->summary) }}</textarea>
-                    @error('summary')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+               <div>
+    <label for="summary" class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
+    <textarea id="summary" name="summary" rows="3"
+              maxlength="150"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="Ringkasan singkat berita...">{{ old('summary', $post->summary) }}</textarea>
+    <p id="summary-count" class="text-sm text-gray-500 mt-1">0 / 100 huruf</p>
+    @error('summary')
+        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+    @enderror
+</div>
             </div>
 
             <div class="space-y-6">
@@ -157,5 +160,19 @@
             preview.src = '';
         }
     });
+</script>
+<script>
+    const summary = document.getElementById('summary');
+    const counter = document.getElementById('summary-count');
+
+    function updateSummaryCount() {
+        const letters = summary.value.replace(/[^a-zA-Z]/g, '');
+        const count = letters.length;
+        counter.textContent = `${count} / 100 huruf`;
+        counter.classList.toggle('text-red-600', count > 100);
+    }
+
+    summary.addEventListener('input', updateSummaryCount);
+    document.addEventListener('DOMContentLoaded', updateSummaryCount);
 </script>
 @endsection

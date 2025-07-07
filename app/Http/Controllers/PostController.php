@@ -10,22 +10,22 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-   public function index()
-{
-    $totalBerita = Post::count();
+    public function index()
+    {
+        $totalBerita = Post::count();
 
-    // Ambil data bulan ini
-    $bulanIni = Post::whereMonth('created_at', now()->month)
-                    ->whereYear('created_at', now()->year)
-                    ->count();
+        // Ambil data bulan ini
+        $bulanIni = Post::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
 
-    // Misalnya field 'status' menandakan aktif atau tidak
-    $activePosts = Post::where('status', 'active')->count();
+        // Misalnya field 'status' menandakan aktif atau tidak
+        $activePosts = Post::where('status', 'active')->count();
 
-    $posts = Post::with('tags')->latest()->paginate(10);
+        $posts = Post::with('tags')->latest()->paginate(10);
 
-    return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts'));
-}
+        return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts'));
+    }
 
     public function create()
     {
@@ -46,7 +46,15 @@ class PostController extends Controller
         $request->validate([
             'title'         => 'required|string|max:255',
             'content'       => 'nullable|string',
-            'summary'       => 'nullable|string',
+
+            // Validasi summary max 100 huruf (tanpa spasi/simbol)
+            'summary'       => ['nullable', 'string', function ($attribute, $value, $fail) {
+                $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
+                if ($letterCount > 100) {
+                    $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
+                }
+            }],
+
             'status'        => 'required|in:active,nonactive',
             'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
             'published_at'  => 'nullable|date',
@@ -74,6 +82,7 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Post berhasil ditambahkan!');
     }
 
+
     public function edit(Post $post)
     {
         $categories = [
@@ -97,7 +106,12 @@ class PostController extends Controller
         $request->validate([
             'title'         => 'required|string|max:255',
             'content'       => 'nullable|string',
-            'summary'       => 'nullable|string',
+            'summary' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
+                if ($letterCount > 100) {
+                    $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
+                }
+            }],
             'status'        => 'required|in:active,nonactive',
             'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
             'published_at'  => 'nullable|date',
@@ -125,11 +139,11 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui!');
     }
-  public function show($slug)
-{
-    $post = Post::where('slug', $slug)->firstOrFail();
-    return view('admin.posts.show', compact('post'));
-}
+    public function show($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('admin.posts.show', compact('post'));
+    }
 
 
     public function destroy(Post $post)
