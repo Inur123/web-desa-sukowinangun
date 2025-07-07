@@ -27,13 +27,6 @@
                     <span>Kelola Berita</span>
                 </a>
             </li>
-            <li>
-                <a href="/"
-                    class="flex items-center px-4 py-3 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors">
-                    <i class="fas fa-globe mr-3"></i>
-                    <span>Lihat Website</span>
-                </a>
-            </li>
         </ul>
     </nav>
 
