@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-@section('title', 'Sukowinangun - Beranda')
+@section('title', 'Beranda - Sukowinangun')
 @section('content')
     <!-- Hero Section -->
     <section class="pt-16 bg-gradient-to-br from-primary to-secondary">
@@ -171,7 +171,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse ($posts as $post)
-                    <a href="{{ route('posts.show', $post->slug) }}"
+                    <a href="{{ route('berita.show', $post->slug) }}"
                         class="block group bg-white rounded-xl shadow-lg overflow-hidden border border-transparent hover:border-primary hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
                         <article>
                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"

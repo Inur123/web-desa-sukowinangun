@@ -21,6 +21,7 @@ return new class extends Migration
         $table->string('image')->nullable();
         $table->string('category'); // ⬅️ Ganti dari category_id ke category (string)
         $table->date('published_at')->nullable();
+        $table->unsignedBigInteger('views')->default(0); // Tambahkan kolom views
         $table->timestamps();
     });
     }

@@ -12,7 +12,7 @@ class Post extends Model
 
     protected $fillable = [
         'title', 'slug', 'status', 'content',
-        'summary', 'image', 'category', 'published_at'
+        'summary', 'image', 'category', 'published_at', 'views'
     ];
 
     protected static function booted()
