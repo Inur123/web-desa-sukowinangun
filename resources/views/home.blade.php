@@ -1,5 +1,6 @@
 @extends('user.layouts.app')
 @section('title', 'Beranda - Sukowinangun')
+
 @section('content')
     <!-- Hero Section -->
     <section class="pt-16 bg-gradient-to-br from-primary to-secondary">

@@ -21,7 +21,7 @@
                     <i class="fas fa-eye text-green-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-2xl font-bold text-gray-800">1,247</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $totalViews }}</p>
                     <p class="text-gray-600 text-sm">Total Views</p>
                 </div>
             </div>

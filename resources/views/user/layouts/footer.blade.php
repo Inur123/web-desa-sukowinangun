@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
                 <div class="flex items-center mb-4">
-                    <img class="h-10 w-10 mr-3" src="/placeholder.svg?height=40&width=40" alt="Logo Desa" />
-                    <h3 class="text-xl font-bold">Desa Maju Sejahtera</h3>
+                    <img class="h-10 w-10 mr-3" src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa" />
+                    <h3 class="text-xl font-bold">Kelurahan Sukowinangun</h3>
                 </div>
                 <p class="text-gray-300 mb-4">
                     Desa yang berkembang dengan semangat gotong royong dan teknologi modern untuk pelayanan terbaik.
@@ -68,7 +68,7 @@
 
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-300">
-                &copy; 2024 Desa Maju Sejahtera. Semua hak cipta dilindungi.
+               &copy; {{ date('Y') }} Kelurahan Sukowangun. Semua hak cipta dilindungi.
             </p>
         </div>
     </div>

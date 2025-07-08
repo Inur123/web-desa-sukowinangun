@@ -10,22 +10,24 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    public function index()
-    {
-        $totalBerita = Post::count();
+ public function index()
+{
+    $totalBerita = Post::count();
 
-        // Ambil data bulan ini
-        $bulanIni = Post::whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->count();
+    $bulanIni = Post::whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
 
-        // Misalnya field 'status' menandakan aktif atau tidak
-        $activePosts = Post::where('status', 'active')->count();
+    $activePosts = Post::where('status', 'active')->count();
 
-        $posts = Post::with('tags')->latest()->paginate(10);
+    // Tambahkan total views
+    $totalViews = Post::sum('views');
 
-        return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts'));
-    }
+    $posts = Post::with('tags')->latest()->paginate(10);
+
+    return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts', 'totalViews'));
+}
+
 
     public function create()
     {

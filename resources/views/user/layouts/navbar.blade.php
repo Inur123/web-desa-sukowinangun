@@ -12,29 +12,29 @@
 
             <!-- Desktop Menu -->
             <div class="hidden md:block">
-    <div class="ml-10 flex items-baseline space-x-4">
-        <a href="{{ route('home') }}"
-            class="{{ request()->routeIs('home') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Beranda
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('profil') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Profil
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('layanan') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Layanan
-        </a>
-        <a href="{{ route('berita.index') }}"
-            class="{{ request()->routeIs('berita.index') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Berita
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('kontak') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Kontak
-        </a>
-    </div>
-</div>
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="{{ route('home') }}"
+                        class="{{ request()->routeIs('home') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Beranda
+                    </a>
+                    <a href=""
+                        class="{{ request()->routeIs('profil') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Profil
+                    </a>
+                    <a href=""
+                        class="{{ request()->routeIs('layanan') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Layanan
+                    </a>
+                    <a href="{{ route('berita.index') }}"
+                        class="{{ request()->is('berita*') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Berita
+                    </a>
+                    <a href=""
+                        class="{{ request()->routeIs('kontak') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Kontak
+                    </a>
+                </div>
+            </div>
 
 
             <!-- Mobile menu button -->
@@ -49,28 +49,29 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-        <a href="{{ route('home') }}"
-            class="{{ request()->routeIs('home') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
-            Beranda
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('profil') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
-            Profil
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('layanan') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
-            Layanan
-        </a>
-        <a href="{{ route('berita.index') }}"
-            class="{{ request()->routeIs('berita.index') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
-            Berita
-        </a>
-        <a href=""
-            class="{{ request()->routeIs('kontak') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
-            Kontak
-        </a>
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+            <a href="{{ route('home') }}"
+                class="{{ request()->routeIs('home') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
+                Beranda
+            </a>
+            <a href=""
+                class="{{ request()->routeIs('profil') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
+                Profil
+            </a>
+            <a href=""
+                class="{{ request()->routeIs('layanan') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
+                Layanan
+            </a>
+            <a href="{{ route('berita.index') }}"
+                class="{{ request()->is('berita*') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
+                Berita
+            </a>
+
+            <a href=""
+                class="{{ request()->routeIs('kontak') ? 'text-primary bg-primary/10' : 'text-gray-700 hover:text-primary' }} block px-3 py-2 rounded-md text-base font-medium">
+                Kontak
+            </a>
+        </div>
     </div>
-</div>
 
 </nav>

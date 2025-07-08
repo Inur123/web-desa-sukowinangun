@@ -26,15 +26,16 @@ class BeritaController extends Controller
     /**
      * Menampilkan detail berita berdasarkan slug.
      */
- public function show($slug)
+public function show($slug)
 {
-    $post = Post::where('slug', $slug)
+    $post = Post::with('tags')
+                ->where('slug', $slug)
                 ->where('status', 'active')
                 ->firstOrFail();
 
-    // Tambahkan view count
     $post->increment('views');
 
     return view('berita-show', compact('post'));
 }
+
 }
