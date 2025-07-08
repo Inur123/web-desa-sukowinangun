@@ -96,7 +96,7 @@
 
                                 <p
                                     class="text-gray-600 mb-2 xs:mb-3 text-xs xs:text-sm sm:text-base line-clamp-3 flex-grow">
-                                    {{ $post->summary }}...
+                                    {{ strip_tags($post->summary) }}...
                                 </p>
 
                                 <div class="flex items-center justify-between mt-auto pt-2">

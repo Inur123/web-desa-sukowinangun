@@ -105,7 +105,5 @@
             });
         }, 30000); // Update every 30 seconds
     </script>
-    
-    @stack('scripts')
 </body>
 </html>

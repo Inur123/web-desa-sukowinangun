@@ -100,11 +100,7 @@
 
             <!-- Article Body -->
             <div class="prose prose-lg max-w-none">
-                @if ($post->summary)
-                    <p class="text-xl text-gray-700 leading-relaxed mb-6 font-medium">
-                        {{ $post->summary }}
-                    </p>
-                @endif
+
                 <div class="space-y-6 text-gray-700 leading-relaxed">
                     {!! $post->content !!}
                 </div>

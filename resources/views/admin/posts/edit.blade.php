@@ -33,24 +33,24 @@
                 <div>
                     <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Konten Berita</label>
                     <textarea id="content" name="content" rows="12"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">{{ old('content', $post->content) }}</textarea>
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent editor"
+                              placeholder="Tulis konten berita di sini...">{{ old('content', $post->content) }}</textarea>
                     @error('content')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
                 {{-- Ringkasan --}}
-               <div>
-    <label for="summary" class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
-    <textarea id="summary" name="summary" rows="3"
-              maxlength="150"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Ringkasan singkat berita...">{{ old('summary', $post->summary) }}</textarea>
-    <p id="summary-count" class="text-sm text-gray-500 mt-1">0 / 100 huruf</p>
-    @error('summary')
-        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-    @enderror
-</div>
+                <div>
+                    <label for="summary" class="block text-sm font-medium text-gray-700 mb-2">Ringkasan</label>
+                    <textarea id="summary" name="summary" rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent editor-small"
+                              placeholder="Ringkasan singkat berita...">{{ old('summary', $post->summary) }}</textarea>
+                    <p id="summary-count" class="text-sm text-gray-500 mt-1">0 / 150 huruf</p>
+                    @error('summary')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
             <div class="space-y-6">
@@ -99,23 +99,27 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Utama</label>
                     @if ($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="Current image" class="mb-3 w-full rounded-lg shadow">
+                        <div class="mb-3">
+                            <p class="text-sm text-gray-600 mb-1">Gambar Saat Ini:</p>
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Current image" class="w-full rounded-lg shadow">
+                        </div>
                     @endif
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
                          onclick="document.getElementById('image').click()">
                         <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-gray-600 mb-2">Klik untuk ganti gambar</p>
+                        <p class="text-gray-600 mb-2">Klik untuk {{ $post->image ? 'ganti' : 'upload' }} gambar</p>
                         <p class="text-xs text-gray-500">PNG, JPG hingga 2MB</p>
                         <input type="file" id="image" name="image" accept="image/*" class="hidden">
                     </div>
                     @error('image')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+
+                    <div id="image-preview-wrapper" class="mt-4 hidden">
+                        <p class="text-sm text-gray-600 mb-1">Preview Gambar Baru:</p>
+                        <img id="image-preview" class="w-full rounded-lg shadow" />
+                    </div>
                 </div>
-                <div id="image-preview-wrapper" class="mt-4 hidden">
-    <p class="text-sm text-gray-600 mb-1">Preview Gambar Baru:</p>
-    <img id="image-preview" class="w-full rounded-lg shadow" />
-</div>
 
                 {{-- Tags --}}
                 <div>
@@ -142,7 +146,47 @@
         </div>
     </form>
 </div>
+
+<!-- Tambahkan CKEditor -->
+<script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+
 <script>
+    // Inisialisasi CKEditor untuk konten (full features)
+CKEDITOR.replace('content', {
+    toolbar: [
+        { name: 'document', items: ['Source', '-', 'Preview', 'Print'] },
+        { name: 'clipboard', items: ['Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace'] },
+        '/',
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+        { name: 'paragraph', items: [
+            'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
+            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+        ]},
+        { name: 'links', items: ['Link', 'Unlink'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+        '/',
+        { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+        { name: 'colors', items: ['TextColor', 'BGColor'] },
+        { name: 'tools', items: ['Maximize', 'ShowBlocks'] }
+    ],
+    height: 400,
+    extraPlugins: 'justify'
+});
+
+
+    // Inisialisasi CKEditor untuk ringkasan (lebih sederhana)
+    CKEDITOR.replace('summary', {
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+            { name: 'tools', items: ['Maximize'] }
+        ],
+        height: 150,
+        removePlugins: 'image' // Nonaktifkan fitur image di ringkasan
+    });
+
+    // Script untuk preview gambar
     document.getElementById('image').addEventListener('change', function(event) {
         const previewWrapper = document.getElementById('image-preview-wrapper');
         const preview = document.getElementById('image-preview');
@@ -160,19 +204,31 @@
             preview.src = '';
         }
     });
-</script>
-<script>
-    const summary = document.getElementById('summary');
-    const counter = document.getElementById('summary-count');
 
+    // Script untuk menghitung karakter pada ringkasan
     function updateSummaryCount() {
-        const letters = summary.value.replace(/[^a-zA-Z]/g, '');
-        const count = letters.length;
-        counter.textContent = `${count} / 100 huruf`;
-        counter.classList.toggle('text-red-600', count > 100);
+        const editor = CKEDITOR.instances.summary;
+        if (editor) {
+            const data = editor.getData();
+            const text = data.replace(/<[^>]*>/g, ''); // Hilangkan tag HTML
+            const count = text.length;
+
+            document.getElementById('summary-count').textContent = `${count} / 150 huruf`;
+
+            if (count > 150) {
+                document.getElementById('summary-count').classList.add('text-red-600');
+            } else {
+                document.getElementById('summary-count').classList.remove('text-red-600');
+            }
+        }
     }
 
-    summary.addEventListener('input', updateSummaryCount);
-    document.addEventListener('DOMContentLoaded', updateSummaryCount);
+    // Update count saat editor berubah
+    CKEDITOR.instances.summary.on('change', updateSummaryCount);
+
+    // Update count saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(updateSummaryCount, 500);
+    });
 </script>
 @endsection

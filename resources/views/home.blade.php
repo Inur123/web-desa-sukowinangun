@@ -185,9 +185,10 @@
                                 <h3 class="text-xl font-bold text-gray-800 mb-3">
                                     {{ $post->title }}
                                 </h3>
-                                <p class="text-gray-600 mb-4">
-                                    {{ $post->summary }}....
-                                </p>
+                              <p class="text-gray-600 mb-4">
+    {{ strip_tags($post->summary) }}....
+</p>
+
                                 <span
                                     class="inline-block text-primary font-semibold group-hover:text-secondary transition-colors">
                                     Baca Selengkapnya <i class="fas fa-arrow-right ml-2"></i>

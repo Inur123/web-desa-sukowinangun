@@ -24,8 +24,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/posts', PostController::class);
 
 
+
+
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+
+
