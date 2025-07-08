@@ -6,10 +6,10 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-600 mb-1">Total Berita</p>
-                    <p class="text-3xl font-bold text-gray-800">24</p>
+                    <p class="text-3xl font-bold text-gray-800">{{ $totalPosts }}</p>
                     <p class="text-sm text-green-600 mt-1">
                         <i class="fas fa-arrow-up mr-1"></i>
-                        +3 bulan ini
+                        {{ $postsThisMonth }}% bulan ini
                     </p>
                 </div>
                 <div class="bg-primary/10 p-3 rounded-lg">
@@ -38,10 +38,10 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-600 mb-1">Views Berita</p>
-                    <p class="text-3xl font-bold text-gray-800">8,432</p>
+                    <p class="text-3xl font-bold text-gray-800">{{ $totalViews }}</p>
                     <p class="text-sm text-green-600 mt-1">
                         <i class="fas fa-arrow-up mr-1"></i>
-                        +8% hari ini
+                        {{ $viewGrowth }}% hari ini
                     </p>
                 </div>
                 <div class="bg-green-100 p-3 rounded-lg">
@@ -87,58 +87,27 @@
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <h2 class="text-lg font-semibold text-gray-800 mb-6">Berita Populer</h2>
             <div class="space-y-4">
-                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <img src="/placeholder.svg?height=50&width=80" alt="Thumbnail"
-                        class="w-12 h-8 object-cover rounded mr-3">
-                    <div class="flex-1">
-                        <h3 class="text-sm font-medium text-gray-800">Pembangunan Jalan Desa Tahap II</h3>
-                        <p class="text-xs text-gray-500">234 views • 2 hari lalu</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-sm font-semibold text-primary">234</span>
-                        <p class="text-xs text-gray-500">views</p>
-                    </div>
-                </div>
+                @foreach ($latestPosts as $post)
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                       <img src="{{ $post->image ? asset('storage/' . $post->image) : '/placeholder.svg?height=50&width=80' }}"
+     alt="{{ $post->title }}"
+     class="w-12 h-8 object-cover rounded mr-3">
 
-                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <img src="/placeholder.svg?height=50&width=80" alt="Thumbnail"
-                        class="w-12 h-8 object-cover rounded mr-3">
-                    <div class="flex-1">
-                        <h3 class="text-sm font-medium text-gray-800">Festival Budaya Desa 2024</h3>
-                        <p class="text-xs text-gray-500">189 views • 3 hari lalu</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-sm font-semibold text-primary">189</span>
-                        <p class="text-xs text-gray-500">views</p>
-                    </div>
-                </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium text-gray-800">{{ $post->title }}</h3>
+                            <p class="text-xs text-gray-500">
+                                {{ $post->views }} views • {{ $post->created_at->diffForHumans() }}
+                            </p>
+                        </div>
 
-                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <img src="/placeholder.svg?height=50&width=80" alt="Thumbnail"
-                        class="w-12 h-8 object-cover rounded mr-3">
-                    <div class="flex-1">
-                        <h3 class="text-sm font-medium text-gray-800">Posyandu Balita Januari</h3>
-                        <p class="text-xs text-gray-500">156 views • 5 hari lalu</p>
+                        <div class="text-right">
+                            <span class="text-sm font-semibold text-primary">{{ $post->views }}</span>
+                            <p class="text-xs text-gray-500">views</p>
+                        </div>
                     </div>
-                    <div class="text-right">
-                        <span class="text-sm font-semibold text-primary">156</span>
-                        <p class="text-xs text-gray-500">views</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
-                    <img src="/placeholder.svg?height=50&width=80" alt="Thumbnail"
-                        class="w-12 h-8 object-cover rounded mr-3">
-                    <div class="flex-1">
-                        <h3 class="text-sm font-medium text-gray-800">Gotong Royong Bersih Desa</h3>
-                        <p class="text-xs text-gray-500">98 views • 1 minggu lalu</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-sm font-semibold text-primary">98</span>
-                        <p class="text-xs text-gray-500">views</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
             <div class="mt-4 pt-4 border-t border-gray-200">
                 <a href="posts.html" class="text-primary hover:text-secondary font-medium text-sm transition-colors">
                     Lihat Semua Berita <i class="fas fa-arrow-right ml-1"></i>

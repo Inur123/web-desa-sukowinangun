@@ -107,7 +107,7 @@
                                         alt="Thumbnail" class="w-12 h-8 object-cover rounded mr-3">
                                     <div>
                                         <p class="text-sm font-medium text-gray-800">{{ $post->title }}</p>
-                                        <p class="text-xs text-gray-500">{{ Str::limit($post->summary, 50) }}</p>
+                                       <p class="text-xs text-gray-500">{{ Str::limit(strip_tags($post->summary), 50) }}</p>
                                     </div>
                                 </div>
                             </td>

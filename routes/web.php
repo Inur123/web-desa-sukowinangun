@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -16,17 +17,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-    // Route resource untuk posts
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/posts', PostController::class);
-
-
-
-
 });
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
