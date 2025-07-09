@@ -15,12 +15,12 @@ class BeritaController extends Controller
     $mostViewedPost = Post::where('status', 'active')
                           ->orderByDesc('views')
                           ->first();
-
+ $breakingNews = Post::latest()->take(3)->get();
     $posts = Post::where('status', 'active')
                  ->orderByDesc('published_at')
                  ->get();
 
-    return view('berita', compact('mostViewedPost', 'posts'));
+    return view('berita', compact('mostViewedPost', 'posts', 'breakingNews'));
 }
 
     /**

@@ -9,7 +9,7 @@
                 <div class="text-white">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         Selamat Datang di<br />
-                        <span class="text-accent">Desa Maju Sejahtera</span>
+                        <span class="text-accent">Kelurahan Sukowinangun</span>
                     </h1>
                     <p class="text-xl mb-8 text-gray-100">
                         Desa yang berkembang dengan semangat gotong royong, teknologi
@@ -62,24 +62,24 @@
                 <div class="text-center transform hover:scale-105 transition-transform duration-300">
                     <div
                         class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                        <i class="fas fa-graduation-cap text-secondary text-2xl"></i>
+                        <i class="fas fa-users text-secondary text-2xl"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-gray-800 counter" data-target="12">
                         0
                     </h3>
-                    <p class="text-gray-600">Sekolah</p>
+                    <p class="text-gray-600">RW</p>
                 </div>
 
                 <!-- Puskesmas -->
                 <div class="text-center transform hover:scale-105 transition-transform duration-300">
                     <div
                         class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                        <i class="fas fa-hospital text-accent text-2xl"></i>
+                        <i class="fas fa-home text-accent text-2xl"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-gray-800 counter" data-target="3">
                         0
                     </h3>
-                    <p class="text-gray-600">Puskesmas</p>
+                    <p class="text-gray-600">RT</p>
                 </div>
 
                 <!-- Area Hijau -->
@@ -151,7 +151,35 @@
             </div>
         </div>
     </section>
-
+    <!-- Logo Lembaga Desa -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-10">Partner</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-center">
+                <!-- Karang Taruna -->
+                <div class="flex flex-col items-center">
+                    <img src="{{ asset('images/logo-desa.png') }}" alt="Karang Taruna"
+                        class="w-20 h-20 object-contain mb-3">
+                    <p class="text-gray-700 font-semibold">Karang Taruna</p>
+                </div>
+                <!-- PKK -->
+                <div class="flex flex-col items-center">
+                    <img src="{{ asset('images/logo-desa.png') }}" alt="PKK" class="w-20 h-20 object-contain mb-3">
+                    <p class="text-gray-700 font-semibold">PKK</p>
+                </div>
+                <!-- BUMDes -->
+                <div class="flex flex-col items-center">
+                    <img src="{{ asset('images/logo-desa.png') }}" alt="BUMDes" class="w-20 h-20 object-contain mb-3">
+                    <p class="text-gray-700 font-semibold">BUMDes</p>
+                </div>
+                <!-- LPM -->
+                <div class="flex flex-col items-center">
+                    <img src="{{ asset('images/logo-desa.png') }}" alt="LPM" class="w-20 h-20 object-contain mb-3">
+                    <p class="text-gray-700 font-semibold">LPM</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Latest News -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -164,7 +192,7 @@
                         Informasi terbaru seputar kegiatan desa.
                     </p>
                 </div>
-                <a href="berita.html"
+                <a href="{{ route('berita.index') }}"
                     class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors">
                     Lihat Semua
                 </a>
@@ -185,9 +213,9 @@
                                 <h3 class="text-xl font-bold text-gray-800 mb-3">
                                     {{ $post->title }}
                                 </h3>
-                              <p class="text-gray-600 mb-4">
-    {{ strip_tags($post->summary) }}....
-</p>
+                                <p class="text-gray-600 mb-4">
+                                    {{ strip_tags($post->summary) }}....
+                                </p>
 
                                 <span
                                     class="inline-block text-primary font-semibold group-hover:text-secondary transition-colors">
@@ -204,4 +232,6 @@
 
         </div>
     </section>
+
+
 @endsection

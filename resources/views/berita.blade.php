@@ -3,6 +3,7 @@
 
 @section('content')
 
+
     <!-- Page Header -->
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -15,6 +16,28 @@
             </div>
         </div>
     </section>
+    <!-- Breaking News Section -->
+    <section class=" py-2 bg-black-500 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center overflow-hidden">
+            <span class="bg-white text-primary text-xs sm:text-sm font-bold px-3 py-1 rounded-full uppercase animate-pulse">
+                Breaking News :
+            </span>
+            <div class="relative overflow-hidden h-6 flex-1">
+                <div id="breakingNewsTicker" class="flex flex-col transition-transform duration-700 ease-in-out">
+                    @forelse ($breakingNews as $item)
+                        <div class="text-black text-sm sm:text-base line-clamp-1">
+                            <a href="{{ route('berita.show', $item->slug) }}" class="hover:underline">
+                                {{ $item->title }}
+                            </a>
+                        </div>
+                    @empty
+                        <div class="text-white text-sm">Tidak ada breaking news saat ini.</div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Featured News -->
     <section class="py-12 sm:py-16 md:py-20 bg-white">
@@ -22,7 +45,6 @@
             <div class="mb-8 sm:mb-12">
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Berita Utama</h2>
             </div>
-
             @if ($mostViewedPost)
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
                     <div class="h-full border border-gray-200 rounded-lg overflow-hidden shadow-md">
@@ -41,7 +63,7 @@
                             {{ $mostViewedPost->title }}
                         </h2>
                         <p class="text-gray-600 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                            {{ $mostViewedPost->summary }}...
+                            {{ strip_tags($mostViewedPost->summary) }}
                         </p>
                         <div class="flex items-center">
                             <span
@@ -69,7 +91,6 @@
             <div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
                 <h2 class="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-800 mb-2 xs:mb-3 sm:mb-4">Berita Terbaru</h2>
             </div>
-
             <div
                 class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8">
                 @forelse ($posts as $post)
@@ -81,24 +102,20 @@
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
                                     class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
-
                             <!-- Content -->
                             <div class="p-3 xs:p-4 sm:p-5 flex-grow flex flex-col">
                                 <div class="flex items-center text-xs xs:text-sm text-gray-500 mb-1 xs:mb-2">
                                     <i class="fas fa-calendar mr-1 xs:mr-2 text-xs"></i>
                                     <span>{{ \Carbon\Carbon::parse($post->published_at)->translatedFormat('d F Y') }}</span>
                                 </div>
-
                                 <h3
                                     class="text-base xs:text-lg sm:text-xl font-bold text-gray-800 mb-2 xs:mb-3 line-clamp-2">
                                     {{ $post->title }}
                                 </h3>
-
                                 <p
                                     class="text-gray-600 mb-2 xs:mb-3 text-xs xs:text-sm sm:text-base line-clamp-3 flex-grow">
                                     {{ strip_tags($post->summary) }}...
                                 </p>
-
                                 <div class="flex items-center justify-between mt-auto pt-2">
                                     <span
                                         class="bg-accent/10 text-accent px-2 xs:px-3 py-1 rounded-full text-xxs xs:text-xs sm:text-sm font-medium xs:font-semibold">
@@ -119,9 +136,22 @@
                     </div>
                 @endforelse
             </div>
-
-
-
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticker = document.getElementById('breakingNewsTicker');
+            const items = ticker.querySelectorAll('div');
+            let currentIndex = 0;
+            const itemHeight = 24; // Height of one item in pixels
+
+            if (items.length > 1) {
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % items.length;
+                    ticker.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
+                }, 3000); // Change every 3 seconds
+            }
+        });
+    </script>
 @endsection
