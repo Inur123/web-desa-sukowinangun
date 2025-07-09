@@ -95,13 +95,13 @@
                     @enderror
                 </div>
 
-                {{-- Gambar --}}
+                {{-- Gambar Utama --}}
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Utama</label>
                     @if ($post->image)
                         <div class="mb-3">
                             <p class="text-sm text-gray-600 mb-1">Gambar Saat Ini:</p>
-                            <img src="{{ asset('storage/' . $post->image) }}" alt="Current image" class="w-full rounded-lg shadow">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Current image" class="w-full h-48 object-cover rounded-lg shadow">
                         </div>
                     @endif
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
@@ -117,8 +117,43 @@
 
                     <div id="image-preview-wrapper" class="mt-4 hidden">
                         <p class="text-sm text-gray-600 mb-1">Preview Gambar Baru:</p>
-                        <img id="image-preview" class="w-full rounded-lg shadow" />
+                        <img id="image-preview" class="w-full h-48 object-cover rounded-lg shadow" />
                     </div>
+                </div>
+
+                {{-- Gambar Tambahan --}}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tambahan</label>
+
+                    @if($post->additional_images && count($post->additional_images) > 0)
+                        <div class="mb-4 space-y-3">
+                            <p class="text-sm text-gray-600">Gambar Saat Ini:</p>
+                            @foreach($post->additional_images as $index => $image)
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex-1">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Additional image {{ $index + 1 }}"
+                                             class="w-full h-24 object-cover rounded-lg border border-gray-200">
+                                    </div>
+                                    <button type="button" onclick="removeExistingImage(this, '{{ $image }}')"
+                                            class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <input type="hidden" name="existing_additional_images[]" value="{{ $image }}">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <div id="additional-images-wrapper" class="space-y-4">
+                        {{-- Dynamic inputs will be added here --}}
+                    </div>
+
+                    <button type="button" onclick="addAdditionalImage()"
+                        class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-plus-circle mr-2 text-primary"></i>
+                        <span class="text-primary font-medium">Tambah Gambar Lainnya</span>
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2">Format: PNG, JPG (maksimal 2MB per gambar)</p>
                 </div>
 
                 {{-- Tags --}}
@@ -152,28 +187,27 @@
 
 <script>
     // Inisialisasi CKEditor untuk konten (full features)
-CKEDITOR.replace('content', {
-    toolbar: [
-        { name: 'document', items: ['Source', '-', 'Preview', 'Print'] },
-        { name: 'clipboard', items: ['Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace'] },
-        '/',
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
-        { name: 'paragraph', items: [
-            'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
-            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
-        ]},
-        { name: 'links', items: ['Link', 'Unlink'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
-        '/',
-        { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-        { name: 'colors', items: ['TextColor', 'BGColor'] },
-        { name: 'tools', items: ['Maximize', 'ShowBlocks'] }
-    ],
-    height: 400,
-    extraPlugins: 'justify'
-});
-
+    CKEDITOR.replace('content', {
+        toolbar: [
+            { name: 'document', items: ['Source', '-', 'Preview', 'Print'] },
+            { name: 'clipboard', items: ['Undo', 'Redo'] },
+            { name: 'editing', items: ['Find', 'Replace'] },
+            '/',
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+            { name: 'paragraph', items: [
+                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
+                '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+            ]},
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+            '/',
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
+            { name: 'tools', items: ['Maximize', 'ShowBlocks'] }
+        ],
+        height: 400,
+        extraPlugins: 'justify'
+    });
 
     // Inisialisasi CKEditor untuk ringkasan (lebih sederhana)
     CKEDITOR.replace('summary', {
@@ -186,7 +220,7 @@ CKEDITOR.replace('content', {
         removePlugins: 'image' // Nonaktifkan fitur image di ringkasan
     });
 
-    // Script untuk preview gambar
+    // Script untuk preview gambar utama
     document.getElementById('image').addEventListener('change', function(event) {
         const previewWrapper = document.getElementById('image-preview-wrapper');
         const preview = document.getElementById('image-preview');
@@ -229,6 +263,98 @@ CKEDITOR.replace('content', {
     // Update count saat halaman dimuat
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(updateSummaryCount, 500);
+    });
+
+    // Script untuk gambar tambahan
+    let imageInputIndex = 0;
+    const existingImagesToDelete = [];
+
+    function addAdditionalImage() {
+        const wrapper = document.getElementById('additional-images-wrapper');
+
+        const div = document.createElement('div');
+        div.classList.add('relative', 'group');
+
+        const inputDiv = document.createElement('div');
+        inputDiv.classList.add('flex', 'items-center', 'space-x-3');
+
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.name = `additional_images[]`;
+        input.accept = 'image/*';
+        input.classList.add(
+            'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg',
+            'border-gray-300', 'focus:ring-2', 'focus:ring-primary',
+            'focus:border-transparent', 'file:mr-4', 'file:py-2',
+            'file:px-4', 'file:rounded-md', 'file:border-0',
+            'file:text-sm', 'file:font-medium', 'file:bg-gray-100',
+            'file:text-gray-700', 'hover:file:bg-gray-200'
+        );
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
+        removeBtn.classList.add('flex-shrink-0');
+        removeBtn.title = 'Hapus gambar ini';
+        removeBtn.onclick = function() {
+            wrapper.removeChild(div);
+        };
+
+        inputDiv.appendChild(input);
+        inputDiv.appendChild(removeBtn);
+        div.appendChild(inputDiv);
+
+        // Tambahkan preview container
+        const previewDiv = document.createElement('div');
+        previewDiv.classList.add('mt-2', 'hidden', 'image-preview-container');
+
+        const previewLabel = document.createElement('p');
+        previewLabel.classList.add('text-sm', 'text-gray-600', 'mb-1');
+        previewLabel.textContent = 'Preview:';
+
+        const previewImg = document.createElement('img');
+        previewImg.classList.add('w-full', 'h-24', 'object-cover', 'rounded-lg', 'border', 'border-gray-200');
+
+        previewDiv.appendChild(previewLabel);
+        previewDiv.appendChild(previewImg);
+        div.appendChild(previewDiv);
+
+        // Event listener untuk preview gambar
+        input.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewDiv.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewDiv.classList.add('hidden');
+            }
+        });
+
+        wrapper.appendChild(div);
+        imageInputIndex++;
+    }
+
+    // Fungsi untuk menandai gambar yang akan dihapus
+    function removeExistingImage(button, imagePath) {
+        existingImagesToDelete.push(imagePath);
+        const container = button.closest('.flex.items-center.space-x-3');
+        container.remove();
+
+        // Tambahkan input hidden untuk menandai gambar yang dihapus
+        const deleteInput = document.createElement('input');
+        deleteInput.type = 'hidden';
+        deleteInput.name = 'deleted_additional_images[]';
+        deleteInput.value = imagePath;
+        document.querySelector('form').appendChild(deleteInput);
+    }
+
+    // Tambahkan input pertama secara otomatis saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        addAdditionalImage();
     });
 </script>
 @endsection

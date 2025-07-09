@@ -43,7 +43,8 @@
     <section class="py-12 sm:py-16 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8 sm:mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4"data-aos="zoom-in-right">Berita Utama</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4"data-aos="zoom-in-right">Berita Utama
+                </h2>
             </div>
             @if ($mostViewedPost)
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
@@ -90,14 +91,13 @@
         <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-10">
             <div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
                 <h2 class="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-800 mb-2 xs:mb-3 sm:mb-4"data-aos="fade-up"
-        data-aos-duration="800"
-        data-aos-delay="100">Berita Terbaru</h2>
+                    data-aos-duration="800" data-aos-delay="100">Berita Terbaru</h2>
             </div>
             <div
                 class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8">
                 @forelse ($posts as $post)
                     <a href="{{ route('berita.show', $post->slug) }}" data-aos="fade-up"
-   data-aos-delay="{{ $loop->index * 100 }}"
+                        data-aos-delay="{{ $loop->index * 100 }}"
                         class="block group bg-white rounded-lg sm:rounded-xl shadow-sm xs:shadow-md sm:shadow-lg overflow-hidden border border-gray-100 hover:border-primary hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out">
                         <article class="h-full flex flex-col">
                             <!-- Image with proper aspect ratio -->

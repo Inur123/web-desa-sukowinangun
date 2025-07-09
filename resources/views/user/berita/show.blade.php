@@ -100,11 +100,25 @@
 
             <!-- Article Body -->
             <div class="prose prose-lg max-w-none">
+    <div class="space-y-6 text-gray-700 leading-relaxed">
+        {!! $post->content !!}
+    </div>
 
-                <div class="space-y-6 text-gray-700 leading-relaxed">
-                    {!! $post->content !!}
-                </div>
-            </div>
+    @if ($post->additionalImages->count() > 0)
+        <hr class="my-8 border-gray-300">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Dokumentasi Kegiatan</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    @foreach ($post->additionalImages as $image)
+        <div class="relative overflow-hidden rounded-lg">
+            <img src="{{ asset('storage/' . $image->image) }}" alt="Dokumentasi Kegiatan"
+                 class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+    @endforeach
+</div>
+    @endif
+</div>
+
 
             <!-- Tags -->
             @if ($post->tags->count())
