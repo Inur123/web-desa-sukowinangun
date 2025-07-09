@@ -2,14 +2,39 @@
 @section('title', 'Beranda - Sukowinangun')
 
 @section('content')
+<style>
+    .typing-cursor {
+        font-weight: bold;
+        color: #f59e0b; /* sesuaikan dengan warna accent kamu */
+        margin-left: 2px;
+    }
+
+    .typing-cursor.blinking {
+        animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    #typing-text {
+        display: inline-block;
+        min-width: 28ch; /* agar tidak goyang/kedit */
+        white-space: nowrap;
+    }
+</style>
+
+
     <!-- Hero Section -->
-    <section class="pt-16 bg-gradient-to-br from-primary to-secondary">
+    <section class="pt-16 bg-gradient-to-br from-primary to-secondary ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"data-aos="zoom-in">
                 <div class="text-white">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         Selamat Datang di<br />
-                        <span class="text-accent">Kelurahan Sukowinangun</span>
+                       <span id="typing-text" class="text-accent text-4xl font-bold whitespace-nowrap"></span>
+
                     </h1>
                     <p class="text-xl mb-8 text-gray-100">
                         Desa yang berkembang dengan semangat gotong royong, teknologi
@@ -44,7 +69,7 @@
 
     <!-- Stats Section -->
     <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"data-aos="zoom-in">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- Kepala Keluarga -->
                 <div class="text-center transform hover:scale-105 transition-transform duration-300">
@@ -100,7 +125,7 @@
     <!-- Quick Services -->
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">
                     Layanan Unggulan
                 </h2>
@@ -112,7 +137,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <a href="layanan.html"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-alt text-primary text-2xl"></i>
                     </div>
@@ -126,7 +152,8 @@
                 </a>
 
                 <a href="layanan.html"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-id-card text-secondary text-2xl"></i>
                     </div>
@@ -139,7 +166,8 @@
                 </a>
 
                 <a href="layanan.html"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"data-aos="zoom-in"
+                    data-aos-delay="30">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-handshake text-accent text-2xl"></i>
                     </div>
@@ -154,26 +182,26 @@
     <!-- Logo Lembaga Desa -->
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold text-gray-800 mb-10">Partner</h2>
+            <h2 class="text-4xl font-bold text-gray-800 mb-10" data-aos="fade-up">Partner</h2>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-center">
                 <!-- Karang Taruna -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center" data-aos="fade-right" data-aos-delay="100">
                     <img src="{{ asset('images/logo-desa.png') }}" alt="Karang Taruna"
                         class="w-20 h-20 object-contain mb-3">
                     <p class="text-gray-700 font-semibold">Karang Taruna</p>
                 </div>
                 <!-- PKK -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center"data-aos="fade-right" data-aos-delay="200">
                     <img src="{{ asset('images/logo-desa.png') }}" alt="PKK" class="w-20 h-20 object-contain mb-3">
                     <p class="text-gray-700 font-semibold">PKK</p>
                 </div>
                 <!-- BUMDes -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center"data-aos="fade-right" data-aos-delay="300">
                     <img src="{{ asset('images/logo-desa.png') }}" alt="BUMDes" class="w-20 h-20 object-contain mb-3">
                     <p class="text-gray-700 font-semibold">BUMDes</p>
                 </div>
                 <!-- LPM -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center"data-aos="fade-right" data-aos-delay="400">
                     <img src="{{ asset('images/logo-desa.png') }}" alt="LPM" class="w-20 h-20 object-contain mb-3">
                     <p class="text-gray-700 font-semibold">LPM</p>
                 </div>
@@ -184,7 +212,7 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center mb-16">
-                <div>
+                <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="800">
                     <h2 class="text-4xl font-bold text-gray-800 mb-4">
                         Berita Terkini
                     </h2>
@@ -193,15 +221,17 @@
                     </p>
                 </div>
                 <a href="{{ route('berita.index') }}"
-                    class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                    data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
                     Lihat Semua
                 </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @forelse ($posts as $post)
+                @forelse ($posts as $index => $post)
                     <a href="{{ route('berita.show', $post->slug) }}"
-                        class="block group bg-white rounded-xl shadow-lg overflow-hidden border border-transparent hover:border-primary hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                        class="block group bg-white rounded-xl shadow-lg overflow-hidden border border-transparent hover:border-primary hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                        data-aos="fade-up" data-aos-delay="{{ 100 * $index }}" data-aos-duration="800">
                         <article>
                             <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
                                 class="w-full aspect-video object-cover">
@@ -229,9 +259,50 @@
                 @endforelse
             </div>
 
-
         </div>
     </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const text = "Kelurahan Sukowinangun";
+        const target = document.getElementById("typing-text");
+
+        let index = 0;
+        let isDeleting = false;
+        let cursor;
+
+        // Inisialisasi kursor
+        cursor = document.createElement("span");
+        cursor.classList.add("typing-cursor");
+        cursor.textContent = "|";
+        target.appendChild(cursor);
+
+        function type() {
+            target.childNodes[0].nodeValue = text.substring(0, index); // ubah teks
+            if (isDeleting) {
+                index--;
+                cursor.classList.remove("blinking"); // hentikan kedip saat menghapus
+            } else {
+                index++;
+                cursor.classList.remove("blinking"); // hentikan kedip saat mengetik
+            }
+
+            if (index === text.length + 1) {
+                isDeleting = true;
+                cursor.classList.add("blinking"); // mulai kedip saat selesai ketik
+                setTimeout(type, 1500);
+            } else if (index === 0) {
+                isDeleting = false;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+
+        // Tambahkan node teks sebelum cursor
+        target.insertBefore(document.createTextNode(""), cursor);
+        type();
+    });
+</script>
 
 
 @endsection

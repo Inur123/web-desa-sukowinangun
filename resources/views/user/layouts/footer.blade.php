@@ -29,9 +29,9 @@
                 <h4 class="text-lg font-semibold mb-4">Menu Utama</h4>
                 <ul class="space-y-2">
                     <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white transition-colors">Beranda</a></li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Profil Desa</a></li>
+                    <li><a href="{{ route('profile.index') }}" class="text-gray-300 hover:text-white transition-colors">Profil Desa</a></li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Layanan</a></li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
+                    <li><a href="{{ route('berita.index') }}" class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                 </ul>
             </div>

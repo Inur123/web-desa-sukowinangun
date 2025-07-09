@@ -20,7 +20,7 @@ class BeritaController extends Controller
                  ->orderByDesc('published_at')
                  ->get();
 
-    return view('berita', compact('mostViewedPost', 'posts', 'breakingNews'));
+    return view('user.berita.index', compact('mostViewedPost', 'posts', 'breakingNews'));
 }
 
     /**
@@ -35,7 +35,7 @@ public function show($slug)
 
     $post->increment('views');
 
-    return view('berita-show', compact('post'));
+    return view('user.berita.show', compact('post'));
 }
 
 }

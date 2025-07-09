@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -25,5 +26,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 

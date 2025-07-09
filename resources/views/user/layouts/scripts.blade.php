@@ -40,16 +40,23 @@
             const animateCounters = () => {
                 counters.forEach(counter => {
                     const target = +counter.getAttribute("data-target");
-                    const count = +counter.innerText;
-                    const increment = target / 200;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(animateCounters, 1);
-                    } else {
-                        counter.innerText = target;
-                    }
+                    let count = 0;
+                    const increment = target / 50;
+
+                    const updateCounter = () => {
+                        if (count < target) {
+                            count += increment;
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCounter, 10);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+
+                    updateCounter(); // Start animation for this counter
                 });
             };
+
             const statsSection = document.querySelector("section.py-16.bg-white");
             if (statsSection) {
                 const observer = new IntersectionObserver(entries => {
@@ -102,7 +109,7 @@
             backToTopButton.addEventListener("click", () => {
                 const heroSection = document.querySelector(
                     ".bg-gradient-to-r.from-primary.to-secondary, .bg-gradient-to-br.from-primary.to-secondary"
-                    );
+                );
                 if (heroSection) {
                     heroSection.scrollIntoView({
                         behavior: "smooth"
@@ -112,7 +119,7 @@
         }
 
         // Chatbot
-      // Chatbot Implementation
+        // Chatbot Implementation
         const initChatbot = () => {
             const chatbotButton = document.getElementById("chatbot-button");
             const chatbotModal = document.getElementById("chatbot-modal");
@@ -128,22 +135,18 @@
 
             // Responses configuration
             const responses = {
-                "Bagaimana cara mengurus surat keterangan?":
-                    "Anda bisa mengurus surat keterangan dengan datang ke kantor desa dengan membawa KK dan KTP. Prosesnya memakan waktu 1-2 hari kerja.",
-                "Jam berapa kantor desa buka?":
-                    "Kantor desa buka setiap hari kerja (Senin-Jumat) pukul 08.00 - 16.00 WIB, dengan istirahat siang 12.00 - 13.00 WIB.",
-                "Apa syarat pembuatan KTP baru?":
-                    "Syarat pembuatan KTP baru: 1. Fotokopi KK, 2. Surat pengantar RT/RW, 3. Pas foto 3x4 (2 lembar), 4. Datang ke kantor desa dengan pemohon.",
-                "Bagaimana prosedur pengaduan?":
-                    "Pengaduan bisa disampaikan langsung ke kantor desa atau melalui email pengaduan@desamajusejahtera.id. Pastikan menyertakan identitas dan bukti yang jelas.",
+                "Bagaimana cara mengurus surat keterangan?": "Anda bisa mengurus surat keterangan dengan datang ke kantor desa dengan membawa KK dan KTP. Prosesnya memakan waktu 1-2 hari kerja.",
+                "Jam berapa kantor desa buka?": "Kantor desa buka setiap hari kerja (Senin-Jumat) pukul 08.00 - 16.00 WIB, dengan istirahat siang 12.00 - 13.00 WIB.",
+                "Apa syarat pembuatan KTP baru?": "Syarat pembuatan KTP baru: 1. Fotokopi KK, 2. Surat pengantar RT/RW, 3. Pas foto 3x4 (2 lembar), 4. Datang ke kantor desa dengan pemohon.",
+                "Bagaimana prosedur pengaduan?": "Pengaduan bisa disampaikan langsung ke kantor desa atau melalui email pengaduan@desamajusejahtera.id. Pastikan menyertakan identitas dan bukti yang jelas.",
             };
 
             // Add message to chat
             const addMessage = (text, sender) => {
                 const messageDiv = document.createElement("div");
-                messageDiv.className = sender === "user"
-                    ? "bg-blue-100 p-3 rounded-lg mb-2 ml-8 text-sm"
-                    : "bg-gray-100 p-3 rounded-lg mb-2 text-sm";
+                messageDiv.className = sender === "user" ?
+                    "bg-blue-100 p-3 rounded-lg mb-2 ml-8 text-sm" :
+                    "bg-gray-100 p-3 rounded-lg mb-2 text-sm";
                 messageDiv.innerHTML = `<p>${text}</p>`;
                 chatbotMessages.appendChild(messageDiv);
                 chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -161,7 +164,8 @@
                     let found = false;
                     // Check for matching questions
                     for (const [question, answer] of Object.entries(responses)) {
-                        if (message.toLowerCase().includes(question.toLowerCase().substring(0, 15))) {
+                        if (message.toLowerCase().includes(question.toLowerCase().substring(0,
+                                15))) {
                             addMessage(answer, "bot");
                             found = true;
                             break;
@@ -216,5 +220,14 @@
         // Initialize chatbot
         initChatbot();
     });
-
 </script>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+    });
+</script>
+
+
