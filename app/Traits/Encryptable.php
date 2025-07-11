@@ -20,7 +20,7 @@ trait Encryptable
                 }
                 return Crypt::decryptString($value);
             } catch (Exception $e) {
-                return $value;
+                return $value; // fallback ke nilai asli jika gagal dekripsi
             }
         }
 
@@ -29,14 +29,14 @@ trait Encryptable
 
     public function setAttribute($key, $value)
     {
-        // Skip encryption for non-encryptable fields
+        // Abaikan enkripsi jika bukan field terenkripsi
         if (!in_array($key, $this->encryptable) || is_null($value)) {
             parent::setAttribute($key, $value);
             return;
         }
 
         if ($this->isFileUpload($key, $value)) {
-            $value = $this->encryptUploadedFile($value);
+            $value = $this->encryptUploadedFile($value, $key); // ← kirim nama field
         } else {
             $value = Crypt::encryptString($value);
         }
@@ -64,16 +64,21 @@ trait Encryptable
         }
     }
 
-    protected function encryptUploadedFile(UploadedFile $file)
+    protected function encryptUploadedFile(UploadedFile $file, $field)
     {
-        $fileContent = file_get_contents($file->path());
-        $encryptedContent = Crypt::encryptString($fileContent);
+        try {
+            $fileContent = file_get_contents($file->path());
+            $encryptedContent = Crypt::encryptString($fileContent);
 
-        $fileName = 'encrypted_'.md5(time().$file->getClientOriginalName()).'.enc';
-        $filePath = 'uploads/surat_keterangan_usaha/'.$fileName;
+            $folder = 'sku/' . $field;
+            $fileName = 'encrypted_' . md5(time() . $file->getClientOriginalName()) . '.enc';
+            $filePath = $folder . '/' . $fileName;
 
-        Storage::disk('public')->put($filePath, $encryptedContent);
+            Storage::disk('public')->put($filePath, $encryptedContent);
 
-        return $filePath;
+            return $filePath;
+        } catch (Exception $e) {
+            throw new \RuntimeException('Gagal menyimpan file terenkripsi: ' . $e->getMessage());
+        }
     }
 }
