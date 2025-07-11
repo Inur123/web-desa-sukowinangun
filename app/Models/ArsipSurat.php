@@ -19,7 +19,7 @@ class ArsipSurat extends Model
     ];
 
     protected $encryptable = [
-        'nomor_surat',
+
         'pengirim_penerima',
         'file_surat',
         'deskripsi',
