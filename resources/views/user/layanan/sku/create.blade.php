@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    @if ($errors->any()))
+    @if ($errors->any())
         <div class="fixed top-4 right-4 z-50">
             <div class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-down">
                 <div class="flex items-center">
