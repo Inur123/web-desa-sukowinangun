@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('keperluan');
             $table->string('pengantar_rt'); // file path
             $table->string('ktp'); // file path
+            $table->enum('status', ['baru', 'diterima', 'ditolak'])->default('baru');
             $table->timestamps();
         });
     }

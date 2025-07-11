@@ -20,7 +20,8 @@ class Sku extends Model
         'alamat_usaha',
         'keperluan',
         'pengantar_rt',
-        'ktp'
+        'ktp',
+        'status'
     ];
 
     protected $encryptable = [

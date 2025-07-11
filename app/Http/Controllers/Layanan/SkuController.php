@@ -15,7 +15,7 @@ class SkuController extends Controller
         return view('user.layanan.sku.create');
     }
 
- public function store(Request $request)
+    public function store(Request $request)
 {
     try {
         $validated = $request->validate([
@@ -38,7 +38,7 @@ class SkuController extends Controller
             'mimes' => 'File harus berupa PDF, JPG, atau PNG'
         ]);
 
-        // Format tanggal sebelum disimpan
+        // Format tanggal
         $validated['ttl'] = Carbon::parse($validated['ttl'])->format('Y-m-d');
 
         // Handle file uploads
@@ -50,14 +50,16 @@ class SkuController extends Controller
             $validated['ktp'] = $request->file('ktp');
         }
 
+        // Tambahkan status default 'baru'
+        $validated['status'] = 'baru';
+
         // Simpan ke database
         Sku::create($validated);
 
         return redirect()->back()
             ->with('success', 'Pengajuan Surat Keterangan Usaha berhasil dikirim.');
-
     } catch (\Exception $e) {
-        // Hapus file yang sudah diupload jika ada error
+        // Hapus file jika gagal
         if (isset($validated['pengantar_rt']) && is_string($validated['pengantar_rt'])) {
             Storage::disk('public')->delete($validated['pengantar_rt']);
         }
@@ -70,4 +72,5 @@ class SkuController extends Controller
             ->withErrors(['error' => 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin.']);
     }
 }
+
 }
