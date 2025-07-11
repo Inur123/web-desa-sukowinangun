@@ -27,8 +27,12 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/posts', PostController::class);
     Route::resource('/arsip-surat',ArsipSuratController::class);
-    Route::resource('/layanan/sktm', SktmController::class)
+    Route::resource('/layanan/sku', SkuController::class)
         ->except(['store']);
+    //sku
+    Route::post('/layanan/sku/{id}/approve', [SkuController::class, 'approve'])->name('sku.approve');
+    Route::post('/layanan/sku/{id}/reject', [SkuController::class, 'reject'])->name('sku.reject');
+    Route::get('/layanan/sku/{id}/file/{type}', [SkuController::class, 'showFile'])->name('sku.showFile');
 });
 
 
@@ -38,9 +42,11 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.sh
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
-Route::post('/layanan/sktm', [SktmController::class, 'store'])->name('sktm.store');
+
 //sku
 Route::get('/layanan/sku/create', [SkuController::class, 'create'])->name('sku.create');
 Route::post('/layanan/sku', [SkuController::class, 'store'])->name('sku.store');
+
+
 
 

@@ -10,52 +10,52 @@ use Illuminate\Support\Facades\Storage;
 
 class ArsipSuratController extends Controller
 {
-  public function index(Request $request)
-{
-    $query = ArsipSurat::query();
+    public function index(Request $request)
+    {
+        $query = ArsipSurat::query();
 
-    // Filter keyword pencarian
-    if ($request->filled('q')) {
-        $q = $request->input('q');
-        $query->where(function ($qBuilder) use ($q) {
-            $qBuilder->where('nomor_surat', 'like', "%$q%")
-                     ->orWhere('pengirim_penerima', 'like', "%$q%")
-                     ->orWhere('deskripsi', 'like', "%$q%");
-        });
+        // Filter keyword pencarian
+        if ($request->filled('q')) {
+            $q = $request->input('q');
+            $query->where(function ($qBuilder) use ($q) {
+                $qBuilder->where('nomor_surat', 'like', "%$q%")
+                    ->orWhere('pengirim_penerima', 'like', "%$q%")
+                    ->orWhere('deskripsi', 'like', "%$q%");
+            });
+        }
+
+        // Filter jenis surat
+        if ($request->filled('jenis')) {
+            $query->where('jenis', $request->jenis);
+        }
+
+        if ($request->filled('tanggal_mulai') && $request->filled('tanggal_selesai')) {
+            $query->whereBetween('tanggal', [$request->tanggal_mulai, $request->tanggal_selesai]);
+        } elseif ($request->filled('tanggal_mulai')) {
+            $query->whereDate('tanggal', '>=', $request->tanggal_mulai);
+        } elseif ($request->filled('tanggal_selesai')) {
+            $query->whereDate('tanggal', '<=', $request->tanggal_selesai);
+        }
+
+
+        $arsipList = $query->latest()->paginate(10)->appends($request->all());
+
+        // Statistik
+        $totalSurat = ArsipSurat::count();
+        $suratMasuk = ArsipSurat::where('jenis', 'masuk')->count();
+        $suratKeluar = ArsipSurat::where('jenis', 'keluar')->count();
+        $suratBulanIni = ArsipSurat::whereMonth('tanggal', now()->month)
+            ->whereYear('tanggal', now()->year)
+            ->count();
+
+        return view('admin.arsip_surat.index', compact(
+            'arsipList',
+            'totalSurat',
+            'suratMasuk',
+            'suratKeluar',
+            'suratBulanIni'
+        ));
     }
-
-    // Filter jenis surat
-    if ($request->filled('jenis')) {
-        $query->where('jenis', $request->jenis);
-    }
-
-  if ($request->filled('tanggal_mulai') && $request->filled('tanggal_selesai')) {
-    $query->whereBetween('tanggal', [$request->tanggal_mulai, $request->tanggal_selesai]);
-} elseif ($request->filled('tanggal_mulai')) {
-    $query->whereDate('tanggal', '>=', $request->tanggal_mulai);
-} elseif ($request->filled('tanggal_selesai')) {
-    $query->whereDate('tanggal', '<=', $request->tanggal_selesai);
-}
-
-
-    $arsipList = $query->latest()->paginate(10)->appends($request->all());
-
-    // Statistik
-    $totalSurat = ArsipSurat::count();
-    $suratMasuk = ArsipSurat::where('jenis', 'masuk')->count();
-    $suratKeluar = ArsipSurat::where('jenis', 'keluar')->count();
-    $suratBulanIni = ArsipSurat::whereMonth('tanggal', now()->month)
-        ->whereYear('tanggal', now()->year)
-        ->count();
-
-    return view('admin.arsip_surat.index', compact(
-        'arsipList',
-        'totalSurat',
-        'suratMasuk',
-        'suratKeluar',
-        'suratBulanIni'
-    ));
-}
 
 
     public function create()

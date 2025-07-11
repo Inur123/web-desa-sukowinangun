@@ -41,7 +41,7 @@
             <li class="dropdown-container">
                 <button onclick="toggleDropdown(this)"
                     class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
-                    {{ request()->routeIs('layanan.*') || request()->routeIs('sktm.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                    {{ request()->routeIs('layanan.*') || request()->routeIs('sku.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
                     <div class="flex items-center">
                         <i class="fas fa-concierge-bell mr-3"></i>
                         <span>Layanan</span>
@@ -59,12 +59,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('sktm.index') }}"
+                        <a href="{{ route('sku.index') }}"
                             class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
-                        {{ request()->routeIs('sktm.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                        {{ request()->routeIs('sku.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
 
-                            <span class="{{ request()->routeIs('sktm.*') ? 'font-semibold text-primary' : '' }}">
-                                Pengajuan SKTM
+                            <span class="{{ request()->routeIs('sku.*') ? 'font-semibold text-primary' : '' }}">
+                                Pengajuan SKU
                             </span>
                         </a>
                     </li>
