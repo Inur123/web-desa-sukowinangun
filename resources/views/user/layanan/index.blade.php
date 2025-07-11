@@ -33,13 +33,15 @@
                 </a>
 
                 <!-- Administrasi KTP -->
-                <a href="form-ktp.html"
+                <a href="{{ route('sku.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-id-card text-secondary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Pembuatan KTP</h3>
-                    <p class="text-gray-600">Layanan pembuatan KTP baru, perpanjangan, dan perubahan data KTP.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Usaha</h3>
+                    <p class="text-gray-600">
+                        Pengajuan surat keterangan usaha untuk keperluan administrasi bisnis dan perizinan usaha.
+                    </p>
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <span class="text-secondary font-semibold">Ajukan Sekarang →</span>
                     </div>

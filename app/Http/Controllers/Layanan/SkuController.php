@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers\Layanan;
+
+use App\Models\Sku;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class SkuController extends Controller
+{
+    public function create()
+    {
+        return view('user.layanan.sku.create');
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            // Validasi data dari publik
+            $validated = $request->validate([
+                'nama' => 'required|string|max:255',
+                'tempat_lahir' => 'required|string|max:255',
+                'ttl' => 'required|date',
+                'nik' => 'required|digits:16',
+                'alamat' => 'required|string',
+                'status_perkawinan' => 'required|string|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
+                'nama_usaha' => 'required|string|max:255',
+                'alamat_usaha' => 'required|string',
+                'keperluan' => 'required|string|max:255',
+                'pengantar_rt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            ], [
+                'nik.digits' => 'NIK harus terdiri dari 16 digit angka',
+                'pengantar_rt.max' => 'File Surat Pengantar RT tidak boleh lebih dari 2MB',
+                'ktp.max' => 'File KTP tidak boleh lebih dari 2MB',
+                'required' => 'Field :attribute wajib diisi',
+                'mimes' => 'File harus berupa PDF, JPG, atau PNG'
+            ]);
+
+            // Simpan file pengantar RT
+            if ($request->hasFile('pengantar_rt')) {
+                $validated['pengantar_rt'] = $request->file('pengantar_rt')->store('uploads/surat_keterangan_usaha', 'public');
+            }
+
+            // Simpan file KTP
+            if ($request->hasFile('ktp')) {
+                $validated['ktp'] = $request->file('ktp')->store('uploads/surat_keterangan_usaha', 'public');
+            }
+
+            // Simpan ke database
+            Sku::create($validated);
+
+            return redirect()->back()->with('success', 'Pengajuan Surat Keterangan Usaha berhasil dikirim.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin.']);
+        }
+    }
+}

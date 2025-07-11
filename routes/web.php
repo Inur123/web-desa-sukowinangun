@@ -11,6 +11,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\Layanan\SkuController;
 use App\Http\Controllers\Layanan\SktmController;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -36,5 +37,8 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
 Route::post('/layanan/sktm', [SktmController::class, 'store'])->name('sktm.store');
+//sku
+Route::get('/layanan/sku/create', [SkuController::class, 'create'])->name('sku.create');
+Route::post('/layanan/sku', [SkuController::class, 'store'])->name('sku.store');
 
 

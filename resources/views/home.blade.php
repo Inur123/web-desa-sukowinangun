@@ -145,7 +145,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <a href="layanan.html"
+                <a href="{{ route('layanan.index') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
                     data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
@@ -160,7 +160,7 @@
                     </p>
                 </a>
 
-                <a href="layanan.html"
+                <a href="{{ route('layanan.index') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
                     data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
@@ -174,7 +174,7 @@
                     </p>
                 </a>
 
-                <a href="layanan.html"
+                <a href="{{ route('layanan.index') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"data-aos="zoom-in"
                     data-aos-delay="30">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
