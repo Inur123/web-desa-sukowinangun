@@ -10,7 +10,7 @@
                     <i class="fas fa-envelope text-primary text-lg md:text-xl"></i>
                 </div>
                 <div class="ml-3 md:ml-4">
-                    <p class="text-xl md:text-2xl font-bold text-gray-800">125</p>
+                    <p class="text-xl md:text-2xl font-bold text-gray-800">{{ $totalSurat }}</p>
                     <p class="text-xs md:text-sm text-gray-600">Total Surat</p>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                     <i class="fas fa-inbox text-green-600 text-lg md:text-xl"></i>
                 </div>
                 <div class="ml-3 md:ml-4">
-                    <p class="text-xl md:text-2xl font-bold text-gray-800">78</p>
+                    <p class="text-xl md:text-2xl font-bold text-gray-800">{{ $suratMasuk }}</p>
                     <p class="text-xs md:text-sm text-gray-600">Surat Masuk</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <i class="fas fa-paper-plane text-blue-600 text-lg md:text-xl"></i>
                 </div>
                 <div class="ml-3 md:ml-4">
-                    <p class="text-xl md:text-2xl font-bold text-gray-800">47</p>
+                    <p class="text-xl md:text-2xl font-bold text-gray-800">{{ $suratKeluar }}</p>
                     <p class="text-xs md:text-sm text-gray-600">Surat Keluar</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <i class="fas fa-calendar text-yellow-600 text-lg md:text-xl"></i>
                 </div>
                 <div class="ml-3 md:ml-4">
-                    <p class="text-xl md:text-2xl font-bold text-gray-800">12</p>
+                    <p class="text-xl md:text-2xl font-bold text-gray-800">{{ $suratBulanIni }}</p>
                     <p class="text-xs md:text-sm text-gray-600">Bulan Ini</p>
                 </div>
             </div>
@@ -159,17 +159,17 @@
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap text-xs md:text-sm text-gray-600">
                                 {{ $arsip->deskripsi ?? '-' }}
                             </td>
-                           <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap text-xs md:text-sm">
-    @if ($arsip->file_surat)
-        <a href="{{ route('arsip-surat.show', $arsip->id) }}"
-           target="_blank"
-           class="text-blue-600 hover:text-blue-800">
-            Lihat File
-        </a>
-    @else
-        <span class="text-gray-500">-</span>
-    @endif
-</td>
+                            <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap text-xs md:text-sm">
+                                @if ($arsip->file_surat)
+                                    <a href="{{ route('arsip-surat.show', $arsip->id) }}" target="_blank"
+                                        rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">
+                                        Lihat File
+                                    </a>
+                                @else
+                                    <span class="text-gray-500">-</span>
+                                @endif
+                            </td>
+
 
 
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
@@ -182,8 +182,7 @@
                                         class="text-yellow-600 hover:text-yellow-800" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href=""
-                                        class="text-green-600 hover:text-green-800" title="Download">
+                                    <a href="" class="text-green-600 hover:text-green-800" title="Download">
                                         <i class="fas fa-download"></i>
                                     </a>
                                     <form action="{{ route('arsip-surat.destroy', $arsip->id) }}" method="POST"
@@ -213,24 +212,44 @@
         <div class="px-4 py-3 md:px-6 md:py-4 border-t border-gray-200">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
                 <div class="text-xs md:text-sm text-gray-600">
-                    Menampilkan 1 - 3 dari 125 surat
+                    Menampilkan {{ $arsipList->firstItem() }} - {{ $arsipList->lastItem() }} dari
+                    {{ $arsipList->total() }} surat
                 </div>
                 <div class="flex items-center space-x-1 md:space-x-2">
-                    <span class="px-2 py-1 text-xs md:text-sm text-gray-400 cursor-not-allowed">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="px-2 py-1 text-xs md:text-sm bg-primary text-white rounded">1</span>
-                    <a href="#"
-                        class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">2</a>
-                    <a href="#"
-                        class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">3</a>
-                    <span class="px-2 py-1 text-xs md:text-sm text-gray-500">...</span>
-                    <a href="#"
-                        class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">13</a>
-                    <a href="#"
-                        class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
+                    {{-- Previous Page Link --}}
+                    @if ($arsipList->onFirstPage())
+                        <span class="px-2 py-1 text-xs md:text-sm text-gray-400 cursor-not-allowed">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                    @else
+                        <a href="{{ $arsipList->previousPageUrl() }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    @endif
+
+                    {{-- Pagination Elements --}}
+                    @foreach ($arsipList->getUrlRange(1, $arsipList->lastPage()) as $page => $url)
+                        @if ($page == $arsipList->currentPage())
+                            <span
+                                class="px-2 py-1 text-xs md:text-sm bg-primary text-white rounded">{{ $page }}</span>
+                        @else
+                            <a href="{{ $url }}"
+                                class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">{{ $page }}</a>
+                        @endif
+                    @endforeach
+
+                    {{-- Next Page Link --}}
+                    @if ($arsipList->hasMorePages())
+                        <a href="{{ $arsipList->nextPageUrl() }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    @else
+                        <span class="px-2 py-1 text-xs md:text-sm text-gray-400 cursor-not-allowed">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    @endif
                 </div>
             </div>
         </div>
