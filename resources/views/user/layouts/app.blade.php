@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title') - Desa Maju Sejahtera</title>
+    <title>@yield('title') - Kelurahan Sukowinangun</title>
+    @hasSection('meta-default')
+        @yield('meta-default')
+    @else
+        <meta name="description" content="Website resmi Kelurahan Sukowinangun. Temukan berita, layanan, dan informasi terbaru seputar kelurahan kami.">
+        <meta name="keywords" content="Kelurahan Sukowinangun, Desa Sukowinangun, Berita Desa, Layanan Masyarakat, Pemerintahan Desa">
+        <meta name="author" content="Kelurahan Sukowinangun">
+        <link rel="canonical" href="{{ url()->current() }}" />
+        <meta property="og:title" content="@yield('title') - Kelurahan Sukowinangun" />
+        <meta property="og:description" content="Website resmi Kelurahan Sukowinangun. Temukan berita, layanan, dan informasi terbaru seputar kelurahan kami." />
+        <meta property="og:image" content="{{ asset('images/logo-desa.png') }}" />
+        <meta property="og:url" content="{{ url()->current() }}" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="@yield('title') - Kelurahan Sukowinangun" />
+        <meta name="twitter:description" content="Website resmi Kelurahan Sukowinangun." />
+        <meta name="twitter:image" content="{{ asset('images/logo-desa.png') }}" />
+    @endif
+    @stack('meta')
+    <link rel="icon" href="{{ asset('images/logo-desa.png') }}" type="image/png" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-     <link rel="icon" href="{{ asset('images/logo-desa.png') }}" type="image/png">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         #chat-messages {
             scrollbar-width: thin;
@@ -26,28 +43,19 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
-
-
     @include('user.layouts.navbar')
-
     <main>
         @yield('content')
     </main>
-
     @include('user.layouts.footer')
-
-    <!-- Back to Top Button -->
     <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all duration-300 hidden items-center justify-center">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
-
-    <!-- Chatbot Button -->
     <button id="chatbot-button" class="fixed bottom-24 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all duration-300 flex items-center justify-center">
         <i class="fas fa-comments text-xl"></i>
     </button>
-
-    <!-- Chatbot Modal -->
     <div id="chatbot-modal" class="fixed bottom-32 right-8 w-80 bg-white rounded-lg shadow-xl hidden flex-col z-50 border border-gray-200">
         <div class="bg-primary text-white p-3 rounded-t-lg flex justify-between items-center">
             <h3 class="font-semibold">Chatbot Desa</h3>
@@ -101,9 +109,6 @@
             </div>
         </div>
     </div>
-
-
     @include('user.layouts.scripts')
-
 </body>
 </html>

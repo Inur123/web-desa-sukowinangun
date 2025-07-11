@@ -8,6 +8,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KontakController;
+use App\Http\Controllers\LayananController;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -27,5 +29,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
+Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+
 
 

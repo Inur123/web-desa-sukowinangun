@@ -1,21 +1,18 @@
 @extends('user.layouts.app')
 @section('title', $post->title . ' - Berita Sukowinangun')
-
 @push('meta')
+    <meta name="description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}">
     <meta property="og:title" content="{{ $post->title }} - Berita Sukowinangun" />
     <meta property="og:description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}" />
     <meta property="og:image" content="{{ asset('storage/' . $post->image) }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="article" />
-    <!-- Optional for better Twitter sharing -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ $post->title }} - Berita Sukowinangun" />
     <meta name="twitter:description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}" />
     <meta name="twitter:image" content="{{ asset('storage/' . $post->image) }}" />
 @endpush
-
 @section('content')
-    <!-- Breadcrumb -->
     <section class="pt-20 pb-4 bg-white border-b border-gray-200">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex items-center space-x-2 text-sm text-gray-500">
@@ -29,11 +26,8 @@
             </nav>
         </div>
     </section>
-
-    <!-- Article Content -->
     <article class="py-12 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Article Header -->
             <header class="mb-8">
                 <div class="flex items-center space-x-4 mb-4">
                     <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
@@ -58,11 +52,9 @@
                         <span>{{ $post->views }} dilihat</span>
                     </div>
                 </div>
-
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight mb-4">
                     {{ $post->title }}
                 </h1>
-
                 <div class="flex items-center justify-between py-4 border-y border-gray-200">
                     <div class="flex items-center">
                         <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
@@ -84,8 +76,6 @@
                     </div>
                 </div>
             </header>
-
-            <!-- Featured Image -->
             <div class="mb-8">
                 <div class="w-full h-64 md:h-auto md:max-h-[80vh] overflow-hidden rounded-xl shadow-lg">
                     <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
@@ -97,30 +87,24 @@
                     </p>
                 @endif
             </div>
-
-            <!-- Article Body -->
             <div class="prose prose-lg max-w-none">
-    <div class="space-y-6 text-gray-700 leading-relaxed">
-        {!! $post->content !!}
-    </div>
+                <div class="space-y-6 text-gray-700 leading-relaxed">
+                    {!! $post->content !!}
+                </div>
+                @if ($post->additionalImages->count() > 0)
+                    <hr class="my-8 border-gray-300">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Dokumentasi Kegiatan</h2>
 
-    @if ($post->additionalImages->count() > 0)
-        <hr class="my-8 border-gray-300">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Dokumentasi Kegiatan</h2>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-    @foreach ($post->additionalImages as $image)
-        <div class="relative overflow-hidden rounded-lg">
-            <img src="{{ asset('storage/' . $image->image) }}" alt="Dokumentasi Kegiatan"
-                 class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-    @endforeach
-</div>
-    @endif
-</div>
-
-
-            <!-- Tags -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        @foreach ($post->additionalImages as $image)
+                            <div class="relative overflow-hidden rounded-lg">
+                                <img src="{{ asset('storage/' . $image->image) }}" alt="Dokumentasi Kegiatan"
+                                    class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
             @if ($post->tags->count())
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <h3 class="text-sm font-medium text-gray-700 mb-3">Tags:</h3>
@@ -134,8 +118,6 @@
                     </div>
                 </div>
             @endif
-
-            <!-- Share Button -->
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <h3 class="text-sm font-medium text-gray-700 mb-3">Bagikan artikel ini:</h3>
                 <div class="flex flex-wrap gap-3">
@@ -146,12 +128,8 @@
                         <i class="fab fa-whatsapp mr-2"></i>
                         Bagikan ke WhatsApp
                     </a>
-
-
                 </div>
             </div>
         </div>
     </article>
-
-
 @endsection

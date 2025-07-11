@@ -24,7 +24,6 @@
                     </a>
                 </div>
             </div>
-
             <div>
                 <h4 class="text-lg font-semibold mb-4">Menu Utama</h4>
                 <ul class="space-y-2">
@@ -35,7 +34,6 @@
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                 <ul class="space-y-2">
@@ -46,7 +44,6 @@
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Pendidikan</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="text-lg font-semibold mb-4">Kontak Info</h4>
                 <div class="space-y-3">
@@ -65,7 +62,6 @@
                 </div>
             </div>
         </div>
-
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-300">
                &copy; {{ date('Y') }} Kelurahan Sukowangun. Semua hak cipta dilindungi.

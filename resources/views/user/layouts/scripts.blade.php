@@ -223,11 +223,12 @@
 </script>
 
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-        once: true,
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+<script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+        AOS.init({
+            once: true,
+        });
     });
 </script>
-
 
