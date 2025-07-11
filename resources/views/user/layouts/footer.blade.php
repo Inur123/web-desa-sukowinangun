@@ -27,20 +27,26 @@
             <div>
                 <h4 class="text-lg font-semibold mb-4">Menu Utama</h4>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white transition-colors">Beranda</a></li>
-                    <li><a href="{{ route('profile.index') }}" class="text-gray-300 hover:text-white transition-colors">Profil Desa</a></li>
+                    <li><a href="{{ route('home') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Beranda</a></li>
+                    <li><a href="{{ route('profile.index') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Profil Desa</a></li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Layanan</a></li>
-                    <li><a href="{{ route('berita.index') }}" class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
+                    <li><a href="{{ route('berita.index') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                 <ul class="space-y-2">
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Surat Keterangan</a></li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Administrasi KTP</a></li>
+                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Surat Keterangan</a>
+                    </li>
+                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Administrasi KTP</a>
+                    </li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Izin Usaha</a></li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Bantuan Sosial</a></li>
+                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Bantuan Sosial</a>
+                    </li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Pendidikan</a></li>
                 </ul>
             </div>
@@ -64,7 +70,7 @@
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-300">
-               &copy; {{ date('Y') }} Kelurahan Sukowangun. Semua hak cipta dilindungi.
+                &copy; {{ date('Y') }} Kelurahan Sukowangun. Semua hak cipta dilindungi.
             </p>
         </div>
     </div>

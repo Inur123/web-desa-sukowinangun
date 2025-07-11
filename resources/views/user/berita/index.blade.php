@@ -2,9 +2,6 @@
 @section('title', 'Berita - Sukowinangun')
 
 @section('content')
-
-
-    <!-- Page Header -->
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
@@ -37,8 +34,6 @@
             </div>
         </div>
     </section>
-
-
     <!-- Featured News -->
     <section class="py-12 sm:py-16 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -141,7 +136,6 @@
             </div>
         </div>
     </section>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ticker = document.getElementById('breakingNewsTicker');

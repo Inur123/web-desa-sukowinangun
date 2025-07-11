@@ -115,18 +115,18 @@
                             <img id="image-preview" class="w-full rounded-lg shadow" />
                         </div>
                     </div>
-                   <div>
-    <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tambahan</label>
-    <div id="additional-images-wrapper" class="space-y-4">
-        {{-- Input pertama akan ditambahkan secara otomatis --}}
-    </div>
-    <button type="button" onclick="addAdditionalImage()"
-        class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors">
-        <i class="fas fa-plus-circle mr-2 text-primary"></i>
-        <span class="text-primary font-medium">Tambah Gambar Lainnya</span>
-    </button>
-    <p class="text-xs text-gray-500 mt-2">Format: PNG, JPG (maksimal 2MB per gambar)</p>
-</div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tambahan</label>
+                        <div id="additional-images-wrapper" class="space-y-4">
+                            {{-- Input pertama akan ditambahkan secara otomatis --}}
+                        </div>
+                        <button type="button" onclick="addAdditionalImage()"
+                            class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-plus-circle mr-2 text-primary"></i>
+                            <span class="text-primary font-medium">Tambah Gambar Lainnya</span>
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2">Format: PNG, JPG (maksimal 2MB per gambar)</p>
+                    </div>
 
                     {{-- Tags --}}
                     <div>
@@ -286,80 +286,80 @@
         });
     </script>
     <script>
-let imageInputIndex = 0;
+        let imageInputIndex = 0;
 
-function addAdditionalImage() {
-    const wrapper = document.getElementById('additional-images-wrapper');
+        function addAdditionalImage() {
+            const wrapper = document.getElementById('additional-images-wrapper');
 
-    const div = document.createElement('div');
-    div.classList.add('relative', 'group');
+            const div = document.createElement('div');
+            div.classList.add('relative', 'group');
 
-    const inputDiv = document.createElement('div');
-    inputDiv.classList.add('flex', 'items-center', 'space-x-3');
+            const inputDiv = document.createElement('div');
+            inputDiv.classList.add('flex', 'items-center', 'space-x-3');
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.name = `additional_images[]`;
-    input.accept = 'image/*';
-    input.classList.add(
-        'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg',
-        'border-gray-300', 'focus:ring-2', 'focus:ring-primary',
-        'focus:border-transparent', 'file:mr-4', 'file:py-2',
-        'file:px-4', 'file:rounded-md', 'file:border-0',
-        'file:text-sm', 'file:font-medium', 'file:bg-gray-100',
-        'file:text-gray-700', 'hover:file:bg-gray-200'
-    );
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.name = `additional_images[]`;
+            input.accept = 'image/*';
+            input.classList.add(
+                'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg',
+                'border-gray-300', 'focus:ring-2', 'focus:ring-primary',
+                'focus:border-transparent', 'file:mr-4', 'file:py-2',
+                'file:px-4', 'file:rounded-md', 'file:border-0',
+                'file:text-sm', 'file:font-medium', 'file:bg-gray-100',
+                'file:text-gray-700', 'hover:file:bg-gray-200'
+            );
 
-    const removeBtn = document.createElement('button');
-    removeBtn.type = 'button';
-    removeBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
-    removeBtn.classList.add('flex-shrink-0');
-    removeBtn.title = 'Hapus gambar ini';
-    removeBtn.onclick = function() {
-        wrapper.removeChild(div);
-    };
-
-    inputDiv.appendChild(input);
-    inputDiv.appendChild(removeBtn);
-    div.appendChild(inputDiv);
-
-    // Tambahkan preview container
-    const previewDiv = document.createElement('div');
-    previewDiv.classList.add('mt-2', 'hidden', 'image-preview-container');
-
-    const previewLabel = document.createElement('p');
-    previewLabel.classList.add('text-sm', 'text-gray-600', 'mb-1');
-    previewLabel.textContent = 'Preview:';
-
-    const previewImg = document.createElement('img');
-    previewImg.classList.add('w-full', 'h-32', 'object-cover', 'rounded-lg', 'border', 'border-gray-200');
-
-    previewDiv.appendChild(previewLabel);
-    previewDiv.appendChild(previewImg);
-    div.appendChild(previewDiv);
-
-    // Event listener untuk preview gambar
-    input.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                previewDiv.classList.remove('hidden');
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
+            removeBtn.classList.add('flex-shrink-0');
+            removeBtn.title = 'Hapus gambar ini';
+            removeBtn.onclick = function() {
+                wrapper.removeChild(div);
             };
-            reader.readAsDataURL(file);
-        } else {
-            previewDiv.classList.add('hidden');
+
+            inputDiv.appendChild(input);
+            inputDiv.appendChild(removeBtn);
+            div.appendChild(inputDiv);
+
+            // Tambahkan preview container
+            const previewDiv = document.createElement('div');
+            previewDiv.classList.add('mt-2', 'hidden', 'image-preview-container');
+
+            const previewLabel = document.createElement('p');
+            previewLabel.classList.add('text-sm', 'text-gray-600', 'mb-1');
+            previewLabel.textContent = 'Preview:';
+
+            const previewImg = document.createElement('img');
+            previewImg.classList.add('w-full', 'h-32', 'object-cover', 'rounded-lg', 'border', 'border-gray-200');
+
+            previewDiv.appendChild(previewLabel);
+            previewDiv.appendChild(previewImg);
+            div.appendChild(previewDiv);
+
+            // Event listener untuk preview gambar
+            input.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        previewDiv.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    previewDiv.classList.add('hidden');
+                }
+            });
+
+            wrapper.appendChild(div);
+            imageInputIndex++;
         }
-    });
 
-    wrapper.appendChild(div);
-    imageInputIndex++;
-}
-
-// Tambahkan input pertama secara otomatis saat halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    addAdditionalImage();
-});
-</script>
+        // Tambahkan input pertama secara otomatis saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            addAdditionalImage();
+        });
+    </script>
 @endsection

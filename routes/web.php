@@ -6,10 +6,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\Layanan\SktmController;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -22,6 +24,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/posts', PostController::class);
+    Route::resource('/layanan/sktm', SktmController::class)
+        ->except(['store']);
 });
 
 
@@ -31,6 +35,6 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.sh
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/layanan', [LayananController::class, 'index'])->name('layanan.index');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
-
+Route::post('/layanan/sktm', [SktmController::class, 'store'])->name('sktm.store');
 
 

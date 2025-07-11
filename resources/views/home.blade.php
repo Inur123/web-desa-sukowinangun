@@ -2,28 +2,37 @@
 @section('title', 'Beranda - Sukowinangun')
 
 @section('content')
-<style>
-    .typing-cursor {
-        font-weight: bold;
-        color: #f59e0b; /* sesuaikan dengan warna accent kamu */
-        margin-left: 2px;
-    }
+    <style>
+        .typing-cursor {
+            font-weight: bold;
+            color: #f59e0b;
+            /* sesuaikan dengan warna accent kamu */
+            margin-left: 2px;
+        }
 
-    .typing-cursor.blinking {
-        animation: blink 1s step-start infinite;
-    }
+        .typing-cursor.blinking {
+            animation: blink 1s step-start infinite;
+        }
 
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
+        @keyframes blink {
 
-    #typing-text {
-        display: inline-block;
-        min-width: 28ch; /* agar tidak goyang/kedit */
-        white-space: nowrap;
-    }
-</style>
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        #typing-text {
+            display: inline-block;
+            min-width: 28ch;
+            /* agar tidak goyang/kedit */
+            white-space: nowrap;
+        }
+    </style>
 
 
     <!-- Hero Section -->
@@ -33,7 +42,7 @@
                 <div class="text-white">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         Selamat Datang di<br />
-                       <span id="typing-text" class="text-accent text-4xl font-bold whitespace-nowrap"></span>
+                        <span id="typing-text" class="text-accent text-4xl font-bold whitespace-nowrap"></span>
 
                     </h1>
                     <p class="text-xl mb-8 text-gray-100">
@@ -261,48 +270,44 @@
 
         </div>
     </section>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const text = "Kelurahan Sukowinangun";
-        const target = document.getElementById("typing-text");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const text = "Kelurahan Sukowinangun";
+            const target = document.getElementById("typing-text");
 
-        let index = 0;
-        let isDeleting = false;
-        let cursor;
+            let index = 0;
+            let isDeleting = false;
+            let cursor;
 
-        // Inisialisasi kursor
-        cursor = document.createElement("span");
-        cursor.classList.add("typing-cursor");
-        cursor.textContent = "|";
-        target.appendChild(cursor);
+            // Inisialisasi kursor
+            cursor = document.createElement("span");
+            cursor.classList.add("typing-cursor");
+            cursor.textContent = "|";
+            target.appendChild(cursor);
 
-        function type() {
-            target.childNodes[0].nodeValue = text.substring(0, index); // ubah teks
-            if (isDeleting) {
-                index--;
-                cursor.classList.remove("blinking"); // hentikan kedip saat menghapus
-            } else {
-                index++;
-                cursor.classList.remove("blinking"); // hentikan kedip saat mengetik
+            function type() {
+                target.childNodes[0].nodeValue = text.substring(0, index); // ubah teks
+                if (isDeleting) {
+                    index--;
+                    cursor.classList.remove("blinking"); // hentikan kedip saat menghapus
+                } else {
+                    index++;
+                    cursor.classList.remove("blinking"); // hentikan kedip saat mengetik
+                }
+
+                if (index === text.length + 1) {
+                    isDeleting = true;
+                    cursor.classList.add("blinking"); // mulai kedip saat selesai ketik
+                    setTimeout(type, 1500);
+                } else if (index === 0) {
+                    isDeleting = false;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, isDeleting ? 50 : 100);
+                }
             }
-
-            if (index === text.length + 1) {
-                isDeleting = true;
-                cursor.classList.add("blinking"); // mulai kedip saat selesai ketik
-                setTimeout(type, 1500);
-            } else if (index === 0) {
-                isDeleting = false;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 50 : 100);
-            }
-        }
-
-        // Tambahkan node teks sebelum cursor
-        target.insertBefore(document.createTextNode(""), cursor);
-        type();
-    });
-</script>
-
-
+            target.insertBefore(document.createTextNode(""), cursor);
+            type();
+        });
+    </script>
 @endsection

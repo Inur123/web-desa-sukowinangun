@@ -56,7 +56,7 @@
     <!-- Add News Button -->
     <div class="mb-4 md:mb-6 flex justify-end">
         <a href="{{ route('posts.create') }}"
-           class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base">
+            class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base">
             <i class="fas fa-plus mr-1 md:mr-2 text-xs md:text-sm"></i>
             Tambah Berita
         </a>
@@ -74,7 +74,8 @@
                             class="w-full pl-8 pr-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
                         <i class="fas fa-search absolute left-2 top-2 md:top-3 text-gray-400 text-sm"></i>
                     </div>
-                    <select class="px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    <select
+                        class="px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
                         <option>Semua Status</option>
                         <option>Active</option>
                         <option>Nonactive</option>
@@ -88,12 +89,24 @@
             <table class="w-full min-w-max">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Judul</th>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Kategori</th>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Status</th>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Tanggal</th>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Views</th>
-                        <th class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Aksi</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Judul</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Kategori</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Status</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Tanggal</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Views</th>
+                        <th
+                            class="px-3 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                            Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -103,18 +116,21 @@
                             <td class="px-3 py-3 md:px-6 md:py-4">
                                 <div class="flex items-center">
                                     <img src="{{ $post->image ? asset('storage/' . $post->image) : '/placeholder.svg?height=50&width=80' }}"
-                                         alt="Thumbnail"
-                                         class="w-10 h-8 md:w-12 md:h-9 object-cover rounded mr-2 md:mr-3">
+                                        alt="Thumbnail" class="w-10 h-8 md:w-12 md:h-9 object-cover rounded mr-2 md:mr-3">
                                     <div class="min-w-0">
-                                        <p class="text-xs md:text-sm font-medium text-gray-800 truncate max-w-[150px] md:max-w-xs">{{ $post->title }}</p>
-                                        <p class="text-xs text-gray-500 truncate max-w-[150px] md:max-w-xs">{{ Str::limit(strip_tags($post->summary), 50) }}</p>
+                                        <p
+                                            class="text-xs md:text-sm font-medium text-gray-800 truncate max-w-[150px] md:max-w-xs">
+                                            {{ $post->title }}</p>
+                                        <p class="text-xs text-gray-500 truncate max-w-[150px] md:max-w-xs">
+                                            {{ Str::limit(strip_tags($post->summary), 50) }}</p>
                                     </div>
                                 </div>
                             </td>
 
                             <!-- Category Column -->
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
-                                <span class="bg-primary/10 text-primary px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">
+                                <span
+                                    class="bg-primary/10 text-primary px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">
                                     {{ $post->category }}
                                 </span>
                             </td>
@@ -122,9 +138,11 @@
                             <!-- Status Column -->
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 @if ($post->status === 'active')
-                                    <span class="bg-green-100 text-green-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Active</span>
+                                    <span
+                                        class="bg-green-100 text-green-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Active</span>
                                 @else
-                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Nonactive</span>
+                                    <span
+                                        class="bg-yellow-100 text-yellow-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Nonactive</span>
                                 @endif
                             </td>
 
@@ -142,22 +160,19 @@
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-1 md:space-x-2">
                                     <a href="{{ route('posts.edit', $post->id) }}"
-                                       class="text-blue-600 hover:text-blue-800 text-sm md:text-base"
-                                       title="Edit">
+                                        class="text-blue-600 hover:text-blue-800 text-sm md:text-base" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('posts.show', $post->slug) }}"
-                                       class="text-green-600 hover:text-green-800 text-sm md:text-base"
-                                       title="View">
+                                        class="text-green-600 hover:text-green-800 text-sm md:text-base" title="View">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="text-red-600 hover:text-red-800 text-sm md:text-base"
-                                                title="Delete">
+                                        <button type="submit" class="text-red-600 hover:text-red-800 text-sm md:text-base"
+                                            title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -166,7 +181,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center py-4 md:py-6 text-gray-500 text-sm md:text-base">Belum ada data berita.</td>
+                            <td colspan="6" class="text-center py-4 md:py-6 text-gray-500 text-sm md:text-base">Belum ada
+                                data berita.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -186,7 +202,8 @@
                             <i class="fas fa-chevron-left"></i>
                         </span>
                     @else
-                        <a href="{{ $posts->previousPageUrl() }}" class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        <a href="{{ $posts->previousPageUrl() }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
                             <i class="fas fa-chevron-left"></i>
                         </a>
                     @endif
@@ -206,7 +223,8 @@
                     @endphp
 
                     @if ($start > 1)
-                        <a href="{{ $posts->url(1) }}" class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">1</a>
+                        <a href="{{ $posts->url(1) }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">1</a>
                         @if ($start > 2)
                             <span class="px-2 py-1 text-xs md:text-sm text-gray-500">...</span>
                         @endif
@@ -214,9 +232,11 @@
 
                     @for ($i = $start; $i <= $end; $i++)
                         @if ($i == $posts->currentPage())
-                            <span class="px-2 py-1 text-xs md:text-sm bg-primary text-white rounded">{{ $i }}</span>
+                            <span
+                                class="px-2 py-1 text-xs md:text-sm bg-primary text-white rounded">{{ $i }}</span>
                         @else
-                            <a href="{{ $posts->url($i) }}" class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">{{ $i }}</a>
+                            <a href="{{ $posts->url($i) }}"
+                                class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">{{ $i }}</a>
                         @endif
                     @endfor
 
@@ -224,12 +244,14 @@
                         @if ($end < $posts->lastPage() - 1)
                             <span class="px-2 py-1 text-xs md:text-sm text-gray-500">...</span>
                         @endif
-                        <a href="{{ $posts->url($posts->lastPage()) }}" class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">{{ $posts->lastPage() }}</a>
+                        <a href="{{ $posts->url($posts->lastPage()) }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">{{ $posts->lastPage() }}</a>
                     @endif
 
                     {{-- Next Button --}}
                     @if ($posts->hasMorePages())
-                        <a href="{{ $posts->nextPageUrl() }}" class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
+                        <a href="{{ $posts->nextPageUrl() }}"
+                            class="px-2 py-1 text-xs md:text-sm text-gray-500 hover:text-gray-700 transition-colors">
                             <i class="fas fa-chevron-right"></i>
                         </a>
                     @else

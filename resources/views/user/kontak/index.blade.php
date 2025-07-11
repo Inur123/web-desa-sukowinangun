@@ -2,7 +2,7 @@
 @section('title', 'Kontak - Sukowinangun')
 
 @section('content')
-    <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
+    <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Hubungi Kami</h1>
@@ -12,10 +12,10 @@
             </div>
         </div>
     </section>
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white" data-aos="fade-up" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-map-marker-alt text-primary text-2xl"></i>
                     </div>
@@ -27,7 +27,7 @@
                     </p>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-phone text-secondary text-2xl"></i>
                     </div>
@@ -39,7 +39,7 @@
                     </p>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-envelope text-accent text-2xl"></i>
                     </div>
@@ -51,7 +51,7 @@
                     </p>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-clock text-green-600 text-2xl"></i>
                     </div>
@@ -65,11 +65,12 @@
             </div>
         </div>
     </section>
-    <section class="py-20 bg-gray-50">
+
+    <section class="py-20 bg-gray-50" data-aos="fade-up" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
-                <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="bg-white p-8 rounded-xl shadow-lg" data-aos="fade-right" data-aos-delay="200">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h2>
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -126,7 +127,7 @@
                 </div>
 
                 <!-- Map -->
-                <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="bg-white p-8 rounded-xl shadow-lg" data-aos="fade-left" data-aos-delay="200">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Lokasi Kami</h2>
                     <div class="mb-6 rounded-lg overflow-hidden h-64">
                         <iframe class="w-full h-full border-0"
@@ -135,9 +136,8 @@
                         </iframe>
                     </div>
 
-
                     <div class="space-y-4">
-                        <div class="flex items-start">
+                        <div class="flex items-start" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-directions text-primary text-xl mt-1 mr-4"></i>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Petunjuk Arah</h4>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-start" data-aos="fade-up" data-aos-delay="200">
                             <i class="fas fa-car text-primary text-xl mt-1 mr-4"></i>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Transportasi</h4>
@@ -159,7 +159,7 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-start" data-aos="fade-up" data-aos-delay="300">
                             <i class="fas fa-landmark text-primary text-xl mt-1 mr-4"></i>
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Patokan</h4>
@@ -174,9 +174,10 @@
             </div>
         </div>
     </section>
-    <section class="py-20 bg-white">
+
+    <section class="py-20 bg-white" data-aos="fade-up" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Jam Pelayanan</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Jadwal lengkap pelayanan administrasi dan layanan publik desa
@@ -184,7 +185,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                <div class="bg-gray-50 p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-calendar-week text-primary text-2xl"></i>
                     </div>
@@ -205,7 +206,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                <div class="bg-gray-50 p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-phone-alt text-secondary text-2xl"></i>
                     </div>
@@ -226,7 +227,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 p-6 rounded-xl text-center">
+                <div class="bg-gray-50 p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-envelope text-accent text-2xl"></i>
                     </div>
