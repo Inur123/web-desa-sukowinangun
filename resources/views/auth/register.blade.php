@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Daftar Akun - Desa Maju Sejahtera</title>
+    <title>Daftar Akun - Kelurahan Sukowinangun</title>
      @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -14,7 +14,7 @@
                  <img class="h-15 w-20" src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa">
             </div>
             <h1 class="text-2xl font-bold text-gray-800 mb-2">Daftar Akun Admin</h1>
-            <p class="text-gray-600">Desa Maju Sejahtera</p>
+            <p class="text-gray-600">Kelurahan Sukowinangun</p>
         </div>
 
         <div class="p-8">

@@ -28,17 +28,26 @@
                     <span>Kelola Berita</span>
                 </a>
             </li>
+            <li>
+   <a href="{{ route('arsip-surat.index') }}"
+    class="flex items-center px-4 py-3 rounded-lg font-medium
+    {{ request()->routeIs('arsip-surat.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+    <i class="fas fa-archive mr-3"></i>
+    <span>Arsip Surat</span>
+</a>
+
+</li>
             <!-- Menu Layanan dengan Dropdown -->
             <li class="dropdown-container">
                 <button onclick="toggleDropdown(this)"
-        class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
-        {{ request()->routeIs('layanan.*') || request()->routeIs('sktm.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-        <div class="flex items-center">
-            <i class="fas fa-concierge-bell mr-3"></i>
-            <span>Layanan</span>
-        </div>
-        <i class="fas fa-chevron-down text-xs transition-transform duration-200 dropdown-icon"></i>
-    </button>
+                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
+                    {{ request()->routeIs('layanan.*') || request()->routeIs('sktm.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                    <div class="flex items-center">
+                        <i class="fas fa-concierge-bell mr-3"></i>
+                        <span>Layanan</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 dropdown-icon"></i>
+                </button>
 
                 <!-- Submenu Dropdown -->
                 <ul class="ml-4 mt-1 space-y-1 dropdown-menu {{ request()->routeIs('layanan.*') ? '' : 'hidden' }}">
@@ -67,12 +76,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href=""
-                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
-                        {{ request()->routeIs('layanan.surat-usaha') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                            <span>Surat Izin Usaha</span>
-                        </a>
-                    </li>
+    <a href="{{ route('arsip-surat.index') }}"
+        class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+        {{ request()->routeIs('layanan.surat-usaha') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+        <i class="fas fa-file-alt mr-3"></i> <!-- Icon tambahan (opsional) -->
+        <span>Surat Izin Usaha</span>
+    </a>
+</li>
                 </ul>
             </li>
         </ul>

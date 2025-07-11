@@ -11,6 +11,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\Layanan\SkuController;
 use App\Http\Controllers\Layanan\SktmController;
 
@@ -25,6 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/posts', PostController::class);
+    Route::resource('/arsip-surat',ArsipSuratController::class);
     Route::resource('/layanan/sktm', SktmController::class)
         ->except(['store']);
 });

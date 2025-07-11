@@ -81,24 +81,24 @@
                                                 placeholder="Kota/Kabupaten kelahiran">
                                         </div>
 
-                                      <div>
-    <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-  <input type="text" id="no_hp" name="no_hp" required
-    inputmode="numeric"
-    pattern="[0-9]*"
-    maxlength="15"
-    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-    placeholder="Contoh: 081234567890">
+                                        <div>
+                                            <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor
+                                                HP</label>
+                                            <input type="text" id="no_hp" name="no_hp" required inputmode="numeric"
+                                                pattern="[0-9]*" maxlength="15"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                                placeholder="Contoh: 081234567890">
 
-</div>
+                                        </div>
 
                                     </div>
 
                                     <!-- Column 2 -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal
+                                            <label for="ttl"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tanggal
                                                 Lahir</label>
                                             <input type="date" id="ttl" name="ttl" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
@@ -116,7 +116,8 @@
 
                                         <div>
                                             <label for="status_perkawinan"
-                                                class="block text-sm font-medium text-gray-700 mb-2">Status Perkawinan</label>
+                                                class="block text-sm font-medium text-gray-700 mb-2">Status
+                                                Perkawinan</label>
                                             <select id="status_perkawinan" name="status_perkawinan" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                                 <option value="">Pilih Status</option>
@@ -363,5 +364,12 @@
                 this.setCustomValidity('');
             });
         });
+        setTimeout(() => {
+    const successNotif = document.querySelector('.bg-green-500');
+    const errorNotif = document.querySelector('.bg-red-500');
+
+    if (successNotif) successNotif.remove();
+    if (errorNotif) errorNotif.remove();
+}, 5000);
     </script>
 @endsection
