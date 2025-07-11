@@ -30,6 +30,7 @@ class SkuController extends Controller
             'keperluan' => 'required|string|max:255',
             'pengantar_rt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'no_hp' => 'required|string|max:25',
         ], [
             'nik.digits' => 'NIK harus terdiri dari 16 digit angka',
             'pengantar_rt.max' => 'File Surat Pengantar RT tidak boleh lebih dari 2MB',
@@ -49,6 +50,9 @@ class SkuController extends Controller
         if ($request->hasFile('ktp')) {
             $validated['ktp'] = $request->file('ktp');
         }
+        if (isset($validated['no_hp']) && preg_match('/^0\d+$/', $validated['no_hp'])) {
+    $validated['no_hp'] = '62' . substr($validated['no_hp'], 1);
+}
 
         // Tambahkan status default 'baru'
         $validated['status'] = 'baru';

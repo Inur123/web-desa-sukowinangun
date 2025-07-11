@@ -21,7 +21,8 @@ class Sku extends Model
         'keperluan',
         'pengantar_rt',
         'ktp',
-        'status'
+        'status',
+        'no_hp'
     ];
 
     protected $encryptable = [
@@ -34,7 +35,11 @@ class Sku extends Model
         'alamat_usaha',
         'keperluan',
         'pengantar_rt',
-        'ktp'
+        'ktp',
+        'no_hp'
+
+
+
     ];
 
     protected $casts = [

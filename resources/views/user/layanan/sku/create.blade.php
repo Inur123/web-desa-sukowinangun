@@ -63,58 +63,78 @@
                                 </h3>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                    <div class="col-span-1">
-                                        <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama
-                                            Lengkap</label>
-                                        <input type="text" id="nama" name="nama" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-                                            placeholder="Nama sesuai KTP">
+                                    <!-- Column 1 -->
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama
+                                                Lengkap</label>
+                                            <input type="text" id="nama" name="nama" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                                placeholder="Nama sesuai KTP">
+                                        </div>
+
+                                        <div>
+                                            <label for="tempat_lahir"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
+                                            <input type="text" id="tempat_lahir" name="tempat_lahir" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                                placeholder="Kota/Kabupaten kelahiran">
+                                        </div>
+
+                                      <div>
+    <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
+  <input type="text" id="no_hp" name="no_hp" required
+    inputmode="numeric"
+    pattern="[0-9]*"
+    maxlength="15"
+    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+    placeholder="Contoh: 081234567890">
+
+</div>
+
                                     </div>
 
-                                    <div class="col-span-1">
-                                        <label for="tempat_lahir"
-                                            class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
-                                        <input type="text" id="tempat_lahir" name="tempat_lahir" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-                                            placeholder="Kota/Kabupaten kelahiran">
-                                    </div>
+                                    <!-- Column 2 -->
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal
+                                                Lahir</label>
+                                            <input type="date" id="ttl" name="ttl" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
+                                        </div>
 
-                                    <div class="col-span-1">
-                                        <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal
-                                            Lahir</label>
-                                        <input type="date" id="ttl" name="ttl" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
-                                    </div>
+                                        <div>
+                                            <label for="nik"
+                                                class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
+                                            <input type="text" id="nik" name="nik" maxlength="16" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                                placeholder="16 digit NIK">
+                                            <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
+                                            </div>
+                                        </div>
 
-                                    <div class="col-span-1">
-                                        <label for="nik"
-                                            class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
-                                        <input type="text" id="nik" name="nik" maxlength="16" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-                                            placeholder="16 digit NIK">
-                                        <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
+                                        <div>
+                                            <label for="status_perkawinan"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Status Perkawinan</label>
+                                            <select id="status_perkawinan" name="status_perkawinan" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
+                                                <option value="">Pilih Status</option>
+                                                <option value="Belum Kawin">Belum Kawin</option>
+                                                <option value="Kawin">Kawin</option>
+                                                <option value="Cerai Hidup">Cerai Hidup</option>
+                                                <option value="Cerai Mati">Cerai Mati</option>
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-span-1 md:col-span-2">
+                                    <!-- Full width field -->
+                                    <div class="md:col-span-2">
                                         <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat
                                             Lengkap</label>
                                         <textarea id="alamat" name="alamat" rows="3" required
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Jalan, nomor rumah, RT/RW"></textarea>
-                                    </div>
-
-                                    <div class="col-span-1 md:col-span-2">
-                                        <label for="status_perkawinan"
-                                            class="block text-sm font-medium text-gray-700 mb-2">Status Perkawinan</label>
-                                        <select id="status_perkawinan" name="status_perkawinan" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
-                                            <option value="">Pilih Status</option>
-                                            <option value="Belum Kawin">Belum Kawin</option>
-                                            <option value="Kawin">Kawin</option>
-                                            <option value="Cerai Hidup">Cerai Hidup</option>
-                                            <option value="Cerai Mati">Cerai Mati</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +147,8 @@
                                 </h3>
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                    <div class="col-span-1 md:col-span-2">
+                                    <!-- Column 1 -->
+                                    <div>
                                         <label for="nama_usaha" class="block text-sm font-medium text-gray-700 mb-2">Nama
                                             Usaha</label>
                                         <input type="text" id="nama_usaha" name="nama_usaha" required
@@ -135,31 +156,34 @@
                                             placeholder="Nama usaha Anda">
                                     </div>
 
-                                    <div class="col-span-1 md:col-span-2">
-                                        <label for="alamat_usaha"
-                                            class="block text-sm font-medium text-gray-700 mb-2">Alamat Usaha</label>
-                                        <textarea id="alamat_usaha" name="alamat_usaha" rows="3" required
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-                                            placeholder="Alamat lengkap tempat usaha"></textarea>
-                                    </div>
-
-                                    <div class="col-span-1 md:col-span-2">
+                                    <!-- Column 2 -->
+                                    <div>
                                         <label for="keperluan"
                                             class="block text-sm font-medium text-gray-700 mb-2">Keperluan</label>
                                         <input type="text" id="keperluan" name="keperluan" required
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Contoh: Pengajuan izin usaha, perpanjangan izin, dll">
                                     </div>
+
+                                    <!-- Full width field -->
+                                    <div class="md:col-span-2">
+                                        <label for="alamat_usaha"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Alamat Usaha</label>
+                                        <textarea id="alamat_usaha" name="alamat_usaha" rows="3" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                            placeholder="Alamat lengkap tempat usaha"></textarea>
+                                    </div>
                                 </div>
                             </div>
 
+                            <!-- Upload Dokumen -->
                             <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-upload mr-2 text-secondary"></i>
                                     Upload Dokumen
                                 </h3>
 
-                                <div class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <!-- Surat Pengantar RT/RW -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar
@@ -268,75 +292,76 @@
                 nikInput.classList.remove('border-red-500');
             }
         });
- document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('pengantar_rt_container').addEventListener('click', function() {
-            document.getElementById('pengantar_rt').click();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('pengantar_rt_container').addEventListener('click', function() {
+                document.getElementById('pengantar_rt').click();
+            });
+
+            document.getElementById('ktp_container').addEventListener('click', function() {
+                document.getElementById('ktp').click();
+            });
         });
 
-        document.getElementById('ktp_container').addEventListener('click', function() {
-            document.getElementById('ktp').click();
-        });
-    });
+        // File preview functionality
+        function previewFile(inputId) {
+            const input = document.getElementById(inputId);
+            const file = input.files[0];
 
-    // File preview functionality
-    function previewFile(inputId) {
-        const input = document.getElementById(inputId);
-        const file = input.files[0];
+            if (file) {
+                const preview = document.getElementById(`${inputId}_preview`);
+                const placeholder = document.getElementById(`${inputId}_placeholder`);
+                const filename = document.getElementById(`${inputId}_filename`);
+                const filesize = document.getElementById(`${inputId}_size`);
 
-        if (file) {
+                // Format file size
+                const formatFileSize = (bytes) => {
+                    if (bytes === 0) return '0 Bytes';
+                    const k = 1024;
+                    const sizes = ['Bytes', 'KB', 'MB'];
+                    const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+                };
+
+                // Show appropriate icon based on file extension
+                const fileExt = file.name.split('.').pop().toLowerCase();
+                let iconClass = 'fa-file';
+
+                if (fileExt === 'pdf') {
+                    iconClass = 'fa-file-pdf text-red-500';
+                } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
+                    iconClass = 'fa-file-image text-blue-500';
+                }
+
+                filename.textContent = file.name;
+                filesize.textContent = formatFileSize(file.size);
+                preview.querySelector('i').className = `fas ${iconClass} text-lg md:text-xl mr-2 flex-shrink-0`;
+
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            }
+        }
+
+        function removeFile(inputId, event) {
+            event.stopPropagation(); // Mencegah event click bubble ke container
+            const input = document.getElementById(inputId);
             const preview = document.getElementById(`${inputId}_preview`);
             const placeholder = document.getElementById(`${inputId}_placeholder`);
-            const filename = document.getElementById(`${inputId}_filename`);
-            const filesize = document.getElementById(`${inputId}_size`);
 
-            // Format file size
-            const formatFileSize = (bytes) => {
-                if (bytes === 0) return '0 Bytes';
-                const k = 1024;
-                const sizes = ['Bytes', 'KB', 'MB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-            };
+            input.value = '';
+            preview.classList.add('hidden');
+            placeholder.classList.remove('hidden');
 
-            // Show appropriate icon based on file extension
-            const fileExt = file.name.split('.').pop().toLowerCase();
-            let iconClass = 'fa-file';
-
-            if (fileExt === 'pdf') {
-                iconClass = 'fa-file-pdf text-red-500';
-            } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
-                iconClass = 'fa-file-image text-blue-500';
+            if (input.required) {
+                input.setCustomValidity('File harus diupload');
             }
-
-            filename.textContent = file.name;
-            filesize.textContent = formatFileSize(file.size);
-            preview.querySelector('i').className = `fas ${iconClass} text-lg md:text-xl mr-2 flex-shrink-0`;
-
-            preview.classList.remove('hidden');
-            placeholder.classList.add('hidden');
         }
-    }
 
-    function removeFile(inputId, event) {
-        event.stopPropagation(); // Mencegah event click bubble ke container
-        const input = document.getElementById(inputId);
-        const preview = document.getElementById(`${inputId}_preview`);
-        const placeholder = document.getElementById(`${inputId}_placeholder`);
-
-        input.value = '';
-        preview.classList.add('hidden');
-        placeholder.classList.remove('hidden');
-
-        if (input.required) {
-            input.setCustomValidity('File harus diupload');
-        }
-    }
-
-    // Reset custom validation when new file is selected
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        input.addEventListener('change', function() {
-            this.setCustomValidity('');
+        // Reset custom validation when new file is selected
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                this.setCustomValidity('');
+            });
         });
-    });
     </script>
 @endsection

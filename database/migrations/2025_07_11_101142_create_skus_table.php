@@ -13,18 +13,19 @@ return new class extends Migration
     {
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('tempat_lahir'); // Tambahan
-            $table->date('ttl'); // Tanggal Lahir
-            $table->string('nik');
-            $table->text('alamat');
-            $table->string('status_perkawinan');
-            $table->string('nama_usaha');
-            $table->text('alamat_usaha');
-            $table->string('keperluan');
-            $table->string('pengantar_rt'); // file path
-            $table->string('ktp'); // file path
+            $table->string('nama')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('ttl')->nullable();
+            $table->string('nik')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('status_perkawinan')->nullable();
+            $table->string('nama_usaha')->nullable();
+            $table->text('alamat_usaha')->nullable();
+            $table->string('keperluan')->nullable();
+            $table->string('pengantar_rt')->nullable();
+            $table->string('ktp')->nullable();
             $table->enum('status', ['baru', 'diterima', 'ditolak'])->default('baru');
+            $table->text('no_hp')->nullable();
             $table->timestamps();
         });
     }
