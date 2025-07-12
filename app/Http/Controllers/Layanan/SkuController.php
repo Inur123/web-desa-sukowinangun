@@ -91,7 +91,7 @@ class SkuController extends Controller
     }
     private function sendWhatsAppNotification($phoneNumber, $message)
 {
-    $apiToken = '6gjbZBLEncZhgN8WyXKY'; // Ganti dengan token API Fonnte Anda
+    $apiToken = env('FONNTE_API_TOKEN');
     $url = 'https://api.fonnte.com/send';
 
     $data = [
