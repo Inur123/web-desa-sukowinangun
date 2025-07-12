@@ -108,14 +108,6 @@
                     <p class="text-gray-600">Dokumen resmi dapat diambil sesuai waktu yang ditentukan</p>
                 </div>
             </div>
-
-            <!-- CTA Button -->
-            <div class="text-center mt-12">
-                <a href="#"
-                    class="inline-block bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
-                    Mulai Layanan Online Sekarang
-                </a>
-            </div>
         </div>
     </section>
     <section class="py-20 bg-white">
