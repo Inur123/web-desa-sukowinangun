@@ -63,6 +63,16 @@ class SkuController extends Controller
             $validated['status'] = 'baru';
 
             Sku::create($validated);
+            // Kirim notifikasi ke pengguna
+        $userMessage = "Halo {$validated['nama']},\n\nTerima kasih telah mengajukan Surat Keterangan Usaha. Pengajuan Anda telah kami terima dengan detail sebagai berikut:\n\nNama Usaha: {$validated['nama_usaha']}\nAlamat Usaha: {$validated['alamat_usaha']}\nKeperluan: {$validated['keperluan']}\n\nKami akan memproses pengajuan Anda segera. Anda akan mendapatkan notifikasi berikutnya ketika status pengajuan berubah.\n\nSalam hormat,\nAdmin";
+
+        $this->sendWhatsAppNotification($validated['no_hp'], $userMessage);
+
+        // Kirim notifikasi ke admin (nomor admin disesuaikan)
+        $adminNumber = '6285785211544'; // Ganti dengan nomor admin yang benar
+        $adminMessage = "Ada pengajuan SKU baru dari:\n\nNama: {$validated['nama']}\nNIK: {$validated['nik']}\nNo. HP: {$validated['no_hp']}\nNama Usaha: {$validated['nama_usaha']}\n\nSilakan periksa sistem untuk detail lebih lanjut.";
+
+        $this->sendWhatsAppNotification($adminNumber, $adminMessage);
 
             return redirect()->back()
                 ->with('success', 'Pengajuan Surat Keterangan Usaha berhasil dikirim.');
@@ -79,6 +89,34 @@ class SkuController extends Controller
                 ->withErrors(['error' => 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin.']);
         }
     }
+    private function sendWhatsAppNotification($phoneNumber, $message)
+{
+    $apiToken = '6gjbZBLEncZhgN8WyXKY'; // Ganti dengan token API Fonnte Anda
+    $url = 'https://api.fonnte.com/send';
+
+    $data = [
+        'target' => $phoneNumber,
+        'message' => $message,
+        'delay' => '5-10',
+    ];
+
+    $headers = [
+        'Authorization: ' . $apiToken,
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    // Anda bisa menambahkan log untuk response jika diperlukan
+    // \Log::info('Fonnte API Response: ' . $response);
+}
 
     public function show($id)
     {
@@ -134,23 +172,33 @@ class SkuController extends Controller
         }
     }
 
-    public function approve($id)
-    {
-        $sku = Sku::findOrFail($id);
-        $sku->status = 'diterima';
-        $sku->save();
+   public function approve($id)
+{
+    $sku = Sku::findOrFail($id);
+    $sku->status = 'diterima';
+    $sku->save();
 
-        return redirect()->back()->with('success', 'Pengajuan telah disetujui.');
-    }
+    // Kirim notifikasi hanya ke pengguna
+    $userMessage = "Halo {$sku->nama},\n\nPengajuan Surat Keterangan Usaha Anda *TELAH DISETUJUI*.\n\nKelengkapan administrasi sudah sesuai dan surat dapat diambil di:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nJam kerja: Senin-Jumat 07.30-15.30\n\nHarap membawa bukti identitas saat pengambilan.\n\nTerima kasih.";
 
-    public function reject($id)
-    {
-        $sku = Sku::findOrFail($id);
-        $sku->status = 'ditolak';
-        $sku->save();
+    $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
 
-        return redirect()->back()->with('success', 'Pengajuan telah ditolak.');
-    }
+    return redirect()->back()->with('success', 'Pengajuan telah disetujui dan notifikasi terkirim ke pemohon.');
+}
+
+public function reject($id)
+{
+    $sku = Sku::findOrFail($id);
+    $sku->status = 'ditolak';
+    $sku->save();
+
+    // Kirim notifikasi hanya ke pengguna
+    $userMessage = "Halo {$sku->nama},\n\nMaaf pengajuan Surat Keterangan Usaha Anda *DITOLAK* karena:\n\n- Kelengkapan dokumen tidak sesuai\n- Data tidak valid\n\nSilakan perbaiki pengajuan dan ajukan kembali.\n\nUntuk informasi lebih lanjut, hubungi:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nTelp: 021-1234567";
+
+    $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
+
+    return redirect()->back()->with('success', 'Pengajuan telah ditolak dan notifikasi terkirim ke pemohon.');
+}
 
 public function destroy($id)
 {
