@@ -33,16 +33,18 @@
             </div>
         </div>
     @endif
-    <!-- Page Header -->
-    <section class="pt-18 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+
+    <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+            <div class="text-center text-white">
+                 <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i class="fas fa-store text-4xl"></i>
             </div>
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">Form Pengajuan Surat Keterangan Usaha</h1>
-            <p class="text-xl text-gray-100 max-w-2xl mx-auto">
-                Ajukan permohonan Surat Keterangan Usaha (SKU) untuk keperluan administrasi bisnis dan perizinan usaha Anda.
-            </p>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Form Pengajuan Surat Keterangan Usaha</h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto px-2 sm:px-0">
+                 Ajukan permohonan Surat Keterangan Usaha (SKU) untuk keperluan administrasi bisnis dan perizinan usaha Anda.
+                </p>
+            </div>
         </div>
     </section>
 

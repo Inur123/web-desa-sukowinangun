@@ -7,7 +7,7 @@
                     <h3 class="text-xl font-bold">Kelurahan Sukowinangun</h3>
                 </div>
                 <p class="text-gray-300 mb-4">
-                    Desa yang berkembang dengan semangat gotong royong dan teknologi modern untuk pelayanan terbaik.
+                    Kelurahan yang berkembang dengan semangat gotong royong dan teknologi modern untuk pelayanan terbaik.
                 </p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-300 hover:text-white transition-colors">
@@ -30,7 +30,7 @@
                     <li><a href="{{ route('home') }}"
                             class="text-gray-300 hover:text-white transition-colors">Beranda</a></li>
                     <li><a href="{{ route('profile.index') }}"
-                            class="text-gray-300 hover:text-white transition-colors">Profil Desa</a></li>
+                            class="text-gray-300 hover:text-white transition-colors">Profil Kelurahan</a></li>
                     <li><a href="" class="text-gray-300 hover:text-white transition-colors">Layanan</a></li>
                     <li><a href="{{ route('berita.index') }}"
                             class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
@@ -55,7 +55,7 @@
                 <div class="space-y-3">
                     <div class="flex items-center">
                         <i class="fas fa-map-marker-alt mr-3 text-primary"></i>
-                        <span class="text-gray-300 text-sm">Jl. Raya Desa No. 123</span>
+                        <span class="text-gray-300 text-sm">Jl. Kunti No. 3</span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-phone mr-3 text-primary"></i>
