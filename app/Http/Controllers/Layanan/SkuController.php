@@ -11,17 +11,17 @@ use Carbon\Carbon;
 
 class SkuController extends Controller
 {
-   public function index()
-{
-    $skus = Sku::latest()->paginate(10);
+    public function index()
+    {
+        $skus = Sku::latest()->paginate(10);
 
-    $total = Sku::count();
-    $disetujui = Sku::where('status', 'diterima')->count();
-    $ditolak = Sku::where('status', 'ditolak')->count();
-    $baru = Sku::where('status', 'baru')->count();
+        $total = Sku::count();
+        $disetujui = Sku::where('status', 'diterima')->count();
+        $ditolak = Sku::where('status', 'ditolak')->count();
+        $baru = Sku::where('status', 'baru')->count();
 
-    return view('admin.layanan.sku.index', compact('skus', 'total', 'disetujui', 'ditolak', 'baru'));
-}
+        return view('admin.layanan.sku.index', compact('skus', 'total', 'disetujui', 'ditolak', 'baru'));
+    }
 
 
 
@@ -31,92 +31,105 @@ class SkuController extends Controller
     }
 
     public function store(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'nama' => 'required|string|max:255',
-                'tempat_lahir' => 'required|string|max:255',
-                'ttl' => 'required|date',
-                'nik' => 'required|digits:16',
-                'alamat' => 'required|string',
-                'status_perkawinan' => 'required|string|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
-                'nama_usaha' => 'required|string|max:255',
-                'alamat_usaha' => 'required|string',
-                'keperluan' => 'required|string|max:255',
-                'pengantar_rt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-                'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-                'no_hp' => 'required|string|max:25',
-            ], [
-                'nik.digits' => 'NIK harus terdiri dari 16 digit angka',
-                'pengantar_rt.max' => 'File Surat Pengantar RT tidak boleh lebih dari 2MB',
-                'ktp.max' => 'File KTP tidak boleh lebih dari 2MB',
-                'required' => 'Field :attribute wajib diisi',
-                'mimes' => 'File harus berupa PDF, JPG, atau PNG'
-            ]);
+{
+    try {
+        // Validasi semua input termasuk alternatif file/kamera
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'ttl' => 'required|date',
+            'nik' => 'required|digits:16',
+            'alamat' => 'required|string',
+            'status_perkawinan' => 'required|string|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
+            'nama_usaha' => 'required|string|max:255',
+            'alamat_usaha' => 'required|string',
+            'keperluan' => 'required|string|max:255',
+            'pengantar_rt_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'pengantar_rt_camera' => 'nullable|string',
+            'ktp_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'ktp_camera' => 'nullable|string',
+            'no_hp' => 'required|string|max:25',
+        ], [
+            'nik.digits' => 'NIK harus terdiri dari 16 digit angka',
+            'required' => 'Field :attribute wajib diisi',
+            'mimes' => 'File harus berupa PDF, JPG, atau PNG',
+            'pengantar_rt_file.max' => 'File Surat Pengantar RT tidak boleh lebih dari 2MB',
+            'ktp_file.max' => 'File KTP tidak boleh lebih dari 2MB',
+        ]);
 
-            $validated['ttl'] = Carbon::parse($validated['ttl'])->format('Y-m-d');
+        // Validasi minimal salah satu file/kamera harus ada
+        if (!$request->hasFile('pengantar_rt_file') && !$request->filled('pengantar_rt_camera')) {
+            return redirect()->back()->withInput()->withErrors(['pengantar_rt_file' => 'Harap unggah file atau ambil foto Surat Pengantar RT.']);
+        }
+        if (!$request->hasFile('ktp_file') && !$request->filled('ktp_camera')) {
+            return redirect()->back()->withInput()->withErrors(['ktp_file' => 'Harap unggah file atau ambil foto KTP.']);
+        }
 
-            if (isset($validated['no_hp']) && preg_match('/^0\d+$/', $validated['no_hp'])) {
-                $validated['no_hp'] = '62' . substr($validated['no_hp'], 1);
-            }
+        // Format TTL dan No HP
+        $validated['ttl'] = Carbon::parse($validated['ttl'])->format('Y-m-d');
+        if (preg_match('/^0\d+$/', $validated['no_hp'])) {
+            $validated['no_hp'] = '62' . substr($validated['no_hp'], 1);
+        }
+        $validated['status'] = 'baru';
 
-            $validated['status'] = 'baru';
+        // Buat objek baru
+        $sku = new Sku($validated);
 
-            Sku::create($validated);
-            // Kirim notifikasi ke pengguna
+        // Atur file/kamera
+        $sku->pengantar_rt = $request->file('pengantar_rt_file') ?? $request->input('pengantar_rt_camera');
+        $sku->ktp = $request->file('ktp_file') ?? $request->input('ktp_camera');
+
+        // Simpan
+        $sku->save();
+
+        // Kirim notifikasi ke user
         $userMessage = "Halo {$validated['nama']},\n\nTerima kasih telah mengajukan Surat Keterangan Usaha. Pengajuan Anda telah kami terima dengan detail sebagai berikut:\n\nNama Usaha: {$validated['nama_usaha']}\nAlamat Usaha: {$validated['alamat_usaha']}\nKeperluan: {$validated['keperluan']}\n\nKami akan memproses pengajuan Anda segera. Anda akan mendapatkan notifikasi berikutnya ketika status pengajuan berubah.\n\nSalam hormat,\nAdmin";
 
         $this->sendWhatsAppNotification($validated['no_hp'], $userMessage);
 
-        // Kirim notifikasi ke admin (nomor admin disesuaikan)
-        $adminNumber = '6285785211544'; // Ganti dengan nomor admin yang benar
+        // Kirim notifikasi ke admin
+        $adminNumber = '6285850512135';
         $adminMessage = "Ada pengajuan SKU baru dari:\n\nNama: {$validated['nama']}\nNIK: {$validated['nik']}\nNo. HP: {$validated['no_hp']}\nNama Usaha: {$validated['nama_usaha']}\n\nSilakan periksa sistem untuk detail lebih lanjut.";
 
         $this->sendWhatsAppNotification($adminNumber, $adminMessage);
 
-            return redirect()->back()
-                ->with('success', 'Pengajuan Surat Keterangan Usaha berhasil dikirim.');
-        } catch (\Exception $e) {
-            if (isset($validated['pengantar_rt']) && is_string($validated['pengantar_rt'])) {
-                Storage::disk('public')->delete($validated['pengantar_rt']);
-            }
-            if (isset($validated['ktp']) && is_string($validated['ktp'])) {
-                Storage::disk('public')->delete($validated['ktp']);
-            }
-
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['error' => 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin.']);
-        }
+        return redirect()->back()
+            ->with('success', 'Pengajuan Surat Keterangan Usaha berhasil dikirim.');
+    } catch (\Exception $e) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['error' => 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin.']);
     }
-    private function sendWhatsAppNotification($phoneNumber, $message)
-{
-    $apiToken = env('FONNTE_API_TOKEN');
-    $url = 'https://api.fonnte.com/send';
-
-    $data = [
-        'target' => $phoneNumber,
-        'message' => $message,
-        'delay' => '5-10',
-    ];
-
-    $headers = [
-        'Authorization: ' . $apiToken,
-    ];
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    // Anda bisa menambahkan log untuk response jika diperlukan
-    // \Log::info('Fonnte API Response: ' . $response);
 }
+
+    private function sendWhatsAppNotification($phoneNumber, $message)
+    {
+        $apiToken = env('FONNTE_API_TOKEN');
+        $url = 'https://api.fonnte.com/send';
+
+        $data = [
+            'target' => $phoneNumber,
+            'message' => $message,
+            'delay' => '5-10',
+        ];
+
+        $headers = [
+            'Authorization: ' . $apiToken,
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Anda bisa menambahkan log untuk response jika diperlukan
+        // \Log::info('Fonnte API Response: ' . $response);
+    }
 
     public function show($id)
     {
@@ -166,64 +179,62 @@ class SkuController extends Controller
             return response($decrypted)
                 ->header('Content-Type', $mimeType)
                 ->header('Content-Disposition', 'inline; filename="' . $displayName . '"');
-
         } catch (\Exception $e) {
             return abort(500, 'Gagal membuka file: ' . $e->getMessage());
         }
     }
 
-   public function approve($id)
-{
-    $sku = Sku::findOrFail($id);
-    $sku->status = 'diterima';
-    $sku->save();
-
-    // Kirim notifikasi hanya ke pengguna
-    $userMessage = "Halo {$sku->nama},\n\nPengajuan Surat Keterangan Usaha Anda *TELAH DISETUJUI*.\n\nKelengkapan administrasi sudah sesuai dan surat dapat diambil di:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nJam kerja: Senin-Jumat 07.30-15.30\n\nHarap membawa bukti identitas saat pengambilan.\n\nTerima kasih.";
-
-    $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
-
-    return redirect()->back()->with('success', 'Pengajuan telah disetujui dan notifikasi terkirim ke pemohon.');
-}
-
-public function reject($id)
-{
-    $sku = Sku::findOrFail($id);
-    $sku->status = 'ditolak';
-    $sku->save();
-
-    // Kirim notifikasi hanya ke pengguna
-    $userMessage = "Halo {$sku->nama},\n\nMaaf pengajuan Surat Keterangan Usaha Anda *DITOLAK* karena:\n\n- Kelengkapan dokumen tidak sesuai\n- Data tidak valid\n\nSilakan perbaiki pengajuan dan ajukan kembali.\n\nUntuk informasi lebih lanjut, hubungi:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nTelp: 021-1234567";
-
-    $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
-
-    return redirect()->back()->with('success', 'Pengajuan telah ditolak dan notifikasi terkirim ke pemohon.');
-}
-
-public function destroy($id)
-{
-    try {
+    public function approve($id)
+    {
         $sku = Sku::findOrFail($id);
+        $sku->status = 'diterima';
+        $sku->save();
 
-        // Hapus file jika ada
-        $ktpPath = $sku->getRawOriginal('ktp');
-        $pengantarPath = $sku->getRawOriginal('pengantar_rt');
+        // Kirim notifikasi hanya ke pengguna
+        $userMessage = "Halo {$sku->nama},\n\nPengajuan Surat Keterangan Usaha Anda *TELAH DISETUJUI*.\n\nKelengkapan administrasi sudah sesuai dan surat dapat diambil di:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nJam kerja: Senin-Jumat 07.30-15.30\n\nHarap membawa bukti identitas saat pengambilan.\n\nTerima kasih.";
 
-        if ($ktpPath && Storage::disk('public')->exists($ktpPath)) {
-            Storage::disk('public')->delete($ktpPath);
-        }
+        $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
 
-        if ($pengantarPath && Storage::disk('public')->exists($pengantarPath)) {
-            Storage::disk('public')->delete($pengantarPath);
-        }
-
-        // Hapus data dari database
-        $sku->delete();
-
-        return redirect()->back()->with('success', 'Data pengajuan berhasil dihapus.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menghapus data. Silakan coba lagi.');
+        return redirect()->back()->with('success', 'Pengajuan telah disetujui dan notifikasi terkirim ke pemohon.');
     }
-}
 
+    public function reject($id)
+    {
+        $sku = Sku::findOrFail($id);
+        $sku->status = 'ditolak';
+        $sku->save();
+
+        // Kirim notifikasi hanya ke pengguna
+        $userMessage = "Halo {$sku->nama},\n\nMaaf pengajuan Surat Keterangan Usaha Anda *DITOLAK* karena:\n\n- Kelengkapan dokumen tidak sesuai\n- Data tidak valid\n\nSilakan perbaiki pengajuan dan ajukan kembali.\n\nUntuk informasi lebih lanjut, hubungi:\n\nKantor Kelurahan Sukowinangun\nJl. Kunti No. 3\nTelp: 021-1234567";
+
+        $this->sendWhatsAppNotification($sku->no_hp, $userMessage);
+
+        return redirect()->back()->with('success', 'Pengajuan telah ditolak dan notifikasi terkirim ke pemohon.');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $sku = Sku::findOrFail($id);
+
+            // Hapus file jika ada
+            $ktpPath = $sku->getRawOriginal('ktp');
+            $pengantarPath = $sku->getRawOriginal('pengantar_rt');
+
+            if ($ktpPath && Storage::disk('public')->exists($ktpPath)) {
+                Storage::disk('public')->delete($ktpPath);
+            }
+
+            if ($pengantarPath && Storage::disk('public')->exists($pengantarPath)) {
+                Storage::disk('public')->delete($pengantarPath);
+            }
+
+            // Hapus data dari database
+            $sku->delete();
+
+            return redirect()->back()->with('success', 'Data pengajuan berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus data. Silakan coba lagi.');
+        }
+    }
 }

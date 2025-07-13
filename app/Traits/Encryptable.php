@@ -2,10 +2,15 @@
 
 namespace App\Traits;
 
+use Exception;
+
+use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
-use Exception;
+use Intervention\Image\Facades\Image;
+
+
 
 trait Encryptable
 {
@@ -41,7 +46,7 @@ trait Encryptable
         }
 
         if ($this->isFileUpload($key, $value)) {
-            $value = $this->encryptUploadedFile($value, $key); // Enkripsi file upload
+            $value = $this->processAndEncryptFile($value, $key);
         } else {
             $value = Crypt::encryptString($value); // Enkripsi teks biasa
         }
@@ -50,7 +55,7 @@ trait Encryptable
     }
 
     /**
-     * Cek apakah ini field file (bisa kamu ubah sesuai field lain)
+     * Cek apakah ini field file
      */
     protected function isFileField($key)
     {
@@ -62,7 +67,15 @@ trait Encryptable
      */
     protected function isFileUpload($key, $value)
     {
-        return $this->isFileField($key) && $value instanceof UploadedFile;
+        return $this->isFileField($key) && ($value instanceof UploadedFile || $this->isBase64Image($value));
+    }
+
+    /**
+     * Cek apakah value berupa base64 image
+     */
+    protected function isBase64Image($value)
+    {
+        return is_string($value) && preg_match('/^data:image\/(\w+);base64,/', $value);
     }
 
     /**
@@ -79,27 +92,89 @@ trait Encryptable
     }
 
     /**
-     * Fungsi menyimpan file terenkripsi ke storage dan kembalikan path
+     * Proses dan enkripsi file yang diupload (baik file maupun dari kamera)
      */
-   protected function encryptUploadedFile(UploadedFile $file, $field)
-{
-    try {
-        $fileContent = file_get_contents($file->getRealPath());
-        $encryptedContent = Crypt::encrypt($fileContent); // binary-safe encrypt
+    protected function processAndEncryptFile($file, $field)
+    {
+        try {
+            // Jika file berasal dari kamera (base64)
+            if ($this->isBase64Image($file)) {
+                $imageData = $this->processBase64Image($file);
+                $fileContent = $imageData['content'];
+                $extension = $imageData['extension'];
+            }
+            // Jika file adalah UploadedFile biasa
+            elseif ($file instanceof UploadedFile) {
+                $fileContent = $this->processUploadedFile($file);
+                $extension = $file->getClientOriginalExtension();
+            } else {
+                throw new \RuntimeException('Format file tidak didukung');
+            }
 
-        $folder = $this->getFolderByField($field);
-        $extension = $file->getClientOriginalExtension(); // Ambil ekstensi asli
-        $fileName = 'encrypted_' . md5(time() . $file->getClientOriginalName()) . '.' . $extension . '.enc';
-        $filePath = $folder . '/' . $fileName;
+            // Enkripsi konten file
+            $encryptedContent = Crypt::encrypt($fileContent);
 
-        Storage::disk('public')->put($filePath, $encryptedContent);
+            // Simpan ke storage
+            $folder = $this->getFolderByField($field);
+            $fileName = 'encrypted_' . Str::uuid() . '.' . $extension . '.enc';
+            $filePath = $folder . '/' . $fileName;
 
-        return $filePath;
-    } catch (Exception $e) {
-        throw new \RuntimeException('Gagal menyimpan file terenkripsi: ' . $e->getMessage());
+            Storage::disk('public')->put($filePath, $encryptedContent);
+
+            return $filePath;
+        } catch (Exception $e) {
+            throw new \RuntimeException('Gagal memproses file: ' . $e->getMessage());
+        }
     }
-}
 
+    /**
+     * Proses file upload biasa
+     */
+    protected function processUploadedFile(UploadedFile $file)
+    {
+        $extension = strtolower($file->getClientOriginalExtension());
+
+        // Optimasi gambar jika format gambar
+        if (in_array($extension, ['jpg', 'jpeg', 'png'])) {
+            $image = Image::make($file)
+                ->orientate() // Perbaiki orientasi
+                ->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode($extension, 75); // Kompresi kualitas 75%
+
+            return $image->getEncoded();
+        }
+
+        return file_get_contents($file->getRealPath());
+    }
+
+    /**
+     * Proses gambar dari kamera (base64)
+     */
+    protected function processBase64Image($base64)
+    {
+        $matches = [];
+        preg_match('/^data:image\/(\w+);base64,/', $base64, $matches);
+        $extension = $matches[1] ?? 'jpg';
+
+        $imageData = base64_decode(preg_replace('/^data:image\/\w+;base64,/', '', $base64));
+
+        // Optimasi gambar
+        $optimizedImage = Image::make($imageData)
+            ->orientate()
+            ->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->encode($extension, 75);
+
+        return [
+            'content' => $optimizedImage->getEncoded(),
+            'extension' => $extension
+        ];
+    }
 
     /**
      * Folder tujuan file sesuai nama field

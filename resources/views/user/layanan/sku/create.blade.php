@@ -180,7 +180,7 @@
                             </div>
 
                             <!-- Upload Dokumen -->
-                            <div class="border-t pt-6">
+                           <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-upload mr-2 text-secondary"></i>
                                     Upload Dokumen
@@ -189,78 +189,99 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <!-- Surat Pengantar RT/RW -->
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar
-                                            RT/RW</label>
-                                        <div id="pengantar_rt_container"
-                                            class="border-2 border-dashed border-gray-300 rounded-lg p-3 md:p-4 text-center hover:border-secondary transition-colors cursor-pointer relative min-h-[120px] flex items-center justify-center">
-                                            <div id="pengantar_rt_preview"
-                                                class="hidden absolute inset-0 bg-white rounded-lg p-3 flex items-center">
-                                                <div class="w-full">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar RT/RW</label>
+                                        <div class="space-y-4">
+                                            <!-- File Upload Option -->
+                                            <div id="pengantar_file_container" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
+                                                <div id="pengantar_file_placeholder">
+                                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                                    <p class="text-gray-600">Upload File Surat Pengantar</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                </div>
+                                                <div id="pengantar_file_preview" class="hidden">
                                                     <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
-                                                        <div class="flex items-center min-w-0">
-                                                            <i
-                                                                class="fas fa-file-pdf text-red-500 text-lg md:text-xl mr-2 flex-shrink-0"></i>
-                                                            <div class="min-w-0">
-                                                                <p id="pengantar_rt_filename"
-                                                                    class="text-xs md:text-sm font-medium truncate"></p>
-                                                                <p id="pengantar_rt_size" class="text-xs text-gray-500">
-                                                                </p>
-                                                            </div>
+                                                        <div class="flex items-center truncate">
+                                                            <i class="fas fa-file-pdf text-red-500 text-xl mr-2"></i>
+                                                            <span id="pengantar_file_name" class="truncate"></span>
                                                         </div>
-                                                        <button type="button" onclick="removeFile('pengantar_rt')"
-                                                            class="text-red-500 hover:text-red-700 ml-2 flex-shrink-0">
+                                                        <button type="button" onclick="resetFileInput('pengantar_file')" class="text-red-500 hover:text-red-700">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
                                                 </div>
+                                                <input type="file" id="pengantar_rt_file" name="pengantar_rt_file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="previewFile('pengantar_rt_file', 'pengantar_file')">
                                             </div>
-                                            <div id="pengantar_rt_placeholder" class="px-2">
-                                                <i
-                                                    class="fas fa-cloud-upload-alt text-2xl md:text-3xl text-gray-400 mb-1 md:mb-2"></i>
-                                                <p class="text-gray-600 text-sm md:text-base">Klik untuk upload Surat
-                                                    Pengantar</p>
-                                                <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+
+                                            <!-- Or Divider -->
+                                            <div class="flex items-center">
+                                                <div class="flex-grow border-t border-gray-300"></div>
+                                                <span class="mx-2 text-gray-500">atau</span>
+                                                <div class="flex-grow border-t border-gray-300"></div>
                                             </div>
-                                            <input type="file" id="pengantar_rt" name="pengantar_rt"
-                                                accept=".pdf,.jpg,.jpeg,.png" class="hidden" required
-                                                onchange="previewFile('pengantar_rt')">
+
+                                            <!-- Camera Option -->
+                                            <div>
+                                                <button type="button" onclick="openCamera('pengantar_rt_camera', 'Surat Pengantar RT')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-camera mr-2"></i>
+                                                    Ambil Foto Surat Pengantar
+                                                </button>
+                                                <input type="hidden" id="pengantar_rt_camera" name="pengantar_rt_camera">
+                                                <div id="pengantar_rt_camera_preview" class="mt-2 hidden">
+                                                    <img id="pengantar_rt_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button" onclick="resetCameraInput('pengantar_rt_camera')" class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                                                        <i class="fas fa-times mr-1"></i> Hapus Foto
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- Fotokopi KTP -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Fotokopi KTP</label>
-                                        <div id="ktp_container"
-                                            class="border-2 border-dashed border-gray-300 rounded-lg p-3 md:p-4 text-center hover:border-secondary transition-colors cursor-pointer relative min-h-[120px] flex items-center justify-center">
-                                            <div id="ktp_preview"
-                                                class="hidden absolute inset-0 bg-white rounded-lg p-3 flex items-center">
-                                                <div class="w-full">
+                                        <div class="space-y-4">
+                                            <!-- File Upload Option -->
+                                            <div id="ktp_file_container" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
+                                                <div id="ktp_file_placeholder">
+                                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                                    <p class="text-gray-600">Upload File KTP</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                </div>
+                                                <div id="ktp_file_preview" class="hidden">
                                                     <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
-                                                        <div class="flex items-center min-w-0">
-                                                            <i
-                                                                class="fas fa-file-image text-blue-500 text-lg md:text-xl mr-2 flex-shrink-0"></i>
-                                                            <div class="min-w-0">
-                                                                <p id="ktp_filename"
-                                                                    class="text-xs md:text-sm font-medium truncate"></p>
-                                                                <p id="ktp_size" class="text-xs text-gray-500"></p>
-                                                            </div>
+                                                        <div class="flex items-center truncate">
+                                                            <i class="fas fa-file-image text-blue-500 text-xl mr-2"></i>
+                                                            <span id="ktp_file_name" class="truncate"></span>
                                                         </div>
-                                                        <button type="button" onclick="removeFile('ktp')"
-                                                            class="text-red-500 hover:text-red-700 ml-2 flex-shrink-0">
+                                                        <button type="button" onclick="resetFileInput('ktp_file')" class="text-red-500 hover:text-red-700">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
                                                 </div>
+                                                <input type="file" id="ktp_file" name="ktp_file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="previewFile('ktp_file', 'ktp_file')">
                                             </div>
-                                            <div id="ktp_placeholder" class="px-2">
-                                                <i
-                                                    class="fas fa-cloud-upload-alt text-2xl md:text-3xl text-gray-400 mb-1 md:mb-2"></i>
-                                                <p class="text-gray-600 text-sm md:text-base">Klik untuk upload KTP</p>
-                                                <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+
+                                            <!-- Or Divider -->
+                                            <div class="flex items-center">
+                                                <div class="flex-grow border-t border-gray-300"></div>
+                                                <span class="mx-2 text-gray-500">atau</span>
+                                                <div class="flex-grow border-t border-gray-300"></div>
                                             </div>
-                                            <input type="file" id="ktp" name="ktp"
-                                                accept=".pdf,.jpg,.jpeg,.png" class="hidden" required
-                                                onchange="previewFile('ktp')">
+
+                                            <!-- Camera Option -->
+                                            <div>
+                                                <button type="button" onclick="openCamera('ktp_camera', 'KTP')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-camera mr-2"></i>
+                                                    Ambil Foto KTP
+                                                </button>
+                                                <input type="hidden" id="ktp_camera" name="ktp_camera">
+                                                <div id="ktp_camera_preview" class="mt-2 hidden">
+                                                    <img id="ktp_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button" onclick="resetCameraInput('ktp_camera')" class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                                                        <i class="fas fa-times mr-1"></i> Hapus Foto
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -268,8 +289,7 @@
 
                             <!-- Submit Button -->
                             <div class="border-t pt-6">
-                                <button type="submit"
-                                    class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
+                                <button type="submit" class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
                                     <i class="fas fa-paper-plane mr-2"></i>
                                     Ajukan Permohonan SKU
                                 </button>
@@ -280,8 +300,7 @@
             </div>
         </div>
     </section>
-
-    <script>
+   <script>
         // Validasi NIK harus 16 digit
         document.getElementById('nik').addEventListener('input', function() {
             const nikInput = this;
@@ -296,82 +315,241 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('pengantar_rt_container').addEventListener('click', function() {
-                document.getElementById('pengantar_rt').click();
+        // Camera functionality
+        function openCamera(inputId, label) {
+            // Check if browser supports mediaDevices
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert('Browser Anda tidak mendukung akses kamera');
+                return;
+            }
+
+            // Create modal container
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+            modal.style.zIndex = '9999';
+            modal.style.display = 'flex';
+            modal.style.flexDirection = 'column';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.padding = '20px';
+
+            // Create header
+            const header = document.createElement('div');
+            header.className = 'text-white text-xl font-bold mb-4';
+            header.textContent = `Ambil Foto ${label}`;
+            modal.appendChild(header);
+
+            // Create video container with responsive sizing
+            const videoContainer = document.createElement('div');
+            videoContainer.style.width = '100%';
+            videoContainer.style.maxWidth = '500px';
+            videoContainer.style.position = 'relative';
+
+            // Create video element for preview
+            const video = document.createElement('video');
+            video.setAttribute('autoplay', '');
+            video.style.width = '100%';
+            video.style.borderRadius = '0.5rem';
+            video.style.display = 'block';
+            video.style.maxHeight = '70vh';
+            videoContainer.appendChild(video);
+
+            // Create canvas for capturing
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            // Create button container
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'flex flex-col md:flex-row gap-4 mt-4';
+
+            // Create capture button
+            const captureBtn = document.createElement('button');
+            captureBtn.textContent = 'Ambil Foto';
+            captureBtn.className = 'bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            captureBtn.innerHTML = '<i class="fas fa-camera mr-2"></i> Ambil Foto';
+            captureBtn.onclick = function() {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert to data URL with quality compression
+                const imageData = canvas.toDataURL('image/jpeg', 0.7);
+
+                // Set the value and show preview
+                document.getElementById(inputId).value = imageData;
+                document.getElementById(`${inputId}_img`).src = imageData;
+                document.getElementById(`${inputId}_preview`).classList.remove('hidden');
+
+                // Stop camera and remove modal
+                stream.getTracks().forEach(track => track.stop());
+                document.body.removeChild(modal);
+
+                // Disable the other input method
+                if (inputId === 'pengantar_rt_camera') {
+                    resetFileInput('pengantar_file');
+                } else {
+                    resetFileInput('ktp_file');
+                }
+            };
+
+            // Create cancel button
+            const cancelBtn = document.createElement('button');
+            cancelBtn.textContent = 'Batal';
+            cancelBtn.className = 'bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            cancelBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Batal';
+            cancelBtn.onclick = function() {
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+                document.body.removeChild(modal);
+            };
+
+            // Add elements to modal
+            buttonContainer.appendChild(captureBtn);
+            buttonContainer.appendChild(cancelBtn);
+            modal.appendChild(videoContainer);
+            modal.appendChild(buttonContainer);
+            document.body.appendChild(modal);
+
+            // Start camera
+            let stream;
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: 'environment',
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                },
+                audio: false
+            })
+            .then(function(s) {
+                stream = s;
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(err) {
+                console.error("Error accessing camera: ", err);
+                document.body.removeChild(modal);
+                alert('Gagal mengakses kamera: ' + err.message);
             });
 
-            document.getElementById('ktp_container').addEventListener('click', function() {
-                document.getElementById('ktp').click();
-            });
-        });
+            // Handle window resize
+            const resizeHandler = function() {
+                if (video.videoWidth > 0) {
+                    const aspectRatio = video.videoWidth / video.videoHeight;
+                    const maxWidth = Math.min(500, window.innerWidth - 40);
+                    const height = maxWidth / aspectRatio;
+                    video.style.width = `${maxWidth}px`;
+                    video.style.height = `${height}px`;
+                }
+            };
+
+            window.addEventListener('resize', resizeHandler);
+            video.addEventListener('loadedmetadata', resizeHandler);
+            modal._resizeHandler = resizeHandler;
+
+            // Cleanup on modal removal
+            modal._cleanup = function() {
+                window.removeEventListener('resize', this._resizeHandler);
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+            };
+
+            // Override removeChild to ensure cleanup
+            const originalRemoveChild = document.body.removeChild.bind(document.body);
+            document.body.removeChild = function(node) {
+                if (node._cleanup) node._cleanup();
+                return originalRemoveChild(node);
+            };
+        }
 
         // File preview functionality
-        function previewFile(inputId) {
+        function previewFile(inputId, previewId) {
             const input = document.getElementById(inputId);
             const file = input.files[0];
 
             if (file) {
-                const preview = document.getElementById(`${inputId}_preview`);
-                const placeholder = document.getElementById(`${inputId}_placeholder`);
-                const filename = document.getElementById(`${inputId}_filename`);
-                const filesize = document.getElementById(`${inputId}_size`);
+                // Tampilkan preview
+                document.getElementById(`${previewId}_placeholder`).classList.add('hidden');
+                document.getElementById(`${previewId}_preview`).classList.remove('hidden');
+                document.getElementById(`${previewId}_name`).textContent = file.name;
 
-                // Format file size
-                const formatFileSize = (bytes) => {
-                    if (bytes === 0) return '0 Bytes';
-                    const k = 1024;
-                    const sizes = ['Bytes', 'KB', 'MB'];
-                    const i = Math.floor(Math.log(bytes) / Math.log(k));
-                    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-                };
-
-                // Show appropriate icon based on file extension
-                const fileExt = file.name.split('.').pop().toLowerCase();
-                let iconClass = 'fa-file';
-
-                if (fileExt === 'pdf') {
-                    iconClass = 'fa-file-pdf text-red-500';
-                } else if (['jpg', 'jpeg', 'png'].includes(fileExt)) {
-                    iconClass = 'fa-file-image text-blue-500';
+                // Nonaktifkan input kamera yang lain
+                if (previewId === 'pengantar_file') {
+                    resetCameraInput('pengantar_rt_camera');
+                } else {
+                    resetCameraInput('ktp_camera');
                 }
-
-                filename.textContent = file.name;
-                filesize.textContent = formatFileSize(file.size);
-                preview.querySelector('i').className = `fas ${iconClass} text-lg md:text-xl mr-2 flex-shrink-0`;
-
-                preview.classList.remove('hidden');
-                placeholder.classList.add('hidden');
             }
         }
 
-        function removeFile(inputId, event) {
-            event.stopPropagation(); // Mencegah event click bubble ke container
-            const input = document.getElementById(inputId);
-            const preview = document.getElementById(`${inputId}_preview`);
-            const placeholder = document.getElementById(`${inputId}_placeholder`);
+        // Reset input file
+       function resetFileInput(type) {
+    const inputId = (type === 'pengantar_file') ? 'pengantar_rt_file' : 'ktp_file';
+    const input = document.getElementById(inputId);
 
-            input.value = '';
-            preview.classList.add('hidden');
-            placeholder.classList.remove('hidden');
+    // Reset file input
+    input.value = '';
 
-            if (input.required) {
-                input.setCustomValidity('File harus diupload');
-            }
+    // Sembunyikan preview dan tampilkan placeholder
+    const placeholder = document.getElementById(`${type}_placeholder`);
+    const preview = document.getElementById(`${type}_preview`);
+
+    if (placeholder && preview) {
+        preview.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+    }
+
+    // Optional: cegah popup upload otomatis
+    input.dispatchEvent(new Event('change')); // agar tidak memicu ulang preview
+}
+
+
+        // Reset input kamera
+        function resetCameraInput(inputId) {
+            document.getElementById(inputId).value = '';
+            document.getElementById(`${inputId}_preview`).classList.add('hidden');
         }
 
-        // Reset custom validation when new file is selected
-        document.querySelectorAll('input[type="file"]').forEach(input => {
-            input.addEventListener('change', function() {
-                this.setCustomValidity('');
-            });
-        });
+      // Untuk pengantar
+document.getElementById('pengantar_file_container').addEventListener('click', function(e) {
+    if (
+        e.target.closest('button') || // klik pada button (termasuk ikon di dalamnya)
+        e.target.closest('i') ||      // klik pada icon
+        e.target.closest('svg')       // klik pada svg (jika pakai icon svg)
+    ) {
+        return; // Jangan buka file picker
+    }
+
+    document.getElementById('pengantar_rt_file').click();
+});
+
+// Untuk KTP
+document.getElementById('ktp_file_container').addEventListener('click', function(e) {
+    if (
+        e.target.closest('button') ||
+        e.target.closest('i') ||
+        e.target.closest('svg')
+    ) {
+        return;
+    }
+
+    document.getElementById('ktp_file').click();
+});
+
+
+        // Auto-remove notifications
         setTimeout(() => {
-    const successNotif = document.querySelector('.bg-green-500');
-    const errorNotif = document.querySelector('.bg-red-500');
+            const successNotif = document.querySelector('.bg-green-500');
+            const errorNotif = document.querySelector('.bg-red-500');
 
-    if (successNotif) successNotif.remove();
-    if (errorNotif) errorNotif.remove();
-}, 5000);
+            if (successNotif) successNotif.remove();
+            if (errorNotif) errorNotif.remove();
+        }, 5000);
     </script>
 @endsection
