@@ -23,8 +23,6 @@ class SkuController extends Controller
         return view('admin.layanan.sku.index', compact('skus', 'total', 'disetujui', 'ditolak', 'baru'));
     }
 
-
-
     public function create()
     {
         return view('user.layanan.sku.create');

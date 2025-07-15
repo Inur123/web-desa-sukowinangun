@@ -186,6 +186,7 @@
                             </div>
 
                             <!-- Upload Dokumen -->
+                            <!-- Upload Dokumen -->
                             <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-upload mr-2 text-secondary"></i>
@@ -305,6 +306,39 @@
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
                                                     </button>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fotokopi KK (Non-functional) -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Foto KK</label>
+                                        <div class="space-y-4">
+                                            <!-- File Upload Option -->
+                                            <div id="kk_file_container"
+                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors cursor-not-allowed bg-gray-50">
+                                                <div id="kk_file_placeholder">
+                                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                                    <p class="text-gray-600">Upload File KK</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                    <p class="text-xs text-yellow-600 mt-2">Fitur upload KK belum aktif</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Or Divider -->
+                                            <div class="flex items-center">
+                                                <div class="flex-grow border-t border-gray-300"></div>
+                                                <span class="mx-2 text-gray-500">atau</span>
+                                                <div class="flex-grow border-t border-gray-300"></div>
+                                            </div>
+
+                                            <!-- Camera Option -->
+                                            <div>
+                                                <button type="button" disabled
+                                                    class="w-full bg-gray-100 text-gray-400 py-2 px-4 rounded-lg flex items-center justify-center cursor-not-allowed">
+                                                    <i class="fas fa-camera mr-2"></i>
+                                                    Ambil Foto KK
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

@@ -15,16 +15,17 @@
             </div>
         </div>
     </section>
+
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Surat Keterangan -->
-                <a href="form-sktm.html"
+                <!-- SKTM -->
+                <a href=""
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-alt text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Tidak Mampu</h3>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Tidak Mampu (SKTM)</h3>
                     <p class="text-gray-600">Pengajuan surat keterangan tidak mampu untuk berbagai keperluan bantuan sosial
                         dan pendidikan.</p>
                     <div class="mt-4 pt-4 border-t border-gray-200">
@@ -32,36 +33,139 @@
                     </div>
                 </a>
 
-                <!-- Administrasi KTP -->
-                <a href="{{ route('sku.create') }}"
+                <!-- Surat Keterangan Belum Menikah -->
+                <a href=""
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-id-card text-secondary text-2xl"></i>
+                        <i class="fas fa-user text-secondary text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Usaha</h3>
-                    <p class="text-gray-600">
-                        Pengajuan surat keterangan usaha untuk keperluan administrasi bisnis dan perizinan usaha.
-                    </p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Belum Menikah</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan status belum menikah untuk berbagai keperluan administrasi.</p>
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <span class="text-secondary font-semibold">Ajukan Sekarang →</span>
                     </div>
                 </a>
 
-                <!-- Izin Usaha -->
-                <a href="form-domisili.html"
+                <!-- Surat Pengantar SKCK -->
+                <a href=""
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-home text-accent text-2xl"></i>
+                        <i class="fas fa-file-signature text-accent text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Lainnya</h3>
-                    <p class="text-gray-600">Pengurusan surat keterangan untuk berbagai keperluan administrasi.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Pengantar SKCK</h3>
+                    <p class="text-gray-600">Pengajuan surat pengantar untuk membuat Surat Keterangan Catatan Kepolisian.</p>
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <span class="text-accent font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Domisili -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-home text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Domisili</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan domisili untuk keperluan administrasi.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-blue-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Harga Tanah -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-landmark text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Harga Tanah</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan nilai tanah untuk keperluan administrasi properti.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-green-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Usaha -->
+                <a href="{{ route('sku.create') }}"
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-business-time text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Usaha</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan usaha untuk keperluan administrasi bisnis dan perizinan.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-yellow-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Kehilangan -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-red-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Kehilangan</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan kehilangan untuk keperluan administrasi pengaduan.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-red-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Kelahiran -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-baby text-pink-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Kelahiran</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan kelahiran untuk keperluan administrasi kependudukan.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-pink-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Kematian -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-praying-hands text-gray-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Kematian</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan kematian untuk keperluan administrasi kependudukan.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-gray-700 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Penghasilan -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-money-bill-wave text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Penghasilan</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan penghasilan untuk berbagai keperluan administrasi.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-purple-500 font-semibold">Ajukan Sekarang →</span>
+                    </div>
+                </a>
+
+                <!-- Surat Keterangan Lainnya -->
+                <a href=""
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-file text-indigo-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surat Keterangan Lainnya</h3>
+                    <p class="text-gray-600">Pengajuan surat keterangan untuk keperluan lain yang tidak termasuk dalam kategori.</p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-indigo-500 font-semibold">Ajukan Sekarang →</span>
                     </div>
                 </a>
             </div>
         </div>
     </section>
+
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -110,6 +214,7 @@
             </div>
         </div>
     </section>
+
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -147,7 +252,7 @@
                         </li>
                         <li class="flex items-center text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Pas Foto 3x4 (2 lembar)</span>
+                            <span>Pas Foto 3x4 (2 lembar)(jika diperlukan)</span>
                         </li>
                         <li class="flex items-center text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
@@ -176,6 +281,7 @@
             </div>
         </div>
     </section>
+
     <section class="py-20 bg-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white">
