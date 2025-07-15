@@ -106,7 +106,7 @@
             @endforeach
         </div>
         <div class="mt-4 pt-4 border-t border-gray-200">
-            <a href="posts.html" class="text-primary hover:text-secondary font-medium text-sm transition-colors">
+            <a href="{{ route('posts.index') }}" class="text-primary hover:text-secondary font-medium text-sm transition-colors">
                 Lihat Semua Berita <i class="fas fa-arrow-right ml-1"></i>
             </a>
         </div>

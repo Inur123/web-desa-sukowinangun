@@ -36,7 +36,29 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::resource('/posts', PostController::class);
     Route::resource('/arsip-surat',ArsipSuratController::class);
     Route::resource('/layanan/sku', SkuController::class)
+        ->except(['create','store']);
+    Route::resource('/layanan/belum-menikah', BelumMenikahController::class)
         ->except(['store']);
+    Route::resource('/layanan/pengantar-skck', PengantarSkckController::class)
+        ->except(['store']);
+    Route::resource('/layanan/domisili', DomisiliController::class)
+        ->except(['store']);
+    Route::resource('/layanan/harga-tanah', HargaTanahController::class)
+        ->except(['store']);
+    Route::resource('/layanan/kehilangan', KehilanganController::class)
+        ->except(['store']);
+    Route::resource('/layanan/kelahiran', KelahiranController::class)
+        ->except(['store']);
+    Route::resource('/layanan/kematian', KematianController::class)
+        ->except(['store']);
+    Route::resource('/layanan/penghasilan', PenghasilanController::class)
+        ->except(['store']);
+    Route::resource('/layanan/sktm', SktmController::class)
+        ->except(['store']);
+    Route::resource('/layanan/skck', PengantarSkckController::class)
+        ->except(['store']);
+
+
     //sku
     Route::post('/layanan/sku/{id}/approve', [SkuController::class, 'approve'])->name('sku.approve');
     Route::post('/layanan/sku/{id}/reject', [SkuController::class, 'reject'])->name('sku.reject');

@@ -50,7 +50,7 @@
 
             <div class="mt-6">
                 <h4 class="text-md font-semibold text-gray-800">Ringkasan:</h4>
-                <p class="text-sm text-gray-600">{{ $post->summary ?? '-' }}</p>
+                <p class="text-sm text-gray-600">{{ strip_tags($post->summary ?? '-') }}</p>
             </div>
 
             <div class="mt-6">

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class HargaTanahController extends Controller
 {
+
+      public function index()
+    {
+        return view('admin.layanan.harga-tanah.index');
+    }
     public function create()
     {
         return view('user.layanan.harga-tanah.create');

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class PenghasilanController extends Controller
 {
+      public function index()
+    {
+        return view('admin.layanan.penghasilan.index');
+    }
     public function create()
     {
         return view('user.layanan.penghasilan.create');

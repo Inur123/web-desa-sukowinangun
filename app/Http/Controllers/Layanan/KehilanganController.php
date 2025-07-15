@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class KehilanganController extends Controller
 {
+
+      public function index()
+    {
+        return view('admin.layanan.kehilangan.index');
+    }
     public function create()
     {
         return view('user.layanan.kehilangan.create');
