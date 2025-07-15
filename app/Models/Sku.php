@@ -22,7 +22,8 @@ class Sku extends Model
         'pengantar_rt',
         'ktp',
         'status',
-        'no_hp'
+        'no_hp',
+        'kk'
     ];
 
     protected $encryptable = [
@@ -36,7 +37,9 @@ class Sku extends Model
         'keperluan',
         'pengantar_rt',
         'ktp',
-        'no_hp'
+        'no_hp',
+        'kk'
+
 
 
 

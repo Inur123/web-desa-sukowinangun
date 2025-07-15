@@ -59,7 +59,7 @@ trait Encryptable
      */
     protected function isFileField($key)
     {
-        return in_array($key, ['pengantar_rt', 'ktp', 'file_surat']);
+        return in_array($key, ['pengantar_rt', 'ktp', 'file_surat', 'kk']);
     }
 
     /**
@@ -184,6 +184,7 @@ trait Encryptable
         return match ($field) {
             'ktp' => 'sku/ktp',
             'pengantar_rt' => 'sku/pengantar_rt',
+            'kk' => 'sku/kk',
             'file_surat' => 'arsip/file_surat',
             default => 'uploads',
         };

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('keperluan')->nullable();
             $table->string('pengantar_rt')->nullable();
             $table->string('ktp')->nullable();
+            $table->string('kk')->nullable();
             $table->enum('status', ['baru', 'diterima', 'ditolak'])->default('baru');
             $table->text('no_hp')->nullable();
             $table->timestamps();

@@ -34,7 +34,7 @@
         </div>
     @endif
 
-    <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
+    <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
                 <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -77,7 +77,6 @@
                                                 placeholder="Nama sesuai KTP">
                                         </div>
 
-
                                         <div>
                                             <label for="ttl"
                                                 class="block text-sm font-medium text-gray-700 mb-2">Tanggal
@@ -94,14 +93,11 @@
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Contoh: 081234567890">
-
                                         </div>
-
                                     </div>
 
                                     <!-- Column 2 -->
                                     <div class="space-y-4">
-
                                         <div>
                                             <label for="tempat_lahir"
                                                 class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
@@ -120,7 +116,6 @@
                                             <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
                                             </div>
                                         </div>
-
 
                                         <div>
                                             <label for="status_perkawinan"
@@ -185,7 +180,6 @@
                                 </div>
                             </div>
 
-                            <!-- Upload Dokumen -->
                             <!-- Upload Dokumen -->
                             <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -310,19 +304,33 @@
                                         </div>
                                     </div>
 
-                                    <!-- Fotokopi KK (Non-functional) -->
+                                    <!-- Fotokopi KK -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Foto KK</label>
                                         <div class="space-y-4">
                                             <!-- File Upload Option -->
                                             <div id="kk_file_container"
-                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors cursor-not-allowed bg-gray-50">
+                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="kk_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File KK</p>
                                                     <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
-                                                    <p class="text-xs text-yellow-600 mt-2">Fitur upload KK belum aktif</p>
                                                 </div>
+                                                <div id="kk_file_preview" class="hidden">
+                                                    <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
+                                                        <div class="flex items-center truncate">
+                                                            <i class="fas fa-file-image text-green-500 text-xl mr-2"></i>
+                                                            <span id="kk_file_name" class="truncate"></span>
+                                                        </div>
+                                                        <button type="button" onclick="resetFileInput('kk_file')"
+                                                            class="text-red-500 hover:text-red-700">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <input type="file" id="kk_file" name="kk_file"
+                                                    accept=".pdf,.jpg,.jpeg,.png" class="hidden"
+                                                    onchange="previewFile('kk_file', 'kk_file')">
                                             </div>
 
                                             <!-- Or Divider -->
@@ -334,11 +342,20 @@
 
                                             <!-- Camera Option -->
                                             <div>
-                                                <button type="button" disabled
-                                                    class="w-full bg-gray-100 text-gray-400 py-2 px-4 rounded-lg flex items-center justify-center cursor-not-allowed">
+                                                <button type="button" onclick="openCamera('kk_camera', 'KK')"
+                                                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
                                                     <i class="fas fa-camera mr-2"></i>
                                                     Ambil Foto KK
                                                 </button>
+                                                <input type="hidden" id="kk_camera" name="kk_camera">
+                                                <div id="kk_camera_preview" class="mt-2 hidden">
+                                                    <img id="kk_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button" onclick="resetCameraInput('kk_camera')"
+                                                        class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                                                        <i class="fas fa-times mr-1"></i> Hapus Foto
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -452,8 +469,10 @@
                 // Disable the other input method
                 if (inputId === 'pengantar_rt_camera') {
                     resetFileInput('pengantar_file');
-                } else {
+                } else if (inputId === 'ktp_camera') {
                     resetFileInput('ktp_file');
+                } else if (inputId === 'kk_camera') {
+                    resetFileInput('kk_file');
                 }
             };
 
@@ -547,15 +566,17 @@
                 // Nonaktifkan input kamera yang lain
                 if (previewId === 'pengantar_file') {
                     resetCameraInput('pengantar_rt_camera');
-                } else {
+                } else if (previewId === 'ktp_file') {
                     resetCameraInput('ktp_camera');
+                } else if (previewId === 'kk_file') {
+                    resetCameraInput('kk_camera');
                 }
             }
         }
 
         // Reset input file
         function resetFileInput(type) {
-            const inputId = (type === 'pengantar_file') ? 'pengantar_rt_file' : 'ktp_file';
+            const inputId = type === 'pengantar_file' ? 'pengantar_rt_file' : (type === 'ktp_file' ? 'ktp_file' : 'kk_file');
             const input = document.getElementById(inputId);
 
             // Reset file input
@@ -574,7 +595,6 @@
             input.dispatchEvent(new Event('change')); // agar tidak memicu ulang preview
         }
 
-
         // Reset input kamera
         function resetCameraInput(inputId) {
             document.getElementById(inputId).value = '';
@@ -584,13 +604,12 @@
         // Untuk pengantar
         document.getElementById('pengantar_file_container').addEventListener('click', function(e) {
             if (
-                e.target.closest('button') || // klik pada button (termasuk ikon di dalamnya)
-                e.target.closest('i') || // klik pada icon
-                e.target.closest('svg') // klik pada svg (jika pakai icon svg)
+                e.target.closest('button') ||
+                e.target.closest('i') ||
+                e.target.closest('svg')
             ) {
-                return; // Jangan buka file picker
+                return;
             }
-
             document.getElementById('pengantar_rt_file').click();
         });
 
@@ -603,10 +622,20 @@
             ) {
                 return;
             }
-
             document.getElementById('ktp_file').click();
         });
 
+        // Untuk KK
+        document.getElementById('kk_file_container').addEventListener('click', function(e) {
+            if (
+                e.target.closest('button') ||
+                e.target.closest('i') ||
+                e.target.closest('svg')
+            ) {
+                return;
+            }
+            document.getElementById('kk_file').click();
+        });
 
         // Auto-remove notifications
         setTimeout(() => {
