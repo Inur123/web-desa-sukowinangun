@@ -36,7 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::resource('/posts', PostController::class);
     Route::resource('/arsip-surat',ArsipSuratController::class);
     Route::resource('/layanan/sku', SkuController::class)
-        ->except(['create','store']);
+        ->except(['store']);
     Route::resource('/layanan/belum-menikah', BelumMenikahController::class)
         ->except(['store']);
     Route::resource('/layanan/pengantar-skck', PengantarSkckController::class)
@@ -67,6 +67,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/sktm/{id}/approve', [SktmController::class, 'approve'])->name('sktm.approve');
     Route::post('/layanan/sktm/{id}/reject', [SktmController::class, 'reject'])->name('sktm.reject');
     Route::get('/layanan/sktm/{id}/file/{type}', [SktmController::class, 'showFile'])->name('sktm.showFile');
+    //domisili
+    Route::post('/layanan/domisili/{id}/approve', [DomisiliController::class, 'approve'])->name('domisili.approve');
+    Route::post('/layanan/domisili/{id}/reject', [DomisiliController::class, 'reject'])->name('domisili.reject');
+    Route::get('/layanan/domisili/{id}/file/{type}', [DomisiliController::class, 'showFile'])->name('domisili.showFile');
+    //belum menikah
 });
 
 

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama')->nullable();
             $table->string('nik')->nullable();
-            $table->string('tempat_lahir')->nullable();
             $table->date('ttl')->nullable();
+            $table->string('tempat_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('alamat_domisili')->nullable(); // Tambahan
             $table->string('status_perkawinan')->nullable();

@@ -10,29 +10,29 @@ class Domisili extends Model
     use Encryptable;
     protected $table = 'domisili';
     protected $fillable = [
-        'nama',
-        'tempat_lahir',
-        'ttl',
-        'nik',
-        'alamat',
-        'alamat_domisili',
-        'keperluan',
-        'status_perkawinan',
-        'pengantar_rt',
-        'ktp',
-        'status',
-        'no_hp',
-        'kk'
-    ];
+            'nama',
+            'nik',
+            'ttl',
+            'tempat_lahir',
+            'alamat',
+            'alamat_domisili',
+            'status_perkawinan',
+            'keperluan',
+            'pengantar_rt',
+            'ktp',
+            'status',
+            'no_hp',
+            'kk'
+        ];
 
     protected $encryptable = [
         'nama',
-        'tempat_lahir',
         'nik',
+        'tempat_lahir',
         'alamat',
         'alamat_domisili',
-        'keperluan',
         'status_perkawinan',
+        'keperluan',
         'pengantar_rt',
         'ktp',
         'no_hp',
