@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-800">{{ $post->author ?? 'Admin Desa' }}</p>
-                            <p class="text-xs text-gray-500">Pemerintah Desa Sukowinangun</p>
+                            <p class="text-xs text-gray-500">Pemerintah Kelurahan Sukowinangun</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -124,7 +124,7 @@
                     <input type="text" id="linkToCopy" value="{{ url()->current() }}" readonly
                         class="text-gray-700 text-sm px-2 py-1 rounded border border-gray-300 hidden">
                     <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition-colors inline-flex items-center">
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors inline-flex items-center">
                         <i class="fab fa-whatsapp mr-2"></i>
                         Bagikan ke WhatsApp
                     </a>

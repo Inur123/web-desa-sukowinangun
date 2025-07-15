@@ -36,9 +36,10 @@
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button"
-                    class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+    class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
+    <i id="menu-icon" class="fas fa-bars text-xl"></i>
+</button>
+
             </div>
         </div>
     </div>

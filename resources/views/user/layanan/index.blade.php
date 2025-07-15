@@ -8,9 +8,9 @@
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Layanan Desa</h1>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Layanan Kelurahan</h1>
                 <p class="text-xl text-gray-100 max-w-3xl mx-auto">
-                    Berbagai layanan administrasi dan fasilitas publik untuk kemudahan warga desa
+                    Berbagai layanan administrasi dan fasilitas publik untuk kemudahan warga Kelurahan
                 </p>
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Cara Menggunakan Layanan</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Proses mudah dan cepat untuk mengakses layanan desa secara online
+                    Proses mudah dan cepat untuk mengakses layanan kelurahan secara online
                 </p>
             </div>
 
@@ -115,7 +115,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Persyaratan Umum</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Dokumen yang perlu disiapkan untuk menggunakan layanan desa
+                    Dokumen yang perlu disiapkan untuk menggunakan layanan kelurahan
                 </p>
             </div>
 

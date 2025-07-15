@@ -36,32 +36,42 @@
 
 
     <!-- Hero Section -->
-    <section class="pt-16 bg-gradient-to-br from-primary to-secondary ">
+    <section class="pt-16 bg-gradient-to-br from-primary to-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"data-aos="zoom-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" data-aos="zoom-in">
                 <div class="text-white">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         Selamat Datang di<br />
                         <span id="typing-text" class="text-accent text-4xl font-bold whitespace-nowrap"></span>
-
                     </h1>
                     <p class="text-xl mb-8 text-gray-100">
                         Desa yang berkembang dengan semangat gotong royong, teknologi
                         modern, dan pelayanan terbaik untuk seluruh warga.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="layanan.html"
+                        <a href="{{ route('layanan.index') }}"
                             class="bg-accent hover:bg-yellow-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors text-center">
                             Layanan Online
                         </a>
-                        <a href="profil.html"
+                        <a href="{{ route('profile.index') }}"
                             class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-lg font-semibold transition-colors text-center">
                             Pelajari Lebih Lanjut
                         </a>
                     </div>
+
+                    <!-- Mobile-only population counter -->
+                    <div class="lg:hidden mt-8 bg-white p-6 rounded-lg shadow-lg w-full max-w-xs mx-auto">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-users text-primary text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-2xl font-bold text-gray-800 population-counter" data-target="2547">0</p>
+                                <p class="text-gray-600">Total Penduduk</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="relative">
-                    <img src="/placeholder.svg?height=500&width=600" alt="Pemandangan Desa" class="rounded-lg shadow-2xl" />
+
+                <div class="relative hidden lg:block">
                     <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-lg">
                         <div class="flex items-center">
                             <i class="fas fa-users text-primary text-2xl mr-3"></i>
@@ -86,7 +96,7 @@
                         class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                         <i class="fas fa-home text-primary text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-gray-800 counter" data-target="847">
+                    <h3 class="text-3xl font-bold text-gray-800 counter population-counter" data-target="847">
                         0
                     </h3>
                     <p class="text-gray-600">Kepala Keluarga</p>
@@ -98,7 +108,7 @@
                         class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                         <i class="fas fa-users text-secondary text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-gray-800 counter" data-target="12">
+                    <h3 class="text-3xl font-bold text-gray-800 counter population-counter" data-target="12">
                         0
                     </h3>
                     <p class="text-gray-600">RW</p>
@@ -110,7 +120,7 @@
                         class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                         <i class="fas fa-home text-accent text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-gray-800 counter" data-target="3">
+                    <h3 class="text-3xl font-bold text-gray-800 counter population-counter" data-target="3">
                         0
                     </h3>
                     <p class="text-gray-600">RT</p>
@@ -122,7 +132,7 @@
                         class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                         <i class="fas fa-leaf text-green-600 text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-gray-800 counter" data-target="95">
+                    <h3 class="text-3xl font-bold text-gray-800 counter population-counter" data-target="95">
                         0
                     </h3>
                     <p class="text-gray-600">Area Hijau</p>

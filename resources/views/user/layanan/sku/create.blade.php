@@ -37,12 +37,14 @@
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
-                 <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-store text-4xl"></i>
-            </div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Form Pengajuan Surat Keterangan Usaha</h1>
+                <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-store text-4xl"></i>
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Form Pengajuan Surat Keterangan Usaha
+                </h1>
                 <p class="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto px-2 sm:px-0">
-                 Ajukan permohonan Surat Keterangan Usaha (SKU) untuk keperluan administrasi bisnis dan perizinan usaha Anda.
+                    Ajukan permohonan Surat Keterangan Usaha (SKU) untuk keperluan administrasi bisnis dan perizinan usaha
+                    Anda.
                 </p>
             </div>
         </div>
@@ -75,12 +77,13 @@
                                                 placeholder="Nama sesuai KTP">
                                         </div>
 
+
                                         <div>
-                                            <label for="tempat_lahir"
-                                                class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
-                                            <input type="text" id="tempat_lahir" name="tempat_lahir" required
-                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-                                                placeholder="Kota/Kabupaten kelahiran">
+                                            <label for="ttl"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tanggal
+                                                Lahir</label>
+                                            <input type="date" id="ttl" name="ttl" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                         </div>
 
                                         <div>
@@ -98,23 +101,26 @@
 
                                     <!-- Column 2 -->
                                     <div class="space-y-4">
-                                        <div>
-                                            <label for="ttl"
-                                                class="block text-sm font-medium text-gray-700 mb-2">Tanggal
-                                                Lahir</label>
-                                            <input type="date" id="ttl" name="ttl" required
-                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
-                                        </div>
 
+                                        <div>
+                                            <label for="tempat_lahir"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
+                                            <input type="text" id="tempat_lahir" name="tempat_lahir" required
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                                placeholder="Kota/Kabupaten kelahiran">
+                                        </div>
                                         <div>
                                             <label for="nik"
                                                 class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
                                             <input type="text" id="nik" name="nik" maxlength="16" required
+                                                inputmode="numeric" pattern="[0-9]*"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="16 digit NIK">
                                             <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
                                             </div>
                                         </div>
+
 
                                         <div>
                                             <label for="status_perkawinan"
@@ -180,7 +186,7 @@
                             </div>
 
                             <!-- Upload Dokumen -->
-                           <div class="border-t pt-6">
+                            <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-upload mr-2 text-secondary"></i>
                                     Upload Dokumen
@@ -189,10 +195,12 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <!-- Surat Pengantar RT/RW -->
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar RT/RW</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar
+                                            RT/RW</label>
                                         <div class="space-y-4">
                                             <!-- File Upload Option -->
-                                            <div id="pengantar_file_container" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
+                                            <div id="pengantar_file_container"
+                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="pengantar_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File Surat Pengantar</p>
@@ -204,12 +212,15 @@
                                                             <i class="fas fa-file-pdf text-red-500 text-xl mr-2"></i>
                                                             <span id="pengantar_file_name" class="truncate"></span>
                                                         </div>
-                                                        <button type="button" onclick="resetFileInput('pengantar_file')" class="text-red-500 hover:text-red-700">
+                                                        <button type="button" onclick="resetFileInput('pengantar_file')"
+                                                            class="text-red-500 hover:text-red-700">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <input type="file" id="pengantar_rt_file" name="pengantar_rt_file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="previewFile('pengantar_rt_file', 'pengantar_file')">
+                                                <input type="file" id="pengantar_rt_file" name="pengantar_rt_file"
+                                                    accept=".pdf,.jpg,.jpeg,.png" class="hidden"
+                                                    onchange="previewFile('pengantar_rt_file', 'pengantar_file')">
                                             </div>
 
                                             <!-- Or Divider -->
@@ -221,14 +232,20 @@
 
                                             <!-- Camera Option -->
                                             <div>
-                                                <button type="button" onclick="openCamera('pengantar_rt_camera', 'Surat Pengantar RT')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
+                                                <button type="button"
+                                                    onclick="openCamera('pengantar_rt_camera', 'Surat Pengantar RT')"
+                                                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
                                                     <i class="fas fa-camera mr-2"></i>
                                                     Ambil Foto Surat Pengantar
                                                 </button>
-                                                <input type="hidden" id="pengantar_rt_camera" name="pengantar_rt_camera">
+                                                <input type="hidden" id="pengantar_rt_camera"
+                                                    name="pengantar_rt_camera">
                                                 <div id="pengantar_rt_camera_preview" class="mt-2 hidden">
-                                                    <img id="pengantar_rt_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
-                                                    <button type="button" onclick="resetCameraInput('pengantar_rt_camera')" class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                                                    <img id="pengantar_rt_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button"
+                                                        onclick="resetCameraInput('pengantar_rt_camera')"
+                                                        class="mt-2 text-red-500 hover:text-red-700 text-sm">
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
                                                     </button>
                                                 </div>
@@ -238,10 +255,11 @@
 
                                     <!-- Fotokopi KTP -->
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Fotokopi KTP</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Foto KTP</label>
                                         <div class="space-y-4">
                                             <!-- File Upload Option -->
-                                            <div id="ktp_file_container" class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
+                                            <div id="ktp_file_container"
+                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="ktp_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File KTP</p>
@@ -253,12 +271,15 @@
                                                             <i class="fas fa-file-image text-blue-500 text-xl mr-2"></i>
                                                             <span id="ktp_file_name" class="truncate"></span>
                                                         </div>
-                                                        <button type="button" onclick="resetFileInput('ktp_file')" class="text-red-500 hover:text-red-700">
+                                                        <button type="button" onclick="resetFileInput('ktp_file')"
+                                                            class="text-red-500 hover:text-red-700">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <input type="file" id="ktp_file" name="ktp_file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="previewFile('ktp_file', 'ktp_file')">
+                                                <input type="file" id="ktp_file" name="ktp_file"
+                                                    accept=".pdf,.jpg,.jpeg,.png" class="hidden"
+                                                    onchange="previewFile('ktp_file', 'ktp_file')">
                                             </div>
 
                                             <!-- Or Divider -->
@@ -270,14 +291,17 @@
 
                                             <!-- Camera Option -->
                                             <div>
-                                                <button type="button" onclick="openCamera('ktp_camera', 'KTP')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
+                                                <button type="button" onclick="openCamera('ktp_camera', 'KTP')"
+                                                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
                                                     <i class="fas fa-camera mr-2"></i>
                                                     Ambil Foto KTP
                                                 </button>
                                                 <input type="hidden" id="ktp_camera" name="ktp_camera">
                                                 <div id="ktp_camera_preview" class="mt-2 hidden">
-                                                    <img id="ktp_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
-                                                    <button type="button" onclick="resetCameraInput('ktp_camera')" class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                                                    <img id="ktp_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button" onclick="resetCameraInput('ktp_camera')"
+                                                        class="mt-2 text-red-500 hover:text-red-700 text-sm">
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
                                                     </button>
                                                 </div>
@@ -289,7 +313,8 @@
 
                             <!-- Submit Button -->
                             <div class="border-t pt-6">
-                                <button type="submit" class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
+                                <button type="submit"
+                                    class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
                                     <i class="fas fa-paper-plane mr-2"></i>
                                     Ajukan Permohonan SKU
                                 </button>
@@ -300,7 +325,7 @@
             </div>
         </div>
     </section>
-   <script>
+    <script>
         // Validasi NIK harus 16 digit
         document.getElementById('nik').addEventListener('input', function() {
             const nikInput = this;
@@ -370,7 +395,8 @@
             // Create capture button
             const captureBtn = document.createElement('button');
             captureBtn.textContent = 'Ambil Foto';
-            captureBtn.className = 'bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            captureBtn.className =
+                'bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
             captureBtn.innerHTML = '<i class="fas fa-camera mr-2"></i> Ambil Foto';
             captureBtn.onclick = function() {
                 canvas.width = video.videoWidth;
@@ -400,7 +426,8 @@
             // Create cancel button
             const cancelBtn = document.createElement('button');
             cancelBtn.textContent = 'Batal';
-            cancelBtn.className = 'bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            cancelBtn.className =
+                'bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
             cancelBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Batal';
             cancelBtn.onclick = function() {
                 if (stream) {
@@ -419,23 +446,27 @@
             // Start camera
             let stream;
             navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                },
-                audio: false
-            })
-            .then(function(s) {
-                stream = s;
-                video.srcObject = stream;
-                video.play();
-            })
-            .catch(function(err) {
-                console.error("Error accessing camera: ", err);
-                document.body.removeChild(modal);
-                alert('Gagal mengakses kamera: ' + err.message);
-            });
+                    video: {
+                        facingMode: 'environment',
+                        width: {
+                            ideal: 1280
+                        },
+                        height: {
+                            ideal: 720
+                        }
+                    },
+                    audio: false
+                })
+                .then(function(s) {
+                    stream = s;
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.error("Error accessing camera: ", err);
+                    document.body.removeChild(modal);
+                    alert('Gagal mengakses kamera: ' + err.message);
+                });
 
             // Handle window resize
             const resizeHandler = function() {
@@ -489,25 +520,25 @@
         }
 
         // Reset input file
-       function resetFileInput(type) {
-    const inputId = (type === 'pengantar_file') ? 'pengantar_rt_file' : 'ktp_file';
-    const input = document.getElementById(inputId);
+        function resetFileInput(type) {
+            const inputId = (type === 'pengantar_file') ? 'pengantar_rt_file' : 'ktp_file';
+            const input = document.getElementById(inputId);
 
-    // Reset file input
-    input.value = '';
+            // Reset file input
+            input.value = '';
 
-    // Sembunyikan preview dan tampilkan placeholder
-    const placeholder = document.getElementById(`${type}_placeholder`);
-    const preview = document.getElementById(`${type}_preview`);
+            // Sembunyikan preview dan tampilkan placeholder
+            const placeholder = document.getElementById(`${type}_placeholder`);
+            const preview = document.getElementById(`${type}_preview`);
 
-    if (placeholder && preview) {
-        preview.classList.add('hidden');
-        placeholder.classList.remove('hidden');
-    }
+            if (placeholder && preview) {
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
 
-    // Optional: cegah popup upload otomatis
-    input.dispatchEvent(new Event('change')); // agar tidak memicu ulang preview
-}
+            // Optional: cegah popup upload otomatis
+            input.dispatchEvent(new Event('change')); // agar tidak memicu ulang preview
+        }
 
 
         // Reset input kamera
@@ -516,31 +547,31 @@
             document.getElementById(`${inputId}_preview`).classList.add('hidden');
         }
 
-      // Untuk pengantar
-document.getElementById('pengantar_file_container').addEventListener('click', function(e) {
-    if (
-        e.target.closest('button') || // klik pada button (termasuk ikon di dalamnya)
-        e.target.closest('i') ||      // klik pada icon
-        e.target.closest('svg')       // klik pada svg (jika pakai icon svg)
-    ) {
-        return; // Jangan buka file picker
-    }
+        // Untuk pengantar
+        document.getElementById('pengantar_file_container').addEventListener('click', function(e) {
+            if (
+                e.target.closest('button') || // klik pada button (termasuk ikon di dalamnya)
+                e.target.closest('i') || // klik pada icon
+                e.target.closest('svg') // klik pada svg (jika pakai icon svg)
+            ) {
+                return; // Jangan buka file picker
+            }
 
-    document.getElementById('pengantar_rt_file').click();
-});
+            document.getElementById('pengantar_rt_file').click();
+        });
 
-// Untuk KTP
-document.getElementById('ktp_file_container').addEventListener('click', function(e) {
-    if (
-        e.target.closest('button') ||
-        e.target.closest('i') ||
-        e.target.closest('svg')
-    ) {
-        return;
-    }
+        // Untuk KTP
+        document.getElementById('ktp_file_container').addEventListener('click', function(e) {
+            if (
+                e.target.closest('button') ||
+                e.target.closest('i') ||
+                e.target.closest('svg')
+            ) {
+                return;
+            }
 
-    document.getElementById('ktp_file').click();
-});
+            document.getElementById('ktp_file').click();
+        });
 
 
         // Auto-remove notifications

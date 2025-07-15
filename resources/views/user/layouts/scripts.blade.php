@@ -1,86 +1,84 @@
 {{-- resources/views/user/layouts/scripts.blade.php --}}
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const populationCounter = document.querySelector(".population-counter");
-        if (populationCounter) {
-            const target = +populationCounter.getAttribute("data-target");
-            const speed = 50;
+        const populationCounters = document.querySelectorAll(".population-counter");
 
-            function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-            const animatePopulationCounter = () => {
-                const count = +populationCounter.innerText.replace(/,/g, '');
-                const increment = Math.ceil(target / speed);
-                if (count < target) {
-                    populationCounter.innerText = numberWithCommas(Math.min(count + increment, target));
-                    setTimeout(animatePopulationCounter, 1);
+        if (populationCounters.length > 0) {
+            function animateCounter(counter) {
+                const target = +counter.getAttribute("data-target");
+                const duration = 2000; // 2 seconds animation
+                const startTime = performance.now();
+                const startValue = 0;
+
+                function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
-            };
-            const heroSection = document.querySelector(
-                ".bg-gradient-to-r.from-primary.to-secondary, .bg-gradient-to-br.from-primary.to-secondary");
+
+                function updateCounter(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const currentValue = Math.floor(progress * target);
+
+                    counter.innerText = numberWithCommas(currentValue);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = numberWithCommas(target);
+                    }
+                }
+
+                requestAnimationFrame(updateCounter);
+            }
+
+            // Trigger animation when section is visible
+            const heroSection = document.querySelector(".bg-gradient-to-br.from-primary.to-secondary");
+
             if (heroSection) {
-                const observer = new IntersectionObserver(entries => {
+                const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            animatePopulationCounter();
-                            observer.unobserve(entry.target);
+                            populationCounters.forEach(counter => {
+                                animateCounter(counter);
+                            });
+                            observer.disconnect();
                         }
                     });
                 }, {
-                    threshold: 0.5
+                    threshold: 0.1, // Lower threshold
+                    rootMargin: '0px 0px -100px 0px' // Trigger 100px before element enters
                 });
+
                 observer.observe(heroSection);
+            } else {
+                // Fallback if observer fails
+                populationCounters.forEach(counter => {
+                    animateCounter(counter);
+                });
             }
         }
 
-        // Counter umum
-        const counters = document.querySelectorAll(".counter");
-        if (counters.length > 0) {
-            const animateCounters = () => {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute("data-target");
-                    let count = 0;
-                    const increment = target / 50;
-
-                    const updateCounter = () => {
-                        if (count < target) {
-                            count += increment;
-                            counter.innerText = Math.ceil(count);
-                            setTimeout(updateCounter, 10);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-
-                    updateCounter(); // Start animation for this counter
-                });
-            };
-
-            const statsSection = document.querySelector("section.py-16.bg-white");
-            if (statsSection) {
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            animateCounters();
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.5
-                });
-                observer.observe(statsSection);
-            }
-        }
 
         // Mobile menu
         const menuButton = document.getElementById("mobile-menu-button");
         const mobileMenu = document.getElementById("mobile-menu");
-        if (menuButton && mobileMenu) {
+        const menuIcon = document.getElementById("menu-icon");
+
+        if (menuButton && mobileMenu && menuIcon) {
             menuButton.addEventListener("click", () => {
                 mobileMenu.classList.toggle("hidden");
+
+                // Toggle ikon
+                if (menuIcon.classList.contains("fa-bars")) {
+                    menuIcon.classList.remove("fa-bars");
+                    menuIcon.classList.add("fa-times");
+                } else {
+                    menuIcon.classList.remove("fa-times");
+                    menuIcon.classList.add("fa-bars");
+                }
             });
         }
+
 
         // Scroll nav effect
         const nav = document.querySelector("nav");

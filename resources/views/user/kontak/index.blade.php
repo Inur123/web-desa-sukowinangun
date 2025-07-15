@@ -21,8 +21,8 @@
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">Alamat</h3>
                     <p class="text-gray-600">
-                        Jl. Raya Desa No. 123<br>
-                        Desa Maju Sejahtera<br>
+                        Jl. Raya Kelurahan No. 123<br>
+                        Kelurahan Maju Sejahtera<br>
                         Kecamatan Sejahtera, 12345
                     </p>
                 </div>
@@ -143,7 +143,7 @@
                                 <h4 class="font-semibold text-gray-800 mb-1">Petunjuk Arah</h4>
                                 <p class="text-gray-600 text-sm">
                                     Dari pusat kota, ambil jalan raya menuju arah timur sekitar 15 km.
-                                    Kantor desa berada di sebelah kiri jalan, berseberangan dengan pasar tradisional.
+                                    Kantor Kelurahan berada di sebelah kiri jalan, berseberangan dengan pasar tradisional.
                                 </p>
                             </div>
                         </div>
@@ -153,8 +153,8 @@
                             <div>
                                 <h4 class="font-semibold text-gray-800 mb-1">Transportasi</h4>
                                 <p class="text-gray-600 text-sm">
-                                    Tersedia angkutan umum rute kota-desa setiap 30 menit.
-                                    Area parkir tersedia di depan kantor desa.
+                                    Tersedia angkutan umum rute kota-Kelurahan setiap 30 menit.
+                                    Area parkir tersedia di depan kantor Kelurahan.
                                 </p>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                                 <h4 class="font-semibold text-gray-800 mb-1">Patokan</h4>
                                 <p class="text-gray-600 text-sm">
                                     Dekat dengan Masjid Al-Ikhlas, SD Negeri 1 Maju Sejahtera,
-                                    dan Puskesmas Desa.
+                                    dan Puskesmas Kelurahan.
                                 </p>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Jam Pelayanan</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Jadwal lengkap pelayanan administrasi dan layanan publik desa
+                    Jadwal lengkap pelayanan administrasi dan layanan publik Kelurahan
                 </p>
             </div>
 
