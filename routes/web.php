@@ -63,6 +63,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/sku/{id}/approve', [SkuController::class, 'approve'])->name('sku.approve');
     Route::post('/layanan/sku/{id}/reject', [SkuController::class, 'reject'])->name('sku.reject');
     Route::get('/layanan/sku/{id}/file/{type}', [SkuController::class, 'showFile'])->name('sku.showFile');
+    //sktm
+    Route::post('/layanan/sktm/{id}/approve', [SktmController::class, 'approve'])->name('sktm.approve');
+    Route::post('/layanan/sktm/{id}/reject', [SktmController::class, 'reject'])->name('sktm.reject');
+    Route::get('/layanan/sktm/{id}/file/{type}', [SktmController::class, 'showFile'])->name('sktm.showFile');
 });
 
 

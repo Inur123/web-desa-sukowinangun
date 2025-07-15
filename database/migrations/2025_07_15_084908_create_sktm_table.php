@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('sktm', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->date('ttl')->nullable();
             $table->string('nik')->nullable();
+            $table->date('ttl')->nullable();
+            $table->string('tempat_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('status_perkawinan')->nullable();
+            $table->text('no_hp')->nullable();
             $table->string('nama_anak')->nullable();
             $table->string('keperluan')->nullable();
-            $table->string('pengantar_rt')->nullable();
             $table->string('kk')->nullable();
             $table->string('ktp')->nullable();
+            $table->string('pengantar_rt')->nullable();
             $table->enum('status', ['baru', 'diterima', 'ditolak'])->default('baru');
-            $table->text('no_hp')->nullable();
             $table->timestamps();
         });
     }
