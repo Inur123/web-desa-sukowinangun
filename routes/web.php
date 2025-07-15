@@ -71,7 +71,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/domisili/{id}/approve', [DomisiliController::class, 'approve'])->name('domisili.approve');
     Route::post('/layanan/domisili/{id}/reject', [DomisiliController::class, 'reject'])->name('domisili.reject');
     Route::get('/layanan/domisili/{id}/file/{type}', [DomisiliController::class, 'showFile'])->name('domisili.showFile');
-    //belum menikah
+    //harga-tanah
+    Route::post('/layanan/harga-tanah/{id}/approve', [HargaTanahController::class, 'approve'])->name('harga-tanah.approve');
+    Route::post('/layanan/harga-tanah/{id}/reject', [HargaTanahController::class, 'reject'])->name('harga-tanah.reject');
+    Route::get('/layanan/harga-tanah/{id}/file/{type}', [HargaTanahController::class, 'showFile'])->name('harga-tanah.showFile');
+
 });
 
 
@@ -121,5 +125,6 @@ Route::post('/layanan/penghasilan', [PenghasilanController::class, 'store'])->na
 // Surat SKTM
 Route::get('/layanan/sktm/create', [SktmController::class, 'create'])->name('sktm.create');
 Route::post('/layanan/sktm', [SktmController::class, 'store'])->name('sktm.store');
+
 
 

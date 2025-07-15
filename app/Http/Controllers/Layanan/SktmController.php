@@ -15,7 +15,6 @@ class SktmController extends Controller
     public function index()
     {
         $sktms = Sktm::latest()->paginate(10);
-
         $total = Sktm::count();
         $disetujui = Sktm::where('status', 'diterima')->count();
         $ditolak = Sktm::where('status', 'ditolak')->count();

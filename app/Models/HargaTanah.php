@@ -5,41 +5,45 @@ namespace App\Models;
 use App\Traits\Encryptable;
 use Illuminate\Database\Eloquent\Model;
 
-class Sktm extends Model
+class HargaTanah extends Model
 {
     use Encryptable;
-    protected $table = 'sktm';
+
+    protected $table = 'harga_tanah';
+
     protected $fillable = [
         'nama',
+        'nik',
         'tempat_lahir',
         'ttl',
-        'nik',
         'alamat',
-        'keperluan',
+        'alamat_tanah',
+        'harga_per_meter',
         'status_perkawinan',
-        'nama_anak',
-        'pengantar_rt',
-        'ktp',
-        'status',
         'no_hp',
-        'kk'
+        'keperluan',
+        'kk',
+        'ktp',
+        'pengantar_rt',
+        'status',
     ];
 
     protected $encryptable = [
         'nama',
-        'tempat_lahir',
         'nik',
+        'tempat_lahir',
         'alamat',
-        'keperluan',
+        'alamat_tanah',
+        'harga_per_meter',
         'status_perkawinan',
-        'nama_anak',
-        'pengantar_rt',
-        'ktp',
         'no_hp',
-        'kk'
+        'keperluan',
+        'kk',
+        'ktp',
+        'pengantar_rt',
     ];
 
     protected $casts = [
-        'ttl' => 'date'
+        'ttl' => 'date',
     ];
 }
