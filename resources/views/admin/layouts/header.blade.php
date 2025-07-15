@@ -2,13 +2,15 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-xl sm:text-2xl font-bold text-gray-800">@yield('page-title', 'Dashboard')</h1>
-            <p class="text-sm sm:text-base text-gray-600">@yield('page-description', 'Selamat datang di panel admin Desa Maju Sejahtera')</p>
+            <p class="text-sm sm:text-base text-gray-600">@yield('page-description', 'Selamat datang di panel admin Kelurahan Sukowinangun')</p>
         </div>
         <div class="flex items-center space-x-2 sm:space-x-4">
             <div class="text-right hidden sm:block">
                 <p class="text-sm text-gray-600">Hari ini</p>
                 <p class="text-lg font-semibold text-gray-800" id="currentDate"></p>
+                <p class="text-sm text-gray-600 mt-1" id="currentTime"></p> <!-- Jam Realtime -->
             </div>
+
             <div class="bg-primary/10 p-2 sm:p-3 rounded-lg">
                 <i class="fas fa-calendar text-primary text-lg sm:text-xl"></i>
             </div>

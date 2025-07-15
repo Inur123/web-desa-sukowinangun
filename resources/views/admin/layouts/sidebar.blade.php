@@ -4,7 +4,7 @@
         <div class="flex items-center">
             <img class="h-10 w-10 mr-3" src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa">
             <div>
-                <h1 class="text-lg font-bold text-primary">Dashboard</h1>
+                <h1 class="text-lg font-bold text-primary">HaloSuko</h1>
                 <p class="text-sm text-gray-600">Kelurahan Sukowinangun</p>
             </div>
         </div>
@@ -29,14 +29,14 @@
                 </a>
             </li>
             <li>
-   <a href="{{ route('arsip-surat.index') }}"
-    class="flex items-center px-4 py-3 rounded-lg font-medium
+                <a href="{{ route('arsip-surat.index') }}"
+                    class="flex items-center px-4 py-3 rounded-lg font-medium
     {{ request()->routeIs('arsip-surat.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-    <i class="fas fa-archive mr-3"></i>
-    <span>Arsip Surat</span>
-</a>
+                    <i class="fas fa-archive mr-3"></i>
+                    <span>Arsip Surat</span>
+                </a>
 
-</li>
+            </li>
             <!-- Menu Layanan dengan Dropdown -->
             <li class="dropdown-container">
                 <button onclick="toggleDropdown(this)"
@@ -76,13 +76,13 @@
                         </a>
                     </li>
                     <li>
-    <a href="{{ route('arsip-surat.index') }}"
-        class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                        <a href="{{ route('arsip-surat.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
         {{ request()->routeIs('layanan.surat-usaha') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-        <i class="fas fa-file-alt mr-3"></i> <!-- Icon tambahan (opsional) -->
-        <span>Surat Izin Usaha</span>
-    </a>
-</li>
+                            <i class="fas fa-file-alt mr-3"></i> <!-- Icon tambahan (opsional) -->
+                            <span>Surat Izin Usaha</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

@@ -181,12 +181,13 @@ trait Encryptable
      */
     protected function getFolderByField($field)
     {
+        $prefix = strtolower(class_basename($this)); // contoh: SKU, SKTM, dst
         return match ($field) {
-            'ktp' => 'sku/ktp',
-            'pengantar_rt' => 'sku/pengantar_rt',
-            'kk' => 'sku/kk',
+            'ktp' => "$prefix/ktp",
+            'pengantar_rt' => "$prefix/pengantar_rt",
+            'kk' => "$prefix/kk",
             'file_surat' => 'arsip/file_surat',
-            default => 'uploads',
+            default => "$prefix/uploads",
         };
     }
 }

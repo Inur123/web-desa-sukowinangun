@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,11 @@
         .rotate-180 {
             transform: rotate(180deg);
         }
+
         .dropdown-menu {
             transition: all 0.3s ease;
         }
+
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -25,28 +28,33 @@
                 z-index: 50;
                 transition: left 0.3s ease;
             }
+
             .sidebar.active {
                 left: 0;
             }
+
             .overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: rgba(0,0,0,0.5);
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 40;
                 display: none;
             }
+
             .overlay.active {
                 display: block;
             }
+
             .mobile-menu-btn {
                 display: block;
             }
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Mobile Menu Button -->
     <button class="mobile-menu-btn fixed top-4 left-4 z-30 bg-white p-2 rounded-lg shadow-md md:hidden">
@@ -128,6 +136,7 @@
             }
 
             // Set current date
+            // Set current date (sudah ada di kode Anda)
             const currentDate = new Date();
             const options = {
                 weekday: 'long',
@@ -136,6 +145,18 @@
                 day: 'numeric'
             };
             document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('id-ID', options);
+
+            // Update realtime clock
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                document.getElementById('currentTime').textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            setInterval(updateClock, 1000);
+            updateClock(); // inisialisasi saat load
+
         });
 
         // Auto refresh stats (simulation)
@@ -151,4 +172,5 @@
         }, 30000);
     </script>
 </body>
+
 </html>

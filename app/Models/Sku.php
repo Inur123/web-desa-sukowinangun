@@ -39,10 +39,6 @@ class Sku extends Model
         'ktp',
         'no_hp',
         'kk'
-
-
-
-
     ];
 
     protected $casts = [
