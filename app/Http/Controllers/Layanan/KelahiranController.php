@@ -11,4 +11,9 @@ class KelahiranController extends Controller
     {
         return view('user.layanan.kelahiran.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

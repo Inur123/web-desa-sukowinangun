@@ -11,4 +11,9 @@ class KematianController extends Controller
     {
         return view('user.layanan.kematian.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

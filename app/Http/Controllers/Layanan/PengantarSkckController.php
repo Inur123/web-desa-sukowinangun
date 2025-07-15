@@ -11,4 +11,9 @@ class PengantarSkckController extends Controller
     {
         return view('user.layanan.pengantar-skck.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

@@ -11,4 +11,9 @@ class BelumMenikahController extends Controller
     {
         return view('user.layanan.belum-menikah.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

@@ -11,4 +11,9 @@ class HargaTanahController extends Controller
     {
         return view('user.layanan.harga-tanah.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

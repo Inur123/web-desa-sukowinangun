@@ -11,4 +11,9 @@ class DomisiliController extends Controller
     {
         return view('user.layanan.domisili.create');
     }
+
+     public function store(Request $request)
+    {
+
+    }
 }

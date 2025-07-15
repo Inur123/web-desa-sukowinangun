@@ -11,4 +11,8 @@ class SktmController extends Controller
     {
         return view('user.layanan.sktm.create');
     }
+    public function store(Request $request)
+    {
+
+    }
 }

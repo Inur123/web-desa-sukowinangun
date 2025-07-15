@@ -20,7 +20,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- SKTM -->
-                <a href=""
+                <a href="{{ route('sktm.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-alt text-primary text-2xl"></i>
@@ -34,7 +34,7 @@
                 </a>
 
                 <!-- Surat Keterangan Belum Menikah -->
-                <a href=""
+                <a href="{{ route('belum-menikah.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-user text-secondary text-2xl"></i>
@@ -47,7 +47,7 @@
                 </a>
 
                 <!-- Surat Pengantar SKCK -->
-                <a href=""
+                <a href="{{ route('pengantar-skck.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-signature text-accent text-2xl"></i>
@@ -60,7 +60,7 @@
                 </a>
 
                 <!-- Surat Keterangan Domisili -->
-                <a href=""
+                <a href="{{ route('domisili.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-home text-blue-500 text-2xl"></i>
@@ -73,7 +73,7 @@
                 </a>
 
                 <!-- Surat Keterangan Harga Tanah -->
-                <a href=""
+                <a href="{{ route('harga-tanah.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-landmark text-green-500 text-2xl"></i>
@@ -99,7 +99,7 @@
                 </a>
 
                 <!-- Surat Keterangan Kehilangan -->
-                <a href=""
+                <a href="{{ route('kehilangan.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-search text-red-500 text-2xl"></i>
@@ -112,7 +112,7 @@
                 </a>
 
                 <!-- Surat Keterangan Kelahiran -->
-                <a href=""
+                <a href="{{ route('kelahiran.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-baby text-pink-500 text-2xl"></i>
@@ -125,7 +125,7 @@
                 </a>
 
                 <!-- Surat Keterangan Kematian -->
-                <a href=""
+                <a href="{{ route('kematian.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                     <i class="fas fa-praying-hands text-gray-700 text-2xl"></i>
@@ -138,7 +138,7 @@
                 </a>
 
                 <!-- Surat Keterangan Penghasilan -->
-                <a href=""
+                <a href="{{ route('penghasilan.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-money-bill-wave text-purple-500 text-2xl"></i>

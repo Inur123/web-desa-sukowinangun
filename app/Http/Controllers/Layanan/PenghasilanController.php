@@ -11,4 +11,8 @@ class PenghasilanController extends Controller
     {
         return view('user.layanan.penghasilan.create');
     }
+      public function store(Request $request)
+    {
+
+    }
 }
