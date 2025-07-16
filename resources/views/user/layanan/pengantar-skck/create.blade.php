@@ -33,7 +33,7 @@
             </div>
         </div>
     @endif
-    <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
+    <section class="pt-16 bg-gradient-to-r from-primary to-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
                 <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">

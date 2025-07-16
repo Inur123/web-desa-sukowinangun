@@ -3,13 +3,12 @@
 
 @section('content')
 
-
     <!-- Page Header -->
-    <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
+    <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Layanan Kelurahan</h1>
-                <p class="text-xl text-gray-100 max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up" data-aos-delay="100">Layanan Kelurahan</h1>
+                <p class="text-xl text-gray-100 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                     Berbagai layanan administrasi dan fasilitas publik untuk kemudahan warga Kelurahan
                 </p>
             </div>
@@ -21,7 +20,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- SKTM -->
                 <a href="{{ route('sktm.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-alt text-primary text-2xl"></i>
                     </div>
@@ -35,7 +35,8 @@
 
                 <!-- Surat Keterangan Belum Menikah -->
                 <a href="{{ route('belum-menikah.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="150">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-user text-secondary text-2xl"></i>
                     </div>
@@ -48,7 +49,8 @@
 
                 <!-- Surat Pengantar SKCK -->
                 <a href="{{ route('pengantar-skck.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file-signature text-accent text-2xl"></i>
                     </div>
@@ -61,7 +63,8 @@
 
                 <!-- Surat Keterangan Domisili -->
                 <a href="{{ route('domisili.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="250">
                     <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-home text-blue-500 text-2xl"></i>
                     </div>
@@ -74,7 +77,8 @@
 
                 <!-- Surat Keterangan Harga Tanah -->
                 <a href="{{ route('harga-tanah.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-landmark text-green-500 text-2xl"></i>
                     </div>
@@ -87,7 +91,8 @@
 
                 <!-- Surat Keterangan Usaha -->
                 <a href="{{ route('sku.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="350">
                     <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-business-time text-yellow-500 text-2xl"></i>
                     </div>
@@ -100,7 +105,8 @@
 
                 <!-- Surat Keterangan Kehilangan -->
                 <a href="{{ route('kehilangan.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-search text-red-500 text-2xl"></i>
                     </div>
@@ -113,7 +119,8 @@
 
                 <!-- Surat Keterangan Kelahiran -->
                 <a href="{{ route('kelahiran.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="150">
                     <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-baby text-pink-500 text-2xl"></i>
                     </div>
@@ -126,7 +133,8 @@
 
                 <!-- Surat Keterangan Kematian -->
                 <a href="{{ route('kematian.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                     <i class="fas fa-praying-hands text-gray-700 text-2xl"></i>
                     </div>
@@ -139,7 +147,8 @@
 
                 <!-- Surat Keterangan Penghasilan -->
                 <a href="{{ route('penghasilan.create') }}"
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="250">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-money-bill-wave text-purple-500 text-2xl"></i>
                     </div>
@@ -152,7 +161,8 @@
 
                 <!-- Surat Keterangan Lainnya -->
                 <a href=""
-                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100">
+                    class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-file text-indigo-500 text-2xl"></i>
                     </div>
@@ -168,7 +178,7 @@
 
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Cara Menggunakan Layanan</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Proses mudah dan cepat untuk mengakses layanan kelurahan secara online
@@ -177,7 +187,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Langkah 1 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="bg-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-white font-bold text-xl">1</span>
                     </div>
@@ -186,7 +196,7 @@
                 </div>
 
                 <!-- Langkah 2 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-secondary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-white font-bold text-xl">2</span>
                     </div>
@@ -195,7 +205,7 @@
                 </div>
 
                 <!-- Langkah 3 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-white font-bold text-xl">3</span>
                     </div>
@@ -204,7 +214,7 @@
                 </div>
 
                 <!-- Langkah 4 -->
-                <div class="text-center">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-white font-bold text-xl">4</span>
                     </div>
@@ -217,7 +227,7 @@
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Persyaratan Umum</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Dokumen yang perlu disiapkan untuk menggunakan layanan kelurahan
@@ -225,7 +235,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-6 rounded-xl">
+                <div class="bg-gray-50 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Dokumen Identitas</h3>
                     <ul class="space-y-2">
                         <li class="flex items-center text-gray-600">
@@ -243,7 +253,7 @@
                     </ul>
                 </div>
 
-                <div class="bg-gray-50 p-6 rounded-xl">
+                <div class="bg-gray-50 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Dokumen Pendukung</h3>
                     <ul class="space-y-2">
                         <li class="flex items-center text-gray-600">
@@ -261,7 +271,7 @@
                     </ul>
                 </div>
 
-                <div class="bg-gray-50 p-6 rounded-xl">
+                <div class="bg-gray-50 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-lg font-bold text-gray-800 mb-4">Dokumen Khusus</h3>
                     <ul class="space-y-2">
                         <li class="flex items-center text-gray-600">
@@ -282,20 +292,22 @@
         </div>
     </section>
 
-    <section class="py-20 bg-primary">
+    <section class="py-20 bg-primary" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white">
                 <h2 class="text-3xl font-bold mb-4">Butuh Bantuan?</h2>
                 <p class="text-xl text-gray-100 mb-8">
-                    Tim kami siap membantu Anda dengan layanan terbaik
+                    HaloSuko siap membantu Anda dengan layanan terbaik
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="kontak.html"
-                        class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                        data-aos="fade-up" data-aos-delay="100">
                         Hubungi Kami
                     </a>
                     <a href="tel:02112345678"
-                        class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-lg font-semibold transition-colors">
+                        class="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-lg font-semibold transition-colors"
+                        data-aos="fade-up" data-aos-delay="200">
                         <i class="fas fa-phone mr-2"></i>
                         (021) 1234-5678
                     </a>
