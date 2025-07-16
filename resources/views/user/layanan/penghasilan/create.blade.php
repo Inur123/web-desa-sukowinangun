@@ -8,7 +8,8 @@
                 <div class="bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-file-alt text-4xl"></i>
                 </div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Form Pengajuan Surat Keterangan Penghasilan</h1>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Form Pengajuan Surat Keterangan
+                    Penghasilan</h1>
                 <p class="text-base sm:text-lg md:text-xl text-gray-100 max-w-3xl mx-auto px-2 sm:px-0">
                     Ajukan permohonan Surat Keterangan Penghasilan untuk keperluan administrasi dan legal.
                 </p>
@@ -21,7 +22,8 @@
             <div class="flex justify-center">
                 <div class="w-full lg:w-2/3">
                     <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-                        <form action="{{ route('penghasilan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        <form action="{{ route('penghasilan.store') }}" method="POST" enctype="multipart/form-data"
+                            class="space-y-6">
                             @csrf
 
                             <!-- Data Pribadi -->
@@ -35,20 +37,23 @@
                                     <!-- Column 1 -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama
+                                                Lengkap</label>
                                             <input type="text" id="nama" name="nama"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Nama sesuai KTP">
                                         </div>
 
                                         <div>
-                                            <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
+                                            <label for="ttl"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
                                             <input type="date" id="ttl" name="ttl"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                         </div>
 
                                         <div>
-                                            <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
+                                            <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor
+                                                HP</label>
                                             <input type="text" id="no_hp" name="no_hp" inputmode="numeric"
                                                 pattern="[0-9]*" maxlength="15"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -60,24 +65,29 @@
                                     <!-- Column 2 -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
+                                            <label for="tempat_lahir"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
                                             <input type="text" id="tempat_lahir" name="tempat_lahir"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Kota/Kabupaten kelahiran">
                                         </div>
 
                                         <div>
-                                            <label for="nik" class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
+                                            <label for="nik"
+                                                class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
                                             <input type="text" id="nik" name="nik" maxlength="16"
                                                 inputmode="numeric" pattern="[0-9]*"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="16 digit NIK">
-                                            <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit</div>
+                                            <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
+                                            </div>
                                         </div>
 
                                         <div>
-                                            <label for="status_perkawinan" class="block text-sm font-medium text-gray-700 mb-2">Status Perkawinan</label>
+                                            <label for="status_perkawinan"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Status
+                                                Perkawinan</label>
                                             <select id="status_perkawinan" name="status_perkawinan"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                                 <option value="">Pilih Status</option>
@@ -91,22 +101,26 @@
 
                                     <!-- Full width fields -->
                                     <div class="md:col-span-2">
-                                        <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
+                                        <label for="alamat"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
                                         <textarea id="alamat" name="alamat" rows="3"
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Jalan, nomor rumah, RT/RW"></textarea>
                                     </div>
 
-                                   <div class="md:col-span-2">
-    <label for="penghasilan_per_bulan" class="block text-sm font-medium text-gray-700 mb-2">Penghasilan per Bulan (Rp)</label>
-    <input type="text" id="penghasilan_per_bulan" name="penghasilan_per_bulan"
-        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
-        placeholder="Contoh: 5jt / 500rb">
-</div>
+                                    <div class="md:col-span-2">
+                                        <label for="penghasilan_per_bulan"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Penghasilan per Bulan
+                                            (Rp)</label>
+                                        <input type="text" id="penghasilan_per_bulan" name="penghasilan_per_bulan"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
+                                            placeholder="Contoh: 5jt / 500rb">
+                                    </div>
 
 
                                     <div class="md:col-span-2">
-                                        <label for="keperluan" class="block text-sm font-medium text-gray-700 mb-2">Keperluan</label>
+                                        <label for="keperluan"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Keperluan</label>
                                         <input type="text" id="keperluan" name="keperluan"
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Contoh: Pengajuan kredit bank, pendaftaran beasiswa, dll">
@@ -124,7 +138,8 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <!-- Surat Pengantar RT/RW -->
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar RT/RW</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar
+                                            RT/RW</label>
                                         <div class="space-y-4">
                                             <!-- File Upload Option -->
                                             <div id="pengantar_file_container"
@@ -168,8 +183,10 @@
                                                 </button>
                                                 <input type="hidden" id="pengantar_rt_camera" name="pengantar_rt">
                                                 <div id="pengantar_rt_camera_preview" class="mt-2 hidden">
-                                                    <img id="pengantar_rt_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
-                                                    <button type="button" onclick="resetCameraInput('pengantar_rt_camera')"
+                                                    <img id="pengantar_rt_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <button type="button"
+                                                        onclick="resetCameraInput('pengantar_rt_camera')"
                                                         class="mt-2 text-red-500 hover:text-red-700 text-sm">
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
                                                     </button>
@@ -223,7 +240,8 @@
                                                 </button>
                                                 <input type="hidden" id="ktp_camera" name="ktp">
                                                 <div id="ktp_camera_preview" class="mt-2 hidden">
-                                                    <img id="ktp_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <img id="ktp_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
                                                     <button type="button" onclick="resetCameraInput('ktp_camera')"
                                                         class="mt-2 text-red-500 hover:text-red-700 text-sm">
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
@@ -278,7 +296,8 @@
                                                 </button>
                                                 <input type="hidden" id="kk_camera" name="kk">
                                                 <div id="kk_camera_preview" class="mt-2 hidden">
-                                                    <img id="kk_camera_img" class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
+                                                    <img id="kk_camera_img"
+                                                        class="max-w-full h-auto rounded-lg border border-gray-200 max-h-40">
                                                     <button type="button" onclick="resetCameraInput('kk_camera')"
                                                         class="mt-2 text-red-500 hover:text-red-700 text-sm">
                                                         <i class="fas fa-times mr-1"></i> Hapus Foto
@@ -294,7 +313,7 @@
                             <div class="border-t pt-6">
                                 <button type="submit"
                                     class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
-                                    <i class="fas fa-paper-plane mr-2"></i>
+
                                     Ajukan Permohonan
                                 </button>
                             </div>

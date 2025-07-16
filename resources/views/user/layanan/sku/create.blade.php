@@ -366,7 +366,7 @@
                             <div class="border-t pt-6">
                                 <button type="submit"
                                     class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
-                                    <i class="fas fa-paper-plane mr-2"></i>
+
                                     Ajukan Permohonan SKU
                                 </button>
                             </div>

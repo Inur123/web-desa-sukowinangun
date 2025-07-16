@@ -89,6 +89,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/kehilangan/{id}/reject', [KehilanganController::class, 'reject'])->name('kehilangan.reject');
     Route::get('/layanan/kehilangan/{id}/file/{type}', [KehilanganController::class, 'showFile'])->name('kehilangan.showFile');
     //kelahiran
+    Route::post('/layanan/kelahiran/{id}/approve', [KelahiranController::class, 'approve'])->name('kelahiran.approve');
+    Route::post('/layanan/kelahiran/{id}/reject', [KelahiranController::class, 'reject'])->name('kelahiran.reject');
+    Route::get('/layanan/kelahiran/{id}/file/{type}', [KelahiranController::class, 'showFile'])->name('kelahiran.showFile');
+    //kematian
 
 });
 
