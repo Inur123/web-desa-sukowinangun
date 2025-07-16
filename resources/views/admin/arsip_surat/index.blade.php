@@ -63,7 +63,7 @@
         </div>
         <div class="flex space-x-2">
             <a href="{{ route('arsip-surat.create') }}"
-                class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm md:text-base">
+                class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base">
                 <i class="fas fa-plus mr-1 md:mr-2 text-xs md:text-sm"></i>
                 Tambah Surat
             </a>
