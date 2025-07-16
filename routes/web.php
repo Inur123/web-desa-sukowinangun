@@ -75,6 +75,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/harga-tanah/{id}/approve', [HargaTanahController::class, 'approve'])->name('harga-tanah.approve');
     Route::post('/layanan/harga-tanah/{id}/reject', [HargaTanahController::class, 'reject'])->name('harga-tanah.reject');
     Route::get('/layanan/harga-tanah/{id}/file/{type}', [HargaTanahController::class, 'showFile'])->name('harga-tanah.showFile');
+    //belum-menikah
+    Route::post('/layanan/belum-menikah/{id}/approve', [BelumMenikahController::class, 'approve'])->name('belum-menikah.approve');
+    Route::post('/layanan/belum-menikah/{id}/reject', [BelumMenikahController::class, 'reject'])->name('belum-menikah.reject');
+    Route::get('/layanan/belum-menikah/{id}/file/{type}', [BelumMenikahController::class, 'showFile'])->name('belum-menikah.showFile');
 
 });
 

@@ -6,6 +6,7 @@
     <title>Login Admin - Kelurahan Sukowinangun</title>
      @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/logo-desa.png') }}" type="image/png">
 </head>
 <body class="bg-gradient-to-br from-primary to-secondary min-h-screen flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10">
