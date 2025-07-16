@@ -7,7 +7,8 @@
                     <h3 class="text-xl font-bold">Kelurahan Sukowinangun</h3>
                 </div>
                 <p class="text-gray-300 mb-4">
-                    Kelurahan yang berkembang dengan semangat gotong royong dan teknologi modern untuk pelayanan terbaik.
+                    Kelurahan yang berkembang dengan semangat gotong royong dan teknologi modern untuk pelayanan
+                    terbaik.
                 </p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-gray-300 hover:text-white transition-colors">
@@ -70,7 +71,10 @@
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-300">
-                &copy; {{ date('Y') }} Kelurahan Sukowangun. Semua hak cipta dilindungi.
+                &copy; {{ date('Y') }} Kelurahan Sukowangun | Developed by
+                <a href="https://www.instagram.com/inurzainur87/" target="_blank" class="text-gray-300">
+                    Zainur
+                </a>
             </p>
         </div>
     </div>
