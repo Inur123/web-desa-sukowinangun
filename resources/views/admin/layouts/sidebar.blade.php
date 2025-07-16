@@ -38,113 +38,114 @@
 
             </li>
             <!-- Menu Layanan dengan Dropdown -->
-@php
-    // Cek apakah salah satu dari submenu aktif
-    $isLayananActive = request()->routeIs('sku.*') ||
-                       request()->routeIs('domisili.*') ||
-                       request()->routeIs('sktm.*') ||
-                       request()->routeIs('belum-menikah.*') ||
-                       request()->routeIs('skck.*') ||
-                       request()->routeIs('harga-tanah.*') ||
-                       request()->routeIs('kehilangan.*') ||
-                       request()->routeIs('kelahiran.*') ||
-                       request()->routeIs('kematian.*') ||
-                       request()->routeIs('penghasilan.*') ||
-                       request()->routeIs('lainnya');
-@endphp
+            @php
+                // Cek apakah salah satu dari submenu aktif
+                $isLayananActive =
+                    request()->routeIs('sku.*') ||
+                    request()->routeIs('domisili.*') ||
+                    request()->routeIs('sktm.*') ||
+                    request()->routeIs('belum-menikah.*') ||
+                    request()->routeIs('skck.*') ||
+                    request()->routeIs('harga-tanah.*') ||
+                    request()->routeIs('kehilangan.*') ||
+                    request()->routeIs('kelahiran.*') ||
+                    request()->routeIs('kematian.*') ||
+                    request()->routeIs('penghasilan.*') ||
+                    request()->routeIs('lainnya');
+            @endphp
 
-<li class="dropdown-container">
-    <button onclick="toggleDropdown(this)"
-        class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
+            <li class="dropdown-container">
+                <button onclick="toggleDropdown(this)"
+                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
         {{ $isLayananActive ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-        <div class="flex items-center">
-            <i class="fas fa-concierge-bell mr-3"></i>
-            <span>Layanan</span>
-        </div>
-        <i class="fas fa-chevron-down text-xs transition-transform duration-200 dropdown-icon"></i>
-    </button>
+                    <div class="flex items-center">
+                        <i class="fas fa-concierge-bell mr-3"></i>
+                        <span>Layanan</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-200 dropdown-icon"></i>
+                </button>
 
-    <!-- Submenu Dropdown -->
-    <ul class="ml-4 mt-1 space-y-1 dropdown-menu {{ $isLayananActive ? '' : 'hidden' }}">
-        <li>
-            <a href="{{ route('sku.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                <!-- Submenu Dropdown -->
+                <ul class="ml-4 mt-1 space-y-1 dropdown-menu {{ $isLayananActive ? '' : 'hidden' }}">
+                    <li>
+                        <a href="{{ route('sku.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('sku.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Pengajuan SKU</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('domisili.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Pengajuan SKU</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('domisili.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('domisili.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Surat Domisili</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('sktm.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Surat Domisili</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('sktm.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('sktm.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>SKTM</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('belum-menikah.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>SKTM</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('belum-menikah.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('belum-menikah.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Belum Menikah</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('skck.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Belum Menikah</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('skck.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('skck.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Surat Pengantar SKCK</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('harga-tanah.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Surat Pengantar SKCK</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('harga-tanah.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('harga-tanah.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Harga Tanah</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('kehilangan.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Harga Tanah</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kehilangan.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('kehilangan.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Kehilangan</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('kelahiran.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Kehilangan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kelahiran.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('kelahiran.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Kelahiran</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('kematian.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Kelahiran</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('kematian.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('kematian.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Kematian</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('penghasilan.index') }}"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Kematian</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('penghasilan.index') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('penghasilan.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Penghasilan</span>
-            </a>
-        </li>
-        <li>
-            <a href="#"
-                class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                            <span>Suket Penghasilan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('lainnya.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-                <span>Suket Lainnya</span>
-            </a>
-        </li>
-    </ul>
-</li>
+                            <span>Suket Lainnya</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
     </nav>

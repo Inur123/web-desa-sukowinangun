@@ -2,7 +2,6 @@
 @section('title', 'Surat Keterangan Belum Menikah - Sukowinangun')
 
 @section('content')
-    <!-- Notification Popups (same as before) -->
     <!-- Notification Popups -->
     @if (session('success'))
         <div class="fixed top-4 right-4 z-50">

@@ -39,8 +39,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
         ->except(['store']);
     Route::resource('/layanan/belum-menikah', BelumMenikahController::class)
         ->except(['store']);
-    Route::resource('/layanan/pengantar-skck', PengantarSkckController::class)
-        ->except(['store']);
+        Route::resource('/layanan/skck', PengantarSkckController::class)
+    ->except(['store']);
     Route::resource('/layanan/domisili', DomisiliController::class)
         ->except(['store']);
     Route::resource('/layanan/harga-tanah', HargaTanahController::class)
@@ -79,6 +79,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/belum-menikah/{id}/approve', [BelumMenikahController::class, 'approve'])->name('belum-menikah.approve');
     Route::post('/layanan/belum-menikah/{id}/reject', [BelumMenikahController::class, 'reject'])->name('belum-menikah.reject');
     Route::get('/layanan/belum-menikah/{id}/file/{type}', [BelumMenikahController::class, 'showFile'])->name('belum-menikah.showFile');
+    //pengantar-skck
+    Route::post('/layanan/pengantar-skck/{id}/approve', [PengantarSkckController::class, 'approve'])->name('pengantar-skck.approve');
+    Route::post('/layanan/pengantar-skck/{id}/reject', [PengantarSkckController::class, 'reject'])->name('pengantar-skck.reject');
+    Route::get('/layanan/pengantar-skck/{id}/file/{type}', [PengantarSkckController::class, 'showFile'])->name('pengantar-skck.showFile');
 
 });
 
