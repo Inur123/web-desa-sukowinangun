@@ -22,6 +22,7 @@ use App\Http\Controllers\Layanan\KelahiranController;
 use App\Http\Controllers\Layanan\KematianController;
 use App\Http\Controllers\Layanan\PenghasilanController;
 use App\Http\Controllers\Layanan\SktmController;
+use App\Models\Kehilangan;
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -83,6 +84,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/pengantar-skck/{id}/approve', [PengantarSkckController::class, 'approve'])->name('pengantar-skck.approve');
     Route::post('/layanan/pengantar-skck/{id}/reject', [PengantarSkckController::class, 'reject'])->name('pengantar-skck.reject');
     Route::get('/layanan/pengantar-skck/{id}/file/{type}', [PengantarSkckController::class, 'showFile'])->name('pengantar-skck.showFile');
+    //kehilangan
+    Route::post('/layanan/kehilangan/{id}/approve', [KehilanganController::class, 'approve'])->name('kehilangan.approve');
+    Route::post('/layanan/kehilangan/{id}/reject', [KehilanganController::class, 'reject'])->name('kehilangan.reject');
+    Route::get('/layanan/kehilangan/{id}/file/{type}', [KehilanganController::class, 'showFile'])->name('kehilangan.showFile');
+    //kelahiran
 
 });
 
