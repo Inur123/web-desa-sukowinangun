@@ -592,14 +592,5 @@
             }
             document.getElementById('kk_file').click();
         });
-
-        // Auto-remove notifications
-        setTimeout(() => {
-            const successNotif = document.querySelector('.bg-green-500');
-            const errorNotif = document.querySelector('.bg-red-500');
-
-            if (successNotif) successNotif.remove();
-            if (errorNotif) errorNotif.remove();
-        }, 5000);
     </script>
 @endsection

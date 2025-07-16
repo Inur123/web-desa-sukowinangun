@@ -4,34 +4,38 @@
 @section('content')
     <!-- Notification Popups -->
     @if (session('success'))
-        <div class="fixed top-4 right-4 z-50">
-            <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in-down">
-                <i class="fas fa-check-circle mr-2"></i>
-                {{ session('success') }}
-                <button onclick="this.parentElement.remove()" class="ml-4">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sukses!',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    position: 'center'
+                });
+            });
+        </script>
     @endif
 
     @if ($errors->any())
-        <div class="fixed top-4 right-4 z-50">
-            <div class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-down">
-                <div class="flex items-center">
-                    <i class="fas fa-exclamation-circle mr-2"></i>
-                    <span>Terjadi kesalahan!</span>
-                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ul class="mt-2 text-sm">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let errorMessages = '';
+                @foreach ($errors->all() as $error)
+                    errorMessages += '{{ $error }}<br>';
+                @endforeach
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan!',
+                    html: errorMessages,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    position: 'center'
+                });
+            });
+        </script>
     @endif
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -604,14 +608,5 @@
             }
             document.getElementById('kk_file').click();
         });
-
-        // Auto-remove notifications
-        setTimeout(() => {
-            const successNotif = document.querySelector('.bg-green-500');
-            const errorNotif = document.querySelector('.bg-red-500');
-
-            if (successNotif) successNotif.remove();
-            if (errorNotif) errorNotif.remove();
-        }, 5000);
     </script>
 @endsection
