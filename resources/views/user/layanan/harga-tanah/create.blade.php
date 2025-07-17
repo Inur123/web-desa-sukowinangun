@@ -361,7 +361,7 @@
         </div>
     </section>
 
-    <script>
+  <script>
         // Validasi NIK harus 16 digit
         document.getElementById('nik').addEventListener('input', function() {
             const nikInput = this;
@@ -376,8 +376,122 @@
             }
         });
 
-        // Camera functionality
+        // Camera functionality with iOS support
         function openCamera(inputId, label) {
+            // Check if iOS device
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            if (isIOS) {
+                // iOS specific implementation
+                handleIOSCamera(inputId, label);
+                return;
+            }
+
+            // Standard implementation for other devices
+            handleStandardCamera(inputId, label);
+        }
+
+        // Handle camera for iOS devices
+        function handleIOSCamera(inputId, label) {
+            // Create a file input element
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.capture = 'environment'; // Use rear camera
+            fileInput.style.display = 'none';
+
+            fileInput.onchange = function(e) {
+                if (e.target.files && e.target.files.length > 0) {
+                    const file = e.target.files[0];
+
+                    // Check file size (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                        return;
+                    }
+
+                    // Check file type
+                    if (!file.type.match('image.*')) {
+                        alert('Hanya file gambar yang diperbolehkan.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Compress image for iOS
+                        compressImageForIOS(event.target.result, function(compressedImage) {
+                            document.getElementById(inputId).value = compressedImage;
+                            document.getElementById(`${inputId}_img`).src = compressedImage;
+                            document.getElementById(`${inputId}_preview`).classList.remove('hidden');
+
+                            // Disable the other input method
+                            if (inputId === 'pengantar_rt_camera') {
+                                resetFileInput('pengantar_file');
+                            } else if (inputId === 'ktp_camera') {
+                                resetFileInput('ktp_file');
+                            } else if (inputId === 'kk_camera') {
+                                resetFileInput('kk_file');
+                            }
+                        });
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+
+                // Remove input after use
+                setTimeout(() => {
+                    document.body.removeChild(fileInput);
+                }, 100);
+            };
+
+            document.body.appendChild(fileInput);
+            fileInput.click();
+        }
+
+        // Image compression for iOS
+        function compressImageForIOS(imageData, callback) {
+            const img = new Image();
+            img.src = imageData;
+
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Set maximum dimensions
+                const MAX_WIDTH = 800;
+                const MAX_HEIGHT = 800;
+
+                let width = img.width;
+                let height = img.height;
+
+                // Calculate new dimensions maintaining aspect ratio
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                // Draw and compress image
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Convert to JPEG with 70% quality
+                callback(canvas.toDataURL('image/jpeg', 0.7));
+            };
+        }
+
+        // Standard camera implementation for non-iOS devices
+        function handleStandardCamera(inputId, label) {
             // Check if browser supports mediaDevices
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 alert('Browser Anda tidak mendukung akses kamera');
@@ -543,6 +657,20 @@
             const file = input.files[0];
 
             if (file) {
+                // Check file size (max 2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                    resetFileInput(previewId);
+                    return;
+                }
+
+                // Check file type
+                if (!file.type.match('image.*') && !file.type.match('application/pdf')) {
+                    alert('Hanya file gambar (JPG, PNG) atau PDF yang diperbolehkan.');
+                    resetFileInput(previewId);
+                    return;
+                }
+
                 // Tampilkan preview
                 document.getElementById(`${previewId}_placeholder`).classList.add('hidden');
                 document.getElementById(`${previewId}_preview`).classList.remove('hidden');
@@ -561,7 +689,8 @@
 
         // Reset input file
         function resetFileInput(type) {
-            const inputId = type === 'pengantar_file' ? 'pengantar_rt_file' : (type === 'ktp_file' ? 'ktp_file' : 'kk_file');
+            const inputId = type === 'pengantar_file' ? 'pengantar_rt_file' : (type === 'ktp_file' ? 'ktp_file' :
+            'kk_file');
             const input = document.getElementById(inputId);
 
             // Reset file input

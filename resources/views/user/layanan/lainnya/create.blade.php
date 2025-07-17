@@ -57,7 +57,8 @@
             <div class="flex justify-center">
                 <div class="w-full lg:w-2/3">
                     <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-                        <form action="{{ route('lainnya.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        <form action="{{ route('lainnya.store') }}" method="POST" enctype="multipart/form-data"
+                            class="space-y-6">
                             @csrf
 
                             <!-- Data Pribadi -->
@@ -70,18 +71,21 @@
                                     <!-- Column 1 -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama
+                                                Lengkap</label>
                                             <input type="text" id="nama" name="nama" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Nama sesuai KTP">
                                         </div>
                                         <div>
-                                            <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
+                                            <label for="ttl"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
                                             <input type="date" id="ttl" name="ttl" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                         </div>
                                         <div>
-                                            <label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
+                                            <label for="tempat_lahir"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Tempat Lahir</label>
                                             <input type="text" id="tempat_lahir" name="tempat_lahir" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Kota/Kabupaten kelahiran">
@@ -90,16 +94,19 @@
                                     <!-- Column 2 -->
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="nik" class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
+                                            <label for="nik"
+                                                class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
                                             <input type="text" id="nik" name="nik" maxlength="16" required
                                                 inputmode="numeric" pattern="[0-9]*"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="16 digit NIK">
-                                            <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit</div>
+                                            <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
+                                            </div>
                                         </div>
                                         <div>
-                                            <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
+                                            <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-2">Nomor
+                                                HP</label>
                                             <input type="text" id="no_hp" name="no_hp" required inputmode="numeric"
                                                 pattern="[0-9]*" maxlength="15"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"
@@ -107,7 +114,9 @@
                                                 placeholder="Contoh: 081234567890">
                                         </div>
                                         <div>
-                                            <label for="status_perkawinan" class="block text-sm font-medium text-gray-700 mb-2">Status Perkawinan</label>
+                                            <label for="status_perkawinan"
+                                                class="block text-sm font-medium text-gray-700 mb-2">Status
+                                                Perkawinan</label>
                                             <select id="status_perkawinan" name="status_perkawinan" required
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                                 <option value="">Pilih Status</option>
@@ -120,7 +129,8 @@
                                     </div>
                                     <!-- Full width fields -->
                                     <div class="md:col-span-2">
-                                        <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
+                                        <label for="alamat"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
                                         <textarea id="alamat" name="alamat" rows="3" required
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Jalan, nomor rumah, RT/RW"></textarea>
@@ -136,7 +146,8 @@
                                 </h3>
                                 <div class="grid grid-cols-1 gap-4 md:gap-6">
                                     <div>
-                                        <label for="keperluan" class="block text-sm font-medium text-gray-700 mb-2">Keperluan</label>
+                                        <label for="keperluan"
+                                            class="block text-sm font-medium text-gray-700 mb-2">Keperluan</label>
                                         <input type="text" id="keperluan" name="keperluan" required
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                             placeholder="Jelaskan keperluan layanan yang dibutuhkan">
@@ -278,111 +289,111 @@
         </div>
     `;
 
-    container.appendChild(fileDiv);
+            container.appendChild(fileDiv);
 
-    // Setup event listener untuk file container yang baru dibuat
-    setupFileUploadEvents(fileIndex);
+            // Setup event listener untuk file container yang baru dibuat
+            setupFileUploadEvents(fileIndex);
 
-    fileIndex++;
-}
-
-// Function baru untuk setup event listeners
-function setupFileUploadEvents(index) {
-    const fileContainer = document.getElementById(`file_container_${index}`);
-    const fileInput = document.getElementById(`files_${index}`);
-
-    if (fileContainer && fileInput) {
-        fileContainer.addEventListener('click', function(e) {
-            // Jangan trigger jika yang diklik adalah button atau icon
-            if (e.target.closest('button') ||
-                e.target.closest('i') ||
-                e.target.closest('svg') ||
-                e.target.tagName === 'BUTTON' ||
-                e.target.tagName === 'I') {
-                return;
-            }
-
-            console.log(`Clicking file input for index ${index}`);
-            fileInput.click();
-        });
-
-        // Tambahkan hover effect
-        fileContainer.addEventListener('mouseenter', function() {
-            if (!document.getElementById(`file_preview_${index}`).classList.contains('hidden')) {
-                return; // Jangan ubah style jika sudah ada preview
-            }
-            this.classList.add('border-secondary');
-        });
-
-        fileContainer.addEventListener('mouseleave', function() {
-            if (!document.getElementById(`file_preview_${index}`).classList.contains('hidden')) {
-                return; // Jangan ubah style jika sudah ada preview
-            }
-            this.classList.remove('border-secondary');
-        });
-    }
-}
-
-// Update function previewFile
-function previewFile(index) {
-    const input = document.getElementById(`files_${index}`);
-    const file = input.files[0];
-
-    console.log(`Preview file for index ${index}:`, file);
-
-    if (file) {
-        // Validasi ukuran file (2MB = 2 * 1024 * 1024 bytes)
-        if (file.size > 2 * 1024 * 1024) {
-            alert('Ukuran file terlalu besar. Maksimal 2MB.');
-            resetFileInput(index);
-            return;
+            fileIndex++;
         }
 
-        // Validasi tipe file
-        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
-        if (!allowedTypes.includes(file.type)) {
-            alert('Tipe file tidak didukung. Gunakan PDF, JPG, atau PNG.');
-            resetFileInput(index);
-            return;
+        // Function baru untuk setup event listeners
+        function setupFileUploadEvents(index) {
+            const fileContainer = document.getElementById(`file_container_${index}`);
+            const fileInput = document.getElementById(`files_${index}`);
+
+            if (fileContainer && fileInput) {
+                fileContainer.addEventListener('click', function(e) {
+                    // Jangan trigger jika yang diklik adalah button atau icon
+                    if (e.target.closest('button') ||
+                        e.target.closest('i') ||
+                        e.target.closest('svg') ||
+                        e.target.tagName === 'BUTTON' ||
+                        e.target.tagName === 'I') {
+                        return;
+                    }
+
+                    console.log(`Clicking file input for index ${index}`);
+                    fileInput.click();
+                });
+
+                // Tambahkan hover effect
+                fileContainer.addEventListener('mouseenter', function() {
+                    if (!document.getElementById(`file_preview_${index}`).classList.contains('hidden')) {
+                        return; // Jangan ubah style jika sudah ada preview
+                    }
+                    this.classList.add('border-secondary');
+                });
+
+                fileContainer.addEventListener('mouseleave', function() {
+                    if (!document.getElementById(`file_preview_${index}`).classList.contains('hidden')) {
+                        return; // Jangan ubah style jika sudah ada preview
+                    }
+                    this.classList.remove('border-secondary');
+                });
+            }
         }
 
-        // Tampilkan preview
-        document.getElementById(`file_placeholder_${index}`).classList.add('hidden');
-        document.getElementById(`file_preview_${index}`).classList.remove('hidden');
-        document.getElementById(`file_name_${index}`).textContent = file.name;
+        // Update function previewFile
+        function previewFile(index) {
+            const input = document.getElementById(`files_${index}`);
+            const file = input.files[0];
 
-        // Update icon berdasarkan tipe file
-        const iconElement = document.querySelector(`#file_preview_${index} i`);
-        if (file.type === 'application/pdf') {
-            iconElement.className = 'fas fa-file-pdf text-red-500 text-xl mr-2';
-        } else {
-            iconElement.className = 'fas fa-file-image text-blue-500 text-xl mr-2';
+            console.log(`Preview file for index ${index}:`, file);
+
+            if (file) {
+                // Validasi ukuran file (2MB = 2 * 1024 * 1024 bytes)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                    resetFileInput(index);
+                    return;
+                }
+
+                // Validasi tipe file
+                const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Tipe file tidak didukung. Gunakan PDF, JPG, atau PNG.');
+                    resetFileInput(index);
+                    return;
+                }
+
+                // Tampilkan preview
+                document.getElementById(`file_placeholder_${index}`).classList.add('hidden');
+                document.getElementById(`file_preview_${index}`).classList.remove('hidden');
+                document.getElementById(`file_name_${index}`).textContent = file.name;
+
+                // Update icon berdasarkan tipe file
+                const iconElement = document.querySelector(`#file_preview_${index} i`);
+                if (file.type === 'application/pdf') {
+                    iconElement.className = 'fas fa-file-pdf text-red-500 text-xl mr-2';
+                } else {
+                    iconElement.className = 'fas fa-file-image text-blue-500 text-xl mr-2';
+                }
+
+                // Reset camera input
+                resetCameraInput(index);
+
+                console.log(`File preview updated for index ${index}`);
+            }
         }
 
-        // Reset camera input
-        resetCameraInput(index);
+        // Update function resetFileInput
+        function resetFileInput(index) {
+            const input = document.getElementById(`files_${index}`);
+            const placeholder = document.getElementById(`file_placeholder_${index}`);
+            const preview = document.getElementById(`file_preview_${index}`);
 
-        console.log(`File preview updated for index ${index}`);
-    }
-}
+            if (input) {
+                input.value = '';
+            }
 
-// Update function resetFileInput
-function resetFileInput(index) {
-    const input = document.getElementById(`files_${index}`);
-    const placeholder = document.getElementById(`file_placeholder_${index}`);
-    const preview = document.getElementById(`file_preview_${index}`);
+            if (preview && placeholder) {
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
 
-    if (input) {
-        input.value = '';
-    }
-
-    if (preview && placeholder) {
-        preview.classList.add('hidden');
-        placeholder.classList.remove('hidden');
-    }
-
-    console.log(`File input reset for index ${index}`);
-}
+            console.log(`File input reset for index ${index}`);
+        }
 
         function removeFileUpload(index) {
             const fileDiv = document.querySelector(`[data-index="${index}"]`);
@@ -391,14 +402,121 @@ function resetFileInput(index) {
             }
         }
 
-
-
         function resetCameraInput(index) {
             document.getElementById(`camera_data_${index}`).value = '';
             document.getElementById(`camera_preview_${index}`).classList.add('hidden');
         }
 
+        // Camera functionality with iOS support
         function openCamera(index) {
+            // Check if iOS device
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            if (isIOS) {
+                // iOS specific implementation
+                handleIOSCamera(index);
+                return;
+            }
+
+            // Standard implementation for other devices
+            handleStandardCamera(index);
+        }
+
+        // Handle camera for iOS devices
+        function handleIOSCamera(index) {
+            // Create a file input element
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.capture = 'environment'; // Use rear camera
+            fileInput.style.display = 'none';
+
+            fileInput.onchange = function(e) {
+                if (e.target.files && e.target.files.length > 0) {
+                    const file = e.target.files[0];
+
+                    // Check file size (max 2MB)
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                        return;
+                    }
+
+                    // Check file type
+                    if (!file.type.match('image.*')) {
+                        alert('Hanya file gambar yang diperbolehkan.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        // Compress image for iOS
+                        compressImageForIOS(event.target.result, function(compressedImage) {
+                            document.getElementById(`camera_data_${index}`).value = compressedImage;
+                            document.getElementById(`camera_img_${index}`).src = compressedImage;
+                            document.getElementById(`camera_preview_${index}`).classList.remove('hidden');
+
+                            // Reset file input
+                            resetFileInput(index);
+                        });
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+
+                // Remove input after use
+                setTimeout(() => {
+                    document.body.removeChild(fileInput);
+                }, 100);
+            };
+
+            document.body.appendChild(fileInput);
+            fileInput.click();
+        }
+
+        // Image compression for iOS
+        function compressImageForIOS(imageData, callback) {
+            const img = new Image();
+            img.src = imageData;
+
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Set maximum dimensions
+                const MAX_WIDTH = 800;
+                const MAX_HEIGHT = 800;
+
+                let width = img.width;
+                let height = img.height;
+
+                // Calculate new dimensions maintaining aspect ratio
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                // Draw and compress image
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Convert to JPEG with 70% quality
+                callback(canvas.toDataURL('image/jpeg', 0.7));
+            };
+        }
+
+        // Standard camera implementation for non-iOS devices
+        function handleStandardCamera(index) {
             // Check if browser supports mediaDevices
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 alert('Browser Anda tidak mendukung akses kamera');
@@ -451,7 +569,8 @@ function resetFileInput(index) {
 
             // Create capture button
             const captureBtn = document.createElement('button');
-            captureBtn.className = 'bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            captureBtn.className =
+                'bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
             captureBtn.innerHTML = '<i class="fas fa-camera mr-2"></i> Ambil Foto';
             captureBtn.onclick = function() {
                 canvas.width = video.videoWidth;
@@ -471,12 +590,14 @@ function resetFileInput(index) {
 
                 // Stop camera and remove modal
                 stream.getTracks().forEach(track => track.stop());
+                document.body crc
                 document.body.removeChild(modal);
             };
 
             // Create cancel button
             const cancelBtn = document.createElement('button');
-            cancelBtn.className = 'bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
+            cancelBtn.className =
+                'bg-gray-500 hover:bg-gray-600 text-white py-2 px-6 rounded-lg flex items-center justify-center';
             cancelBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Batal';
             cancelBtn.onclick = function() {
                 if (stream) {
@@ -494,23 +615,57 @@ function resetFileInput(index) {
             // Start camera
             let stream;
             navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                },
-                audio: false
-            })
-            .then(function(s) {
-                stream = s;
-                video.srcObject = stream;
-                video.play();
-            })
-            .catch(function(err) {
-                console.error("Error accessing camera: ", err);
-                document.body.removeChild(modal);
-                alert('Gagal mengakses kamera: ' + err.message);
-            });
+                    video: {
+                        facingMode: 'environment',
+                        width: {
+                            ideal: 1280
+                        },
+                        height: {
+                            ideal: 720
+                        }
+                    },
+                    audio: false
+                })
+                .then(function(s) {
+                    stream = s;
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.error("Error accessing camera: ", err);
+                    document.body.removeChild(modal);
+                    alert('Gagal mengakses kamera: ' + err.message);
+                });
+
+            // Handle window resize
+            const resizeHandler = function() {
+                if (video.videoWidth > 0) {
+                    const aspectRatio = video.videoWidth / video.videoHeight;
+                    const maxWidth = Math.min(500, window.innerWidth - 40);
+                    const height = maxWidth / aspectRatio;
+                    video.style.width = `${maxWidth}px`;
+                    video.style.height = `${height}px`;
+                }
+            };
+
+            window.addEventListener('resize', resizeHandler);
+            video.addEventListener('loadedmetadata', resizeHandler);
+            modal._resizeHandler = resizeHandler;
+
+            // Cleanup on modal removal
+            modal._cleanup = function() {
+                window.removeEventListener('resize', this._resizeHandler);
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+            };
+
+            // Override removeChild to ensure cleanup
+            const originalRemoveChild = document.body.removeChild.bind(document.body);
+            document.body.removeChild = function(node) {
+                if (node._cleanup) node._cleanup();
+                return originalRemoveChild(node);
+            };
         }
     </script>
 @endsection

@@ -70,10 +70,10 @@
         class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all duration-300 hidden items-center justify-center">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
-    <button id="chatbot-button"
+    {{-- <button id="chatbot-button"
         class="fixed bottom-24 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all duration-300 flex items-center justify-center">
         <i class="fas fa-comments text-xl"></i>
-    </button>
+    </button> --}}
     <div id="chatbot-modal"
         class="fixed bottom-32 right-8 w-80 bg-white rounded-lg shadow-xl hidden flex-col z-50 border border-gray-200">
         <div class="bg-primary text-white p-3 rounded-t-lg flex justify-between items-center">
