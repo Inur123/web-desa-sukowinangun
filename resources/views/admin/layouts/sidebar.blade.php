@@ -51,7 +51,7 @@
                     request()->routeIs('kelahiran.*') ||
                     request()->routeIs('kematian.*') ||
                     request()->routeIs('penghasilan.*') ||
-                    request()->routeIs('lainnya');
+                    request()->routeIs('lainnya.*');
             @endphp
 
             <li class="dropdown-container">
@@ -138,7 +138,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('lainnya.index') }}"
                             class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
                 {{ request()->routeIs('lainnya.*') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
                             <span>Suket Lainnya</span>

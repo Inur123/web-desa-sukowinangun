@@ -160,7 +160,7 @@
                 </a>
 
                 <!-- Surat Keterangan Lainnya -->
-                <a href=""
+                <a href="{{ route('lainnya.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
                     data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">

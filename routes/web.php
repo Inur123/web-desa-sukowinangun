@@ -22,6 +22,7 @@ use App\Http\Controllers\Layanan\KelahiranController;
 use App\Http\Controllers\Layanan\KematianController;
 use App\Http\Controllers\Layanan\PenghasilanController;
 use App\Http\Controllers\Layanan\SktmController;
+use App\Http\Controllers\Layanan\LainnyaController;
 use App\Models\Kehilangan;
 
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -57,6 +58,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::resource('/layanan/sktm', SktmController::class)
         ->except(['store']);
     Route::resource('/layanan/skck', PengantarSkckController::class)
+        ->except(['store']);
+    Route::resource('/layanan/lainnya', LainnyaController::class)
         ->except(['store']);
 
 
@@ -100,6 +103,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/kematian/{id}/approve', [KematianController::class, 'approve'])->name('kematian.approve');
     Route::post('/layanan/kematian/{id}/reject', [KematianController::class, 'reject'])->name('kematian.reject');
     Route::get('/layanan/kematian/{id}/file/{type}', [KematianController::class, 'showFile'])->name('kematian.showFile');
+    //lainnya
+    Route::post('/layanan/lainnya/{id}/approve', [LainnyaController::class, 'approve'])->name('lainnya.approve');
+    Route::post('/layanan/lainnya/{id}/reject', [LainnyaController::class, 'reject'])->name('lainnya.reject');
+   Route::get('/layanan/lainnya/{id}/file/{fileId}', [LainnyaController::class, 'showFile'])->name('lainnya.showFile');
+
 
 });
 
@@ -150,6 +158,11 @@ Route::post('/layanan/penghasilan', [PenghasilanController::class, 'store'])->na
 // Surat SKTM
 Route::get('/layanan/sktm/create', [SktmController::class, 'create'])->name('sktm.create');
 Route::post('/layanan/sktm', [SktmController::class, 'store'])->name('sktm.store');
+
+//lainnya
+Route::get('/layanan/lainnya/create', [LainnyaController::class, 'create'])->name('lainnya.create');
+Route::post('/layanan/lainnya', [LainnyaController::class, 'store'])->name('lainnya.store');
+
 
 
 

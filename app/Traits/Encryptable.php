@@ -3,14 +3,11 @@
 namespace App\Traits;
 
 use Exception;
-
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-
-
 
 trait Encryptable
 {
@@ -59,7 +56,7 @@ trait Encryptable
      */
     protected function isFileField($key)
     {
-        return in_array($key, ['pengantar_rt', 'ktp', 'file_surat', 'kk','surat_keterangan_bidan']);
+        return in_array($key, ['pengantar_rt', 'ktp', 'file_surat', 'kk', 'surat_keterangan_bidan', 'file']);
     }
 
     /**
@@ -181,13 +178,20 @@ trait Encryptable
      */
     protected function getFolderByField($field)
     {
-        $prefix = strtolower(class_basename($this)); // contoh: SKU, SKTM, dst
+        $prefix = strtolower(class_basename($this)); // contoh: lainnya, lainnya_files
+
+        // Handle folder untuk model LainnyaFile
+        if ($this instanceof \App\Models\LainnyaFile) {
+            return "$prefix/files";
+        }
+
         return match ($field) {
             'ktp' => "$prefix/ktp",
             'pengantar_rt' => "$prefix/pengantar_rt",
             'kk' => "$prefix/kk",
             'surat_keterangan_bidan' => "$prefix/surat_keterangan_bidan",
             'file_surat' => 'arsip/file_surat',
+            'file' => "$prefix/files", // Untuk field 'file' di LainnyaFile
             default => "$prefix/uploads",
         };
     }

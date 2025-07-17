@@ -136,7 +136,7 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <a href="{{ route('layanan.index') }}"
+                <a href="{{ route('lainnya.create') }}"
                     class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
                     data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
