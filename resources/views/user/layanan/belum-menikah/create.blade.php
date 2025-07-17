@@ -128,9 +128,6 @@
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                                 <option value="">Pilih Status</option>
                                                 <option value="Belum Kawin">Belum Kawin</option>
-                                                <option value="Kawin">Kawin</option>
-                                                <option value="Cerai Hidup">Cerai Hidup</option>
-                                                <option value="Cerai Mati">Cerai Mati</option>
                                             </select>
                                         </div>
                                     </div>
