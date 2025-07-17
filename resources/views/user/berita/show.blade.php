@@ -1,15 +1,15 @@
 @extends('user.layouts.app')
 @section('title', $post->title . ' - Berita Sukowinangun')
 @push('meta')
-    <meta name="description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}">
+    <meta name="description" content="{{ strip_tags($post->summary ?? Str::limit($post->content, 150)) }}">
     <meta property="og:title" content="{{ $post->title }} - Berita Sukowinangun" />
-    <meta property="og:description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}" />
+    <meta property="og:description" content="{{ strip_tags($post->summary ?? Str::limit($post->content, 150)) }}" />
     <meta property="og:image" content="{{ asset('storage/' . $post->image) }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ $post->title }} - Berita Sukowinangun" />
-    <meta name="twitter:description" content="{{ $post->summary ?? strip_tags(Str::limit($post->content, 150)) }}" />
+    <meta name="twitter:description" content="{{ strip_tags($post->summary ?? Str::limit($post->content, 150)) }}" />
     <meta name="twitter:image" content="{{ asset('storage/' . $post->image) }}" />
 @endpush
 @section('content')

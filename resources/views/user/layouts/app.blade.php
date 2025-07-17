@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@yield('title') - Kelurahan Sukowinangun</title>
+
+    {{-- Meta khusus halaman (dari @push('meta')) --}}
+    @stack('meta')
+
+    {{-- Meta default jika tidak ada section meta-default --}}
     @hasSection('meta-default')
         @yield('meta-default')
     @else
@@ -25,12 +31,13 @@
         <meta name="twitter:description" content="Website resmi Kelurahan Sukowinangun." />
         <meta name="twitter:image" content="{{ asset('images/logo-desa.png') }}" />
     @endif
-    @stack('meta')
+
     <link rel="icon" href="{{ asset('images/logo-desa.png') }}" type="image/png" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
         #chat-messages {
             scrollbar-width: thin;
@@ -51,6 +58,7 @@
         }
     </style>
 </head>
+
 
 <body class="bg-gray-50">
     @include('user.layouts.navbar')
