@@ -19,7 +19,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $period = $request->input('period', '7days'); // Default 7 hari
+        $period = $request->input('period', 'today'); // Default to today
 
         $totalPosts = Post::count();
         $postsThisMonth = Post::whereMonth('created_at', now()->month)->count();
@@ -77,11 +77,20 @@ class DashboardController extends Controller
     {
         $labels = collect();
         $datasets = [];
-        $days = 7;
+        $days = 0;
         $groupBy = 'DATE(created_at)';
-        $format = 'l'; // Format hari (Senin, Selasa, etc)
+        $format = 'H:i'; // Format jam untuk hari ini
 
         switch ($period) {
+            case 'today':
+                $groupBy = 'HOUR(created_at)';
+                $format = 'H:i'; // Format jam
+                break;
+            case '7days':
+                $days = 7;
+                $groupBy = 'DATE(created_at)';
+                $format = 'l'; // Format hari (Senin, Selasa, etc)
+                break;
             case '30days':
                 $days = 30;
                 $groupBy = 'DATE(created_at)';
@@ -106,17 +115,31 @@ class DashboardController extends Controller
                 $format = 'M'; // Format bulan (Jan, Feb, etc)
                 $labels = collect(['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']);
                 break;
-            default: // 7days
-                $days = 7;
-                $groupBy = 'DATE(created_at)';
-                $format = 'l';
         }
 
-        // Jika bukan this_year, buat labels berdasarkan hari
+        // Jika bukan this_year, buat labels berdasarkan periode
         if ($period !== 'this_year') {
-            for ($i = $days; $i >= 0; $i--) {
-                $date = Carbon::now()->subDays($i);
-                $labels->push($date->translatedFormat($format));
+            if ($period === 'today') {
+                // Untuk hari ini, tampilkan per jam
+                for ($hour = 0; $hour <= 23; $hour++) {
+                    $time = Carbon::now()->startOfDay()->addHours($hour);
+                    $labels->push($time->format('H:00'));
+                }
+            } else {
+                // Untuk periode lainnya (7 hari, 30 hari, bulan ini, bulan lalu)
+                for ($i = $days; $i >= 0; $i--) {
+                    $date = Carbon::now()->subDays($i);
+
+                    if ($period === 'this_month' || $period === 'last_month') {
+                        $start = Carbon::now()->startOfMonth();
+                        if ($period === 'last_month') {
+                            $start = Carbon::now()->subMonth()->startOfMonth();
+                        }
+                        $date = $start->copy()->addDays($days - $i);
+                    }
+
+                    $labels->push($date->translatedFormat($format));
+                }
             }
         }
 
@@ -153,8 +176,18 @@ class DashboardController extends Controller
                     ->count();
                 $data->push($count);
             }
+        } elseif ($period === 'today') {
+            // Data per jam untuk hari ini
+            for ($hour = 0; $hour <= 23; $hour++) {
+                $start = Carbon::now()->startOfDay()->addHours($hour);
+                $end = $start->copy()->addHour();
+
+                $count = $model::whereBetween('created_at', [$start, $end])
+                    ->count();
+                $data->push($count);
+            }
         } else {
-            // Data per hari
+            // Data per hari untuk periode lainnya
             for ($i = $days; $i >= 0; $i--) {
                 $date = Carbon::now()->subDays($i);
 

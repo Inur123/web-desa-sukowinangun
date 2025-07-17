@@ -70,27 +70,25 @@
     <!-- Charts and Recent Activity -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <!-- Card Wrapper -->
-        <div class="flex flex-col h-full bg-white p-6 rounded-xl shadow-sm border border-gray-200 mt-6">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-lg font-semibold text-gray-800">Statistik Pengajuan Layanan</h2>
-                <form method="GET" action="">
-                    <select name="period" onchange="this.form.submit()"
-                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        <option value="7days" {{ $selectedPeriod === '7days' ? 'selected' : '' }}>7 Hari Terakhir</option>
-                        <option value="30days" {{ $selectedPeriod === '30days' ? 'selected' : '' }}>30 Hari Terakhir
-                        </option>
-                        <option value="this_month" {{ $selectedPeriod === 'this_month' ? 'selected' : '' }}>Bulan Ini
-                        </option>
-                        <option value="last_month" {{ $selectedPeriod === 'last_month' ? 'selected' : '' }}>Bulan Lalu
-                        </option>
-                        <option value="this_year" {{ $selectedPeriod === 'this_year' ? 'selected' : '' }}>Tahun Ini</option>
-                    </select>
-                </form>
-            </div>
-            <div class="flex-grow">
-                <canvas id="servicesChart" class="w-full h-[200px]"></canvas>
-            </div>
-        </div>
+      <div class="flex flex-col h-full bg-white p-6 rounded-xl shadow-sm border border-gray-200 mt-6">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-gray-800">Statistik Pengajuan Layanan</h2>
+        <form method="GET" action="">
+            <select name="period" onchange="this.form.submit()"
+                class="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                <option value="today" {{ $selectedPeriod === 'today' ? 'selected' : '' }}>Hari Ini</option>
+                <option value="7days" {{ $selectedPeriod === '7days' ? 'selected' : '' }}>7 Hari Terakhir</option>
+                <option value="30days" {{ $selectedPeriod === '30days' ? 'selected' : '' }}>30 Hari Terakhir</option>
+                <option value="this_month" {{ $selectedPeriod === 'this_month' ? 'selected' : '' }}>Bulan Ini</option>
+                <option value="last_month" {{ $selectedPeriod === 'last_month' ? 'selected' : '' }}>Bulan Lalu</option>
+                <option value="this_year" {{ $selectedPeriod === 'this_year' ? 'selected' : '' }}>Tahun Ini</option>
+            </select>
+        </form>
+    </div>
+    <div class="flex-grow">
+        <canvas id="servicesChart" class="w-full h-[200px]"></canvas>
+    </div>
+</div>
 
         <div class="flex flex-col h-full bg-white p-6 rounded-xl shadow-sm border border-gray-200 mt-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-6">Berita Populer</h2>

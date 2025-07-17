@@ -92,7 +92,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::post('/layanan/kelahiran/{id}/approve', [KelahiranController::class, 'approve'])->name('kelahiran.approve');
     Route::post('/layanan/kelahiran/{id}/reject', [KelahiranController::class, 'reject'])->name('kelahiran.reject');
     Route::get('/layanan/kelahiran/{id}/file/{type}', [KelahiranController::class, 'showFile'])->name('kelahiran.showFile');
+    //penghasilan
+    Route::post('/layanan/penghasilan/{id}/approve', [PenghasilanController::class, 'approve'])->name('penghasilan.approve');
+    Route::post('/layanan/penghasilan/{id}/reject', [PenghasilanController::class, 'reject'])->name('penghasilan.reject');
+    Route::get('/layanan/penghasilan/{id}/file/{type}', [PenghasilanController::class, 'showFile'])->name('penghasilan.showFile');
     //kematian
+    Route::post('/layanan/kematian/{id}/approve', [KematianController::class, 'approve'])->name('kematian.approve');
+    Route::post('/layanan/kematian/{id}/reject', [KematianController::class, 'reject'])->name('kematian.reject');
+    Route::get('/layanan/kematian/{id}/file/{type}', [KematianController::class, 'showFile'])->name('kematian.showFile');
 
 });
 
