@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Sku;
 use App\Models\Post;
-use App\Models\BelumMenikah;
+use App\Models\Sktm;
+use App\Models\Lainnya;
 use App\Models\Domisili;
+use App\Models\Kematian;
+use App\Models\Kelahiran;
 use App\Models\HargaTanah;
 use App\Models\Kehilangan;
-use App\Models\Kelahiran;
-use App\Models\PengantarSkck;
-use App\Models\Sktm;
+use App\Models\Penghasilan;
+use App\Models\BelumMenikah;
 use Illuminate\Http\Request;
+use App\Models\PengantarSkck;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -37,18 +40,26 @@ class DashboardController extends Controller
         $totalKelahiran = Kelahiran::count();
         $totalPengantarSkck = PengantarSkck::count();
         $totalSktm = Sktm::count();
+        $totalKematian = Kematian::count();
+        $totalLainnya = Lainnya::count();
+        $totalPenghasilan = Penghasilan::count();
+
 
         // Get data for selected period
-        $services = [
-            'SKU' => Sku::class,
-            'Belum Menikah' => BelumMenikah::class,
-            'Domisili' => Domisili::class,
-            'Harga Tanah' => HargaTanah::class,
-            'Kehilangan' => Kehilangan::class,
-            'Kelahiran' => Kelahiran::class,
-            'Pengantar SKCK' => PengantarSkck::class,
-            'SKTM' => Sktm::class
-        ];
+       $services = [
+    'SKU' => Sku::class,
+    'Belum Menikah' => BelumMenikah::class,
+    'Domisili' => Domisili::class,
+    'Harga Tanah' => HargaTanah::class,
+    'Kehilangan' => Kehilangan::class,
+    'Kelahiran' => Kelahiran::class,
+    'Pengantar SKCK' => PengantarSkck::class,
+    'SKTM' => Sktm::class,
+    'Kematian' => Kematian::class,
+    'Lainnya' => Lainnya::class,
+    'Penghasilan' => Penghasilan::class
+];
+
 
         list($labels, $datasets) = $this->getChartData($services, $period);
 
@@ -70,6 +81,10 @@ class DashboardController extends Controller
             'chartLabels' => $labels,
             'chartDatasets' => $datasets,
             'selectedPeriod' => $period,
+            'totalKematian' => $totalKematian,
+'totalLainnya' => $totalLainnya,
+'totalPenghasilan' => $totalPenghasilan,
+
         ]);
     }
 
@@ -208,19 +223,23 @@ class DashboardController extends Controller
         return $data;
     }
 
-    private function getServiceColors()
-    {
-        return [
-            'SKU' => '#3B82F6', // Biru
-            'Belum Menikah' => '#10B981', // Hijau
-            'Domisili' => '#F59E0B', // Kuning
-            'Harga Tanah' => '#6366F1', // Ungu
-            'Kehilangan' => '#EF4444', // Merah
-            'Kelahiran' => '#EC4899', // Pink
-            'Pengantar SKCK' => '#14B8A6', // Teal
-            'SKTM' => '#F97316' // Orange
-        ];
-    }
+   private function getServiceColors()
+{
+    return [
+        'SKU' => '#3B82F6', // Biru
+        'Belum Menikah' => '#10B981', // Hijau
+        'Domisili' => '#F59E0B', // Kuning
+        'Harga Tanah' => '#6366F1', // Ungu
+        'Kehilangan' => '#EF4444', // Merah
+        'Kelahiran' => '#EC4899', // Pink
+        'Pengantar SKCK' => '#14B8A6', // Teal
+        'SKTM' => '#F97316', // Orange
+        'Kematian' => '#8B5CF6', // Violet
+        'Lainnya' => '#0EA5E9', // Sky Blue
+        'Penghasilan' => '#22C55E' // Emerald
+    ];
+}
+
 
     private function hexToRgba($hex, $alpha)
     {
