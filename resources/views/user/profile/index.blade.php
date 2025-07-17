@@ -199,62 +199,65 @@
     </section>
 
     <!-- Geography -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16"data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Geografis kelurahan</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Kondisi geografis dan demografis kelurahan Sukowinangun
-                </p>
-            </div>
+<section class="py-8 sm:py-12 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"> <!-- Diperlebar container -->
+        <!-- Header -->
+        <div class="text-center mb-8 md:mb-12">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">Kelurahan Sukowinangun</h1>
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-700 mb-3">Geografis Kelurahan</h2>
+            <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">Kondisi geografis dan demografis Kelurahan Sukowinangun</p>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="bg-white p-8 rounded-xl shadow-lg"data-aos="fade-right" data-aos-delay="200">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Batas Wilayah</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Utara</span>
-                            <span class="text-gray-600">kelurahan Sejahtera Utara</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Selatan</span>
-                            <span class="text-gray-600">kelurahan Sejahtera Selatan</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Timur</span>
-                            <span class="text-gray-600">Kecamatan Maju</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3">
-                            <span class="font-semibold text-gray-700">Barat</span>
-                            <span class="text-gray-600">Sungai Jernih</span>
-                        </div>
+        <!-- Grid Layout - Diperbesar cardnya -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+            <!-- Wilayah Section -->
+            <div class="bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-200">Batas Wilayah</h3>
+                <div class="space-y-4 md:space-y-5">
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Utara</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">Kelurahan Sejahtera Utara</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Selatan</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">Kelurahan Sejahtera Selatan</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Timur</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">Kecamatan Maju</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Barat</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">Sungai Jernih</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="bg-white p-8 rounded-xl shadow-lg"data-aos="fade-left" data-aos-delay="400">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Data Demografis</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Laki-laki</span>
-                            <span class="text-gray-600">1,289 jiwa</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Perempuan</span>
-                            <span class="text-gray-600">1,258 jiwa</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3 border-b border-gray-200">
-                            <span class="font-semibold text-gray-700">Kepala Keluarga</span>
-                            <span class="text-gray-600">847 KK</span>
-                        </div>
-                        <div class="flex justify-between items-center py-3">
-                            <span class="font-semibold text-gray-700">Kepadatan</span>
-                            <span class="text-gray-600">2.04 jiwa/Ha</span>
-                        </div>
+            <!-- Demografis Section -->
+            <div class="bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-200">Data Demografis</h3>
+                <div class="space-y-4 md:space-y-5">
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Laki-laki</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">1,289 jiwa</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Perempuan</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">1,258 jiwa</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Kepala Keluarga</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">847 KK</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 items-center">
+                        <span class="col-span-1 font-semibold text-gray-700 text-sm md:text-base">Kepadatan</span>
+                        <span class="col-span-2 text-gray-600 text-sm md:text-base">2.04 jiwa/Ha</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <!-- Maps Section -->
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
