@@ -2,6 +2,37 @@
 @section('title', 'Arsip Surat')
 
 @section('content')
+<!-- Notification Popups -->
+    @if (session('success'))
+        <div class="fixed top-4 right-4 z-50 notification-popup">
+            <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in-down">
+                <i class="fas fa-check-circle mr-2"></i>
+                {{ session('success') }}
+                <button onclick="closeNotification(this)" class="ml-4">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="fixed top-4 right-4 z-50 notification-popup">
+            <div class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-down">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span>Terjadi kesalahan!</span>
+                    <button onclick="closeNotification(this)" class="ml-4">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="mt-2 text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
         <!-- Statistic Cards -->
         <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-200">
@@ -54,13 +85,8 @@
     </div>
 
     <!-- Add Letter Buttons -->
-    <div class="mb-4 md:mb-6 flex justify-between">
-        <div class="flex space-x-2">
-            <button class="px-3 py-1 md:px-4 md:py-2 border border-gray-300 rounded-lg text-sm md:text-base font-medium">
-                <i class="fas fa-download mr-1 md:mr-2 text-xs md:text-sm"></i>
-                Export
-            </button>
-        </div>
+    <div class="mb-4 md:mb-6 flex justify-end">
+
         <div class="flex space-x-2">
             <a href="{{ route('arsip-surat.create') }}"
                 class="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base">
@@ -74,55 +100,55 @@
     <!-- Letters Table -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <!-- Table Header -->
-       <div class="p-4 md:p-6 border-b border-gray-200">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
-        <h2 class="text-base md:text-lg font-semibold text-gray-800">Daftar Surat</h2>
-        <form method="GET" action="{{ route('arsip-surat.index') }}"
-            class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-4">
-            <!-- Search Input -->
-            <div class="relative">
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari surat..."
-                    class="w-full pl-8 pr-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
-                <i class="fas fa-search absolute left-2 top-2 md:top-3 text-gray-400 text-sm"></i>
+        <div class="p-4 md:p-6 border-b border-gray-200">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
+                <h2 class="text-base md:text-lg font-semibold text-gray-800">Daftar Surat</h2>
+                <form method="GET" action="{{ route('arsip-surat.index') }}"
+                    class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-4">
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari surat..."
+                            class="w-full pl-8 pr-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                        <i class="fas fa-search absolute left-2 top-2 md:top-3 text-gray-400 text-sm"></i>
+                    </div>
+
+                    <!-- Jenis Surat -->
+                    <select name="jenis"
+                        class="px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                        <option value="">Semua Jenis</option>
+                        <option value="masuk" {{ request('jenis') == 'masuk' ? 'selected' : '' }}>Surat Masuk</option>
+                        <option value="keluar" {{ request('jenis') == 'keluar' ? 'selected' : '' }}>Surat Keluar</option>
+                    </select>
+
+                    <!-- Tanggal Mulai -->
+                    <div class="relative">
+                        <input type="date" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}"
+                            class="w-full px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    </div>
+
+                    <!-- Tanggal Selesai -->
+                    <div class="relative">
+                        <input type="date" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}"
+                            class="w-full px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                    </div>
+
+                    <!-- Button Group -->
+                    <div class="flex space-x-2">
+                        <!-- Submit Button -->
+                        <button type="submit"
+                            class="px-4 py-1 md:py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
+                            Filter
+                        </button>
+
+                        <!-- Clear Filter Button -->
+                        <a href="{{ route('arsip-surat.index') }}"
+                            class="px-4 py-1 md:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center">
+                            <i class="fas fa-times mr-1"></i> Clear
+                        </a>
+                    </div>
+                </form>
             </div>
-
-            <!-- Jenis Surat -->
-            <select name="jenis"
-                class="px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
-                <option value="">Semua Jenis</option>
-                <option value="masuk" {{ request('jenis') == 'masuk' ? 'selected' : '' }}>Surat Masuk</option>
-                <option value="keluar" {{ request('jenis') == 'keluar' ? 'selected' : '' }}>Surat Keluar</option>
-            </select>
-
-            <!-- Tanggal Mulai -->
-            <div class="relative">
-                <input type="date" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}"
-                    class="w-full px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
-            </div>
-
-            <!-- Tanggal Selesai -->
-            <div class="relative">
-                <input type="date" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}"
-                    class="w-full px-3 py-1 md:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
-            </div>
-
-            <!-- Button Group -->
-            <div class="flex space-x-2">
-                <!-- Submit Button -->
-                <button type="submit"
-                    class="px-4 py-1 md:py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
-                    Filter
-                </button>
-
-                <!-- Clear Filter Button -->
-                <a href="{{ route('arsip-surat.index') }}"
-                    class="px-4 py-1 md:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm flex items-center">
-                    <i class="fas fa-times mr-1"></i> Clear
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
         <!-- Table Content -->
         <div class="overflow-x-auto">
@@ -210,9 +236,6 @@
                                         class="text-yellow-600 hover:text-yellow-800" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="" class="text-green-600 hover:text-green-800" title="Download">
-                                        <i class="fas fa-download"></i>
-                                    </a>
                                     <form action="{{ route('arsip-surat.destroy', $arsip->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
@@ -282,4 +305,30 @@
             </div>
         </div>
     </div>
+    <script>
+          // Fungsi untuk menutup notifikasi
+        function closeNotification(button) {
+            const notification = button.closest('.notification-popup');
+            if (notification) {
+                notification.remove();
+            }
+        }
+
+        // Set timeout untuk menghilangkan notifikasi setelah 3 detik
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifications = document.querySelectorAll('.notification-popup');
+
+            notifications.forEach(notification => {
+                setTimeout(() => {
+                    notification.style.transition = 'opacity 0.5s ease-out';
+                    notification.style.opacity = '0';
+
+                    // Hapus elemen setelah animasi selesai
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                }, 2000);
+            });
+        });
+    </script>
 @endsection

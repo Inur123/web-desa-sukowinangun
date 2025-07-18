@@ -35,7 +35,6 @@
                     <i class="fas fa-archive mr-3"></i>
                     <span>Arsip Surat</span>
                 </a>
-
             </li>
             <!-- Menu Layanan dengan Dropdown -->
             @php
@@ -145,6 +144,14 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('setting.index') }}"
+                    class="flex items-center px-4 py-3 rounded-lg font-medium
+        {{ request()->routeIs('setting.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                    <i class="fas fa-cog mr-3"></i>
+                    <span>Setting</span>
+                </a>
             </li>
 
         </ul>

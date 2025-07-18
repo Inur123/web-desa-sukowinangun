@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Layanan;
 
 
+use Carbon\Carbon;
 use App\Models\Sktm;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class SktmController extends Controller
 {
@@ -90,7 +91,7 @@ class SktmController extends Controller
             $this->sendWhatsAppNotification($validated['no_hp'], $userMessage);
 
             // Kirim notifikasi ke admin
-            $adminNumber = '6285850512135';
+            $adminNumber = Setting::getValue('admin_whatsapp_number', '6285850512135');
             $adminMessage = "Ada pengajuan SKTM baru dari:\n\nNama: {$validated['nama']}\nNIK: {$validated['nik']}\nNo. HP: {$validated['no_hp']}\nNama Anak: {$validated['nama_anak']}\n\nSilakan periksa sistem untuk detail lebih lanjut.";
 
             $this->sendWhatsAppNotification($adminNumber, $adminMessage);
@@ -105,7 +106,7 @@ class SktmController extends Controller
     }
     private function sendWhatsAppNotification($phoneNumber, $message)
     {
-        $apiToken = env('FONNTE_API_TOKEN');
+        $apiToken = Setting::getValue('fonnte_api_token', env('FONNTE_API_TOKEN'));
         $url = 'https://api.fonnte.com/send';
 
         $data = [

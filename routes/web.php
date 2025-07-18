@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Layanan\SkuController;
 
 use App\Http\Controllers\Layanan\SktmController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Layanan\LainnyaController;
 use App\Http\Controllers\Admin\ArsipSuratController;
@@ -110,9 +111,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     //lainnya
     Route::post('/layanan/lainnya/{id}/approve', [LainnyaController::class, 'approve'])->name('lainnya.approve');
     Route::post('/layanan/lainnya/{id}/reject', [LainnyaController::class, 'reject'])->name('lainnya.reject');
-   Route::get('/layanan/lainnya/{id}/file/{fileId}', [LainnyaController::class, 'showFile'])->name('lainnya.showFile');
+    Route::get('/layanan/lainnya/{id}/file/{fileId}', [LainnyaController::class, 'showFile'])->name('lainnya.showFile');
 
-
+    // Setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::put('/setting', [SettingController::class, 'update'])->name('setting.update');
 });
 
 

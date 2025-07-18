@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Layanan;
 
 use Carbon\Carbon;
+use App\Models\Setting;
 use App\Models\Kematian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -93,7 +94,7 @@ class KematianController extends Controller
             $this->sendWhatsAppNotification($validated['no_hp'], $userMessage);
 
             // Kirim notifikasi ke admin
-            $adminNumber = '6285850512135';
+            $adminNumber = Setting::getValue('admin_whatsapp_number', '6285850512135');
             $adminMessage = "Ada pengajuan Surat Kematian baru dari:\n\nNama: {$validated['nama']}\nNIK: {$validated['nik']}\nNo. HP: {$validated['no_hp']}\nTanggal Meninggal: {$validated['tanggal_meninggal']}\n\nSilakan periksa sistem untuk detail lebih lanjut.";
 
             $this->sendWhatsAppNotification($adminNumber, $adminMessage);
@@ -109,7 +110,7 @@ class KematianController extends Controller
 
     private function sendWhatsAppNotification($phoneNumber, $message)
     {
-        $apiToken = env('FONNTE_API_TOKEN');
+        $apiToken = Setting::getValue('fonnte_api_token', env('FONNTE_API_TOKEN'));
         $url = 'https://api.fonnte.com/send';
 
         $data = [

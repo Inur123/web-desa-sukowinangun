@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Layanan;
 
+use Carbon\Carbon;
+use App\Models\Setting;
 use App\Models\BelumMenikah;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class BelumMenikahController extends Controller
 {
@@ -91,7 +92,7 @@ class BelumMenikahController extends Controller
             $this->sendWhatsAppNotification($validated['no_hp'], $userMessage);
 
             // Send notification to admin
-            $adminNumber = '6285850512135';
+            $adminNumber = Setting::getValue('admin_whatsapp_number', '6285850512135');
             $adminMessage = "Ada pengajuan Surat Belum Menikah baru dari:\n\nNama: {$validated['nama']}\nNIK: {$validated['nik']}\nNo. HP: {$validated['no_hp']}\n\nSilakan periksa sistem untuk detail lebih lanjut.";
 
             $this->sendWhatsAppNotification($adminNumber, $adminMessage);
@@ -107,7 +108,9 @@ class BelumMenikahController extends Controller
 
     private function sendWhatsAppNotification($phoneNumber, $message)
     {
-        $apiToken = env('FONNTE_API_TOKEN');
+        // Ambil token API dari database setting, fallback ke .env jika tidak ada
+        $apiToken = Setting::getValue('fonnte_api_token', env('FONNTE_API_TOKEN'));
+
         $url = 'https://api.fonnte.com/send';
 
         $data = [
@@ -129,6 +132,8 @@ class BelumMenikahController extends Controller
 
         $response = curl_exec($ch);
         curl_close($ch);
+
+        return $response;
     }
 
     public function show($id)

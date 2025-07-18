@@ -2,6 +2,37 @@
 @section('title', 'Berita')
 
 @section('content')
+ <!-- Notification Popups -->
+    @if (session('success'))
+        <div class="fixed top-4 right-4 z-50 notification-popup">
+            <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in-down">
+                <i class="fas fa-check-circle mr-2"></i>
+                {{ session('success') }}
+                <button onclick="closeNotification(this)" class="ml-4">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="fixed top-4 right-4 z-50 notification-popup">
+            <div class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-down">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span>Terjadi kesalahan!</span>
+                    <button onclick="closeNotification(this)" class="ml-4">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="mt-2 text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
         <!-- Statistic Cards -->
         <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-gray-200">
@@ -263,4 +294,30 @@
             </div>
         </div>
     </div>
+    <script>
+          // Fungsi untuk menutup notifikasi
+        function closeNotification(button) {
+            const notification = button.closest('.notification-popup');
+            if (notification) {
+                notification.remove();
+            }
+        }
+
+        // Set timeout untuk menghilangkan notifikasi setelah 3 detik
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifications = document.querySelectorAll('.notification-popup');
+
+            notifications.forEach(notification => {
+                setTimeout(() => {
+                    notification.style.transition = 'opacity 0.5s ease-out';
+                    notification.style.opacity = '0';
+
+                    // Hapus elemen setelah animasi selesai
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                }, 2000);
+            });
+        });
+    </script>
 @endsection
