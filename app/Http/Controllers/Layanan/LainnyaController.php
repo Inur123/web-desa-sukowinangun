@@ -62,10 +62,10 @@ class LainnyaController extends Controller
                     $file = $request->file("files.{$index}");
 
                     $request->validate([
-                        "files.{$index}" => 'file|mimes:jpg,jpeg,png,pdf|max:2048'
+                        "files.{$index}" => 'file|mimes:jpg,jpeg,png,pdf|max:5120'
                     ], [
                         "files.{$index}.mimes" => "File {$fileName} harus berupa PDF, JPG, atau PNG",
-                        "files.{$index}.max" => "File {$fileName} tidak boleh lebih dari 2MB",
+                        "files.{$index}.max" => "File {$fileName} tidak boleh lebih dari 5MB",
                     ]);
 
                     $fileData[] = [

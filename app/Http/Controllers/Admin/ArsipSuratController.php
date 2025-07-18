@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArsipSuratController extends Controller
 {
-     public function index(Request $request)
+    public function index(Request $request)
     {
         $query = ArsipSurat::query();
 
@@ -71,10 +71,10 @@ class ArsipSuratController extends Controller
             'pengirim_penerima' => 'nullable|string|max:255',
             'tanggal' => 'nullable|date',
             'jenis' => 'nullable|in:masuk,keluar',
-            'file_surat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_surat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'deskripsi' => 'nullable|string',
         ], [
-            'file_surat.max' => 'Ukuran file maksimal 2MB',
+            'file_surat.max' => 'Ukuran file maksimal 5MB',
             'file_surat.mimes' => 'Format file harus PDF, JPG, atau PNG',
             'jenis.in' => 'Jenis surat harus "masuk" atau "keluar"',
         ]);
@@ -114,10 +114,10 @@ class ArsipSuratController extends Controller
             'pengirim_penerima' => 'nullable|string|max:255',
             'tanggal' => 'nullable|date',
             'jenis' => 'nullable|in:masuk,keluar',
-            'file_surat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_surat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'deskripsi' => 'nullable|string',
         ], [
-            'file_surat.max' => 'Ukuran file maksimal 2MB',
+            'file_surat.max' => 'Ukuran file maksimal 5MB',
             'file_surat.mimes' => 'Format file harus PDF, JPG, atau PNG',
             'jenis.in' => 'Jenis surat harus "masuk" atau "keluar"',
         ]);

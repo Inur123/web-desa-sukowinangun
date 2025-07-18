@@ -169,7 +169,7 @@
                                                 <div id="pengantar_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File Surat Pengantar</p>
-                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 5MB)</p>
                                                 </div>
                                                 <div id="pengantar_file_preview" class="hidden">
                                                     <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
@@ -228,7 +228,7 @@
                                                 <div id="ktp_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File KTP</p>
-                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 5MB)</p>
                                                 </div>
                                                 <div id="ktp_file_preview" class="hidden">
                                                     <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
@@ -284,7 +284,7 @@
                                                 <div id="kk_file_placeholder">
                                                     <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
                                                     <p class="text-gray-600">Upload File KK</p>
-                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 2MB)</p>
+                                                    <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 5MB)</p>
                                                 </div>
                                                 <div id="kk_file_preview" class="hidden">
                                                     <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
@@ -392,8 +392,8 @@
                     const file = e.target.files[0];
 
                     // Check file size (max 2MB)
-                    if (file.size > 2 * 1024 * 1024) {
-                        alert('Ukuran file terlalu besar. Maksimal 2MB.');
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Ukuran file terlalu besar. Maksimal 5MB.');
                         return;
                     }
 

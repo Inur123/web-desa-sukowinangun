@@ -40,20 +40,20 @@ class SktmController extends Controller
                 'status_perkawinan' => 'required|string|in:Belum Kawin,Kawin,Cerai Hidup,Cerai Mati',
                 'nama_anak' => 'required|string|max:255',
                 'keperluan' => 'required|string|max:255',
-                'pengantar_rt_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'pengantar_rt_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
                 'pengantar_rt_camera' => 'nullable|string',
-                'ktp_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'ktp_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
                 'ktp_camera' => 'nullable|string',
-                'kk_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'kk_file' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
                 'kk_camera' => 'nullable|string',
                 'no_hp' => 'required|string|max:25',
             ], [
                 'nik.digits' => 'NIK harus terdiri dari 16 digit angka',
                 'required' => 'Field :attribute wajib diisi',
                 'mimes' => 'File harus berupa PDF, JPG, atau PNG',
-                'pengantar_rt_file.max' => 'File Surat Pengantar RT tidak boleh lebih dari 2MB',
-                'ktp_file.max' => 'File KTP tidak boleh lebih dari 2MB',
-                'kk_file.max' => 'File KK tidak boleh lebih dari 2MB',
+                'pengantar_rt_file.max' => 'File Surat Pengantar RT tidak boleh lebih dari 5MB',
+                'ktp_file.max' => 'File KTP tidak boleh lebih dari 5MB',
+                'kk_file.max' => 'File KK tidak boleh lebih dari 5MB',
             ]);
 
             // Validasi minimal salah satu file/kamera harus ada

@@ -12,22 +12,22 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
     public function index()
-{
-    $totalBerita = Post::count();
+    {
+        $totalBerita = Post::count();
 
-    $bulanIni = Post::whereMonth('created_at', now()->month)
-        ->whereYear('created_at', now()->year)
-        ->count();
+        $bulanIni = Post::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
 
-    $activePosts = Post::where('status', 'active')->count();
+        $activePosts = Post::where('status', 'active')->count();
 
-    // Tambahkan total views
-    $totalViews = Post::sum('views');
+        // Tambahkan total views
+        $totalViews = Post::sum('views');
 
-    $posts = Post::with('tags')->latest()->paginate(10);
+        $posts = Post::with('tags')->latest()->paginate(10);
 
-    return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts', 'totalViews'));
-}
+        return view('admin.posts.index', compact('posts', 'totalBerita', 'bulanIni', 'activePosts', 'totalViews'));
+    }
 
 
     public function create()
@@ -45,54 +45,54 @@ class PostController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'title'         => 'required|string|max:255',
-        'content'       => 'nullable|string',
+    {
+        $request->validate([
+            'title'         => 'required|string|max:255',
+            'content'       => 'nullable|string',
 
-        // Validasi summary max 100 huruf (tanpa spasi/simbol)
-        'summary'       => ['nullable', 'string', function ($attribute, $value, $fail) {
-            $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
-            if ($letterCount > 100) {
-                $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
-            }
-        }],
+            // Validasi summary max 100 huruf (tanpa spasi/simbol)
+            'summary'       => ['nullable', 'string', function ($attribute, $value, $fail) {
+                $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
+                if ($letterCount > 100) {
+                    $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
+                }
+            }],
 
-        'status'        => 'required|in:active,nonactive',
-        'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
-        'published_at'  => 'nullable|date',
-        'image'         => 'nullable|image|max:2048',
-        'tags'          => 'nullable|string',
-        'additional_images.*' => 'nullable|image|max:2048', // validasi gambar tambahan
-    ]);
+            'status'        => 'required|in:active,nonactive',
+            'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
+            'published_at'  => 'nullable|date',
+            'image'         => 'nullable|image|max:10240',
+            'tags'          => 'nullable|string',
+            'additional_images.*' => 'nullable|image|max:10240', // validasi gambar tambahan
+        ]);
 
-    $imagePath = null;
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('posts', 'public');
-    }
-
-    $post = Post::create([
-        'title'         => $request->title,
-        'content'       => $request->content,
-        'summary'       => $request->summary,
-        'status'        => $request->status,
-        'category'      => $request->category,
-        'published_at'  => $request->published_at,
-        'image'         => $imagePath,
-    ]);
-
-    // Simpan gambar tambahan (jika ada)
-    if ($request->hasFile('additional_images')) {
-        foreach ($request->file('additional_images') as $image) {
-            $path = $image->store('post-images', 'public');
-            $post->additionalImages()->create(['image' => $path]);
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
         }
+
+        $post = Post::create([
+            'title'         => $request->title,
+            'content'       => $request->content,
+            'summary'       => $request->summary,
+            'status'        => $request->status,
+            'category'      => $request->category,
+            'published_at'  => $request->published_at,
+            'image'         => $imagePath,
+        ]);
+
+        // Simpan gambar tambahan (jika ada)
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $image) {
+                $path = $image->store('post-images', 'public');
+                $post->additionalImages()->create(['image' => $path]);
+            }
+        }
+
+        $this->syncTags($post, $request->tags);
+
+        return redirect()->route('posts.index')->with('success', 'Post berhasil ditambahkan!');
     }
-
-    $this->syncTags($post, $request->tags);
-
-    return redirect()->route('posts.index')->with('success', 'Post berhasil ditambahkan!');
-}
 
 
     public function edit(Post $post)
@@ -114,55 +114,55 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post)
-{
-    $request->validate([
-        'title'         => 'required|string|max:255',
-        'content'       => 'nullable|string',
-        'summary' => ['nullable', 'string', function ($attribute, $value, $fail) {
-            $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
-            if ($letterCount > 100) {
-                $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
+    {
+        $request->validate([
+            'title'         => 'required|string|max:255',
+            'content'       => 'nullable|string',
+            'summary' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                $letterCount = strlen(preg_replace('/[^a-zA-Z]/u', '', $value));
+                if ($letterCount > 100) {
+                    $fail('Ringkasan maksimal 100 huruf (tidak termasuk spasi dan simbol).');
+                }
+            }],
+            'status'        => 'required|in:active,nonactive',
+            'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
+            'published_at'  => 'nullable|date',
+            'image'         => 'nullable|image|max:10240',
+            'tags'          => 'nullable|string',
+            'additional_images.*' => 'nullable|image|max:10240', // validasi gambar tambahan
+        ]);
+
+        // Ganti gambar utama jika diupload baru
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
             }
-        }],
-        'status'        => 'required|in:active,nonactive',
-        'category'      => 'required|in:Pembangunan,Budaya,Ekonomi,Kesehatan,Lingkungan,Pendidikan,Pertanian',
-        'published_at'  => 'nullable|date',
-        'image'         => 'nullable|image|max:2048',
-        'tags'          => 'nullable|string',
-        'additional_images.*' => 'nullable|image|max:2048', // validasi gambar tambahan
-    ]);
-
-    // Ganti gambar utama jika diupload baru
-    if ($request->hasFile('image')) {
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image);
+            $post->image = $request->file('image')->store('posts', 'public');
         }
-        $post->image = $request->file('image')->store('posts', 'public');
-    }
 
-    // Update data utama
-    $post->update([
-        'title'         => $request->title,
-        'content'       => $request->content,
-        'summary'       => $request->summary,
-        'status'        => $request->status,
-        'category'      => $request->category,
-        'published_at'  => $request->published_at,
-        'image'         => $post->image, // pastikan gambar utama tidak hilang saat update
-    ]);
+        // Update data utama
+        $post->update([
+            'title'         => $request->title,
+            'content'       => $request->content,
+            'summary'       => $request->summary,
+            'status'        => $request->status,
+            'category'      => $request->category,
+            'published_at'  => $request->published_at,
+            'image'         => $post->image, // pastikan gambar utama tidak hilang saat update
+        ]);
 
-    // Simpan gambar tambahan (jika ada)
-    if ($request->hasFile('additional_images')) {
-        foreach ($request->file('additional_images') as $image) {
-            $path = $image->store('post-images', 'public');
-            $post->additionalImages()->create(['image' => $path]);
+        // Simpan gambar tambahan (jika ada)
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $image) {
+                $path = $image->store('post-images', 'public');
+                $post->additionalImages()->create(['image' => $path]);
+            }
         }
+
+        $this->syncTags($post, $request->tags);
+
+        return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui!');
     }
-
-    $this->syncTags($post, $request->tags);
-
-    return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui!');
-}
 
     public function show($slug)
     {
