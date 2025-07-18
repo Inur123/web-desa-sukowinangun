@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\ArsipSurat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class ArsipSuratController extends Controller
 {
-    public function index(Request $request)
+     public function index(Request $request)
     {
         $query = ArsipSurat::query();
 

@@ -1,29 +1,33 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Kehilangan;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
+
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
 
-use App\Http\Controllers\ArsipSuratController;
+
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Layanan\SkuController;
-use App\Http\Controllers\Layanan\BelumMenikahController;
-use App\Http\Controllers\Layanan\PengantarSkckController;
+
+use App\Http\Controllers\Layanan\SktmController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Layanan\LainnyaController;
+use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Layanan\DomisiliController;
+use App\Http\Controllers\Layanan\KematianController;
+use App\Http\Controllers\Layanan\KelahiranController;
 use App\Http\Controllers\Layanan\HargaTanahController;
 use App\Http\Controllers\Layanan\KehilanganController;
-use App\Http\Controllers\Layanan\KelahiranController;
-use App\Http\Controllers\Layanan\KematianController;
 use App\Http\Controllers\Layanan\PenghasilanController;
-use App\Http\Controllers\Layanan\SktmController;
-use App\Http\Controllers\Layanan\LainnyaController;
-use App\Models\Kehilangan;
+use App\Http\Controllers\Layanan\BelumMenikahController;
+use App\Http\Controllers\Layanan\PengantarSkckController;
 
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 // Route::post('/register', [AuthController::class, 'register']);

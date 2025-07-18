@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\Sku;
@@ -14,13 +14,14 @@ use App\Models\HargaTanah;
 use App\Models\Kehilangan;
 use App\Models\Penghasilan;
 use App\Models\BelumMenikah;
-use Illuminate\Http\Request;
 use App\Models\PengantarSkck;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+     public function index(Request $request)
     {
         $period = $request->input('period', 'today'); // Default to today
 
