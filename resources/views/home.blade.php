@@ -171,20 +171,21 @@
                         cepat.
                     </p>
                 </a>
-                <a href="{{ route('layanan.index') }}"
+                <a href="{{ route('sktm.create') }}"
                     class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100"
                     data-aos="zoom-in" data-aos-delay="30">
                     <div class="bg-secondary/10 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                        <i class="fas fa-id-card text-secondary text-lg sm:text-2xl"></i>
+                          <i class="fas fa-file-alt text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                        Administrasi KTP
+                        Surat Keterangan Tidak Mampu (SKTM)
                     </h3>
                     <p class="text-gray-600 text-sm sm:text-base">
-                        Layanan pembuatan dan perpanjangan KTP serta kartu keluarga.
+                       Pengajuan surat keterangan tidak mampu untuk berbagai keperluan bantuan sosial
+                        dan pendidikan.
                     </p>
                 </a>
-                <a href="{{ route('layanan.index') }}"
+                <a href="{{ route('sku.create') }}"
                     class="bg-white p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 border border-gray-100" data-aos="zoom-in"
                     data-aos-delay="30">
                     <div class="bg-accent/10 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-4 sm:mb-6">

@@ -30,6 +30,8 @@
         <meta name="twitter:title" content="@yield('title') - Kelurahan Sukowinangun" />
         <meta name="twitter:description" content="Website resmi Kelurahan Sukowinangun." />
         <meta name="twitter:image" content="{{ asset('images/logo-desa.png') }}" />
+        <meta name="twitter:site" content="@KelurahanSukowinangun" />
+
     @endif
 
     <link rel="icon" href="{{ asset('images/logo-desa.png') }}" type="image/png" />
@@ -70,6 +72,7 @@
         class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg hover:bg-secondary transition-all duration-300 hidden items-center justify-center">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
+
     @include('user.layouts.scripts')
 </body>
 
