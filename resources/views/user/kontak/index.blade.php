@@ -22,9 +22,9 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Alamat</h3>
                     <p class="text-gray-600">
-                        Jl. Raya Kelurahan No. 123<br>
+                        Jl. Kunti No. 3<br>
                         Kelurahan Sukowinangun<br>
-                        Kecamatan Sejahtera, 12345
+                        Kecamatan Magetan, 63319
                     </p>
                 </div>
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
@@ -156,9 +156,9 @@
                             <div>
                                 <h4 class="font-semibold text-gray-800 text-sm sm:text-base">Alamat Kantor</h4>
                                 <p class="text-gray-600 text-sm sm:text-base">
-                                    Jl. Raya Sukowinangun No. 123<br>
+                                    Jl. Kunti No. 3<br>
                                     Kec. Magetan, Kabupaten Magetan<br>
-                                    Jawa Timur 63314
+                                    Jawa Timur 63319
                                 </p>
                             </div>
                         </div>

@@ -69,7 +69,7 @@
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-envelope mr-3 text-primary"></i>
-                        <span class="text-gray-300 text-sm">info@desamajusejahtera.id</span>
+                        <span class="text-gray-300 text-sm">info@sukowinangun.id</span>
                     </div>
                 </div>
             </div>

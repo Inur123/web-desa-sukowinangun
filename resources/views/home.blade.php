@@ -356,7 +356,6 @@
             let cursor;
             cursor = document.createElement("span");
             cursor.classList.add("typing-cursor");
-            cursor.textContent = "|";
             target.appendChild(cursor);
             function type() {
                 target.childNodes[0].nodeValue = text.substring(0, index);
