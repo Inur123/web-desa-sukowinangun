@@ -11,16 +11,16 @@
                     terbaik.
                 </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
                         <i class="fab fa-facebook text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
                         <i class="fab fa-twitter text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                    <a href="/" class="text-gray-300 hover:text-white transition-colors">
                         <i class="fab fa-youtube text-xl"></i>
                     </a>
                 </div>
@@ -41,14 +41,19 @@
             <div>
                 <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                 <ul class="space-y-2">
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Surat Keterangan</a>
+                    <li><a href="{{ route('sktm.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Surat Keterangan Tidak Mampu</a>
                     </li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Administrasi KTP</a>
-                    </li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Izin Usaha</a></li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Bantuan Sosial</a>
-                    </li>
-                    <li><a href="" class="text-gray-300 hover:text-white transition-colors">Pendidikan</a></li>
+                    <li><a href="{{ route('sku.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Surat Izin Usaha</a></li>
+                    <li><a href="{{ route('skck.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Surat Keterangan Catatan
+                            Kepolisian</a></li>
+                    <li><a href="{{ route('kematian.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Surat Keterangan Kematian</a></li>
+                    <li><a href="{{ route('domisili.create') }}"
+                            class="text-gray-300 hover:text-white transition-colors">Surat Keterangan Domisili</a></li>
+
                 </ul>
             </div>
             <div>

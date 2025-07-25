@@ -3,7 +3,6 @@
 @section('title', 'Kontak - Sukowinangun')
 
 @section('content')
-
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
@@ -14,7 +13,6 @@
             </div>
         </div>
     </section>
-
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -29,7 +27,6 @@
                         Kecamatan Sejahtera, 12345
                     </p>
                 </div>
-
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-phone text-secondary text-2xl"></i>
@@ -41,7 +38,6 @@
                         <span class="text-sm text-gray-500">Senin - Jumat: 08:00-16:00</span>
                     </p>
                 </div>
-
                 <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-envelope text-accent text-2xl"></i>
@@ -53,7 +49,6 @@
                         <span class="text-sm text-gray-500">Respon dalam 24 jam</span>
                     </p>
                 </div>
-
                 <div class="text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-clock text-green-600 text-2xl"></i>
@@ -139,7 +134,7 @@
                     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Informasi Kontak</h3>
 
                     <!-- Map Section -->
-                    <div class="mb-6 sm:mb-8 rounded-lg overflow-hidden shadow-sm">
+                    <div class="mb-6 sm:mb-8 rounded-lg overflow-hidden shadow-sm" alt="Google Maps kelurahan">
                         <iframe class="w-full h-48 sm:h-56 md:h-64 border-0"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15817.524687629319!2d111.32475269786742!3d-7.642094877980936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e799234fbd3c4f5%3A0x77c7c6105bafc5af!2sKantor%20Kelurahan%20Sukowinangun!5e0!3m2!1sid!2sid!4v1752052198496!5m2!1sid!2sid"
                             allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
@@ -301,7 +296,6 @@
             </div>
         </div>
     </section>
-
     <section class="py-20 bg-primary" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white">
@@ -325,5 +319,4 @@
             </div>
         </div>
     </section>
-
 @endsection

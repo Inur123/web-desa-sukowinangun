@@ -12,7 +12,6 @@
         .typing-cursor.blinking {
             animation: blink 1s step-start infinite;
         }
-
         @keyframes blink {
 
             0%,
@@ -24,28 +23,22 @@
                 opacity: 0;
             }
         }
-
         #typing-text {
             display: inline-block;
             min-width: 20ch;
-            /* Responsive min-width for mobile */
             white-space: nowrap;
         }
-
         @media (min-width: 640px) {
             #typing-text {
                 min-width: 28ch;
             }
         }
-
-        /* Text truncation utility */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         .line-clamp-3 {
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -117,7 +110,7 @@
                         class="bg-secondary/10 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 animate-pulse">
                         <i class="fas fa-users text-secondary text-lg sm:text-2xl"></i>
                     </div>
-                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 counter population-counter" data-target="12">
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 counter population-counter" data-target="4">
                         0
                     </h3>
                     <p class="text-gray-600 text-xs sm:text-sm lg:text-base">RW</p>
@@ -127,7 +120,7 @@
                         class="bg-accent/10 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 animate-pulse">
                         <i class="fas fa-home text-accent text-lg sm:text-2xl"></i>
                     </div>
-                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 counter population-counter" data-target="3">
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 counter population-counter" data-target="25">
                         0
                     </h3>
                     <p class="text-gray-600 text-xs sm:text-sm lg:text-base">RT</p>
@@ -210,7 +203,7 @@
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-8 sm:mb-10" data-aos="fade-up">Partner</h2>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 items-center justify-center">
                 <div class="flex flex-col items-center" data-aos="fade-right" data-aos-delay="100">
-                    <img src="{{ asset('images/logo-desa.png') }}" alt="Karang Taruna"
+                    <img src="{{ asset('images/logo-karangtaruna.png') }}" alt="Karang Taruna"
                         class="w-16 h-16 sm:w-20 sm:h-20 object-contain mb-2 sm:mb-3">
                     <p class="text-gray-700 font-semibold text-sm sm:text-base">Karang Taruna</p>
                 </div>
@@ -265,7 +258,6 @@
                                 <p class="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base line-clamp-3">
                                     {{ strip_tags($post->summary) }}....
                                 </p>
-
                                 <span
                                     class="inline-block text-primary font-semibold group-hover:text-secondary transition-colors text-sm sm:text-base">
                                     Baca Selengkapnya <i class="fas fa-arrow-right ml-1 sm:ml-2"></i>
@@ -279,7 +271,6 @@
                     </div>
                 @endforelse
             </div>
-
         </div>
     </section>
     <script>

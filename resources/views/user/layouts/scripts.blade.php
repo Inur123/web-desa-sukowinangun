@@ -1,10 +1,8 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // Hamburger menu toggle
         const menuButton = document.getElementById("menu-button");
         const menu = document.getElementById("nav-menu");
         const menuIcon = document.getElementById("menu-icon");
-
         if (menuButton && menu && menuIcon) {
             menuButton.addEventListener("click", () => {
                 menu.classList.toggle("hidden");
@@ -13,8 +11,6 @@
                 menuIcon.classList.toggle("fa-times", isMenuVisible);
             });
         }
-
-        // Scroll nav effect
         const nav = document.querySelector("nav");
         if (nav) {
             window.addEventListener("scroll", () => {
@@ -25,21 +21,16 @@
                 }
             });
         }
-
-        // Population counter animation
         const populationCounters = document.querySelectorAll(".population-counter");
-
         if (populationCounters.length > 0) {
             function animateCounter(counter) {
                 const target = +counter.getAttribute("data-target");
                 const duration = 2000;
                 const startTime = performance.now();
                 const startValue = 0;
-
                 function numberWithCommas(x) {
                     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
-
                 function updateCounter(currentTime) {
                     const elapsedTime = currentTime - startTime;
                     const progress = Math.min(elapsedTime / duration, 1);
@@ -53,13 +44,9 @@
                         counter.innerText = numberWithCommas(target);
                     }
                 }
-
                 requestAnimationFrame(updateCounter);
             }
-
-            // Trigger animation when section is visible
             const heroSection = document.querySelector(".bg-gradient-to-r.from-primary.to-secondary");
-
             if (heroSection) {
                 const observer = new IntersectionObserver(
                     (entries) => {
@@ -77,7 +64,6 @@
                         rootMargin: "0px 0px -100px 0px",
                     }
                 );
-
                 observer.observe(heroSection);
             } else {
                 populationCounters.forEach((counter) => {
@@ -85,8 +71,6 @@
                 });
             }
         }
-
-        // Back to Top
         const backToTopButton = document.getElementById("back-to-top");
         if (backToTopButton) {
             window.addEventListener("scroll", () => {
@@ -109,7 +93,6 @@
         }
     });
 </script>
-
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 <script defer>
     document.addEventListener("DOMContentLoaded", function () {
@@ -117,4 +100,14 @@
             once: true,
         });
     });
+</script>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GovernmentOrganization",
+        "name": "Kelurahan Sukowinangun",
+        "url": "{{ url('/') }}",
+        "logo": "{{ asset('images/logo-desa.png') }}",
+        "description": "Website resmi Kelurahan Sukowinangun"
+    }
 </script>

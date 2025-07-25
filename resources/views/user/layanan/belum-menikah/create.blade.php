@@ -1,8 +1,6 @@
 @extends('user.layouts.app')
 @section('title', 'Surat Keterangan Belum Menikah - Sukowinangun')
-
 @section('content')
-    <!-- Notification Popups -->
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -17,7 +15,6 @@
             });
         </script>
     @endif
-
     @if ($errors->any())
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -25,7 +22,6 @@
                 @foreach ($errors->all() as $error)
                     errorMessages += '{{ $error }}<br>';
                 @endforeach
-
                 Swal.fire({
                     icon: 'error',
                     title: 'Terjadi Kesalahan!',
@@ -52,7 +48,6 @@
             </div>
         </div>
     </section>
-
     <section class="py-12">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center">
@@ -61,16 +56,12 @@
                         <form action="{{ route('belum-menikah.store') }}" method="POST" enctype="multipart/form-data"
                             class="space-y-6">
                             @csrf
-
-                            <!-- Data Pribadi -->
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-user mr-2 text-secondary"></i>
                                     Data Pribadi
                                 </h3>
-
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                    <!-- Column 1 -->
                                     <div class="space-y-4">
                                         <div>
                                             <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama
@@ -79,7 +70,6 @@
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Nama sesuai KTP">
                                         </div>
-
                                         <div>
                                             <label for="ttl"
                                                 class="block text-sm font-medium text-gray-700 mb-2">Tanggal
@@ -96,10 +86,7 @@
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent"
                                                 placeholder="Contoh: 081234567890">
                                         </div>
-
                                     </div>
-
-                                    <!-- Column 2 -->
                                     <div class="space-y-4">
                                         <div>
                                             <label for="tempat_lahir"
@@ -119,7 +106,6 @@
                                             <div id="nikError" class="text-red-500 text-sm mt-1 hidden">NIK harus 16 digit
                                             </div>
                                         </div>
-
                                         <div>
                                             <label for="status_perkawinan"
                                                 class="block text-sm font-medium text-gray-700 mb-2">Status
@@ -131,8 +117,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <!-- Full width fields -->
                                     <div class="md:col-span-2">
                                         <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat
                                             Lengkap</label>
@@ -149,21 +133,16 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Upload Dokumen -->
                             <div class="border-t pt-6">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                                     <i class="fas fa-upload mr-2 text-secondary"></i>
                                     Upload Dokumen
                                 </h3>
-
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                    <!-- Surat Pengantar RT/RW -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Surat Pengantar
                                             RT/RW</label>
                                         <div class="space-y-4">
-                                            <!-- File Upload Option -->
                                             <div id="pengantar_file_container"
                                                 class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="pengantar_file_placeholder">
@@ -187,15 +166,11 @@
                                                     accept=".pdf,.jpg,.jpeg,.png" class="hidden"
                                                     onchange="previewFile('pengantar_rt_file', 'pengantar_file')">
                                             </div>
-
-                                            <!-- Or Divider -->
                                             <div class="flex items-center">
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                                 <span class="mx-2 text-gray-500">atau</span>
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                             </div>
-
-                                            <!-- Camera Option -->
                                             <div>
                                                 <button type="button"
                                                     onclick="openCamera('pengantar_rt_camera', 'Surat Pengantar RT')"
@@ -217,12 +192,9 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Fotokopi KTP -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Foto KTP</label>
                                         <div class="space-y-4">
-                                            <!-- File Upload Option -->
                                             <div id="ktp_file_container"
                                                 class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="ktp_file_placeholder">
@@ -246,15 +218,11 @@
                                                     accept=".pdf,.jpg,.jpeg,.png" class="hidden"
                                                     onchange="previewFile('ktp_file', 'ktp_file')">
                                             </div>
-
-                                            <!-- Or Divider -->
                                             <div class="flex items-center">
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                                 <span class="mx-2 text-gray-500">atau</span>
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                             </div>
-
-                                            <!-- Camera Option -->
                                             <div>
                                                 <button type="button" onclick="openCamera('ktp_camera', 'KTP')"
                                                     class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
@@ -273,12 +241,9 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Fotokopi KK -->
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Foto KK</label>
                                         <div class="space-y-4">
-                                            <!-- File Upload Option -->
                                             <div id="kk_file_container"
                                                 class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-secondary transition-colors cursor-pointer">
                                                 <div id="kk_file_placeholder">
@@ -302,15 +267,11 @@
                                                     accept=".pdf,.jpg,.jpeg,.png" class="hidden"
                                                     onchange="previewFile('kk_file', 'kk_file')">
                                             </div>
-
-                                            <!-- Or Divider -->
                                             <div class="flex items-center">
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                                 <span class="mx-2 text-gray-500">atau</span>
                                                 <div class="flex-grow border-t border-gray-300"></div>
                                             </div>
-
-                                            <!-- Camera Option -->
                                             <div>
                                                 <button type="button" onclick="openCamera('kk_camera', 'KK')"
                                                     class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg flex items-center justify-center">
@@ -331,8 +292,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Submit Button -->
                             <div class="border-t pt-6">
                                 <button type="submit"
                                     class="w-full bg-secondary hover:bg-primary text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors flex items-center justify-center">
@@ -346,13 +305,10 @@
             </div>
         </div>
     </section>
-
     <script>
-        // Validasi NIK harus 16 digit
         document.getElementById('nik').addEventListener('input', function() {
             const nikInput = this;
             const nikError = document.getElementById('nikError');
-
             if (nikInput.value.length !== 16 && nikInput.value.length > 0) {
                 nikError.classList.remove('hidden');
                 nikInput.classList.add('border-red-500');
@@ -361,58 +317,38 @@
                 nikInput.classList.remove('border-red-500');
             }
         });
-
-        // Camera functionality with iOS support
         function openCamera(inputId, label) {
-            // Check if iOS device
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
             if (isIOS) {
-                // iOS specific implementation
                 handleIOSCamera(inputId, label);
                 return;
             }
-
-            // Standard implementation for other devices
             handleStandardCamera(inputId, label);
         }
-
-        // Handle camera for iOS devices
         function handleIOSCamera(inputId, label) {
-            // Create a file input element
             const fileInput = document.createElement('input');
             fileInput.type = 'file';
             fileInput.accept = 'image/*';
-            fileInput.capture = 'environment'; // Use rear camera
+            fileInput.capture = 'environment';
             fileInput.style.display = 'none';
-
             fileInput.onchange = function(e) {
                 if (e.target.files && e.target.files.length > 0) {
                     const file = e.target.files[0];
-
-                    // Check file size (max 2MB)
                     if (file.size > 5 * 1024 * 1024) {
                         alert('Ukuran file terlalu besar. Maksimal 5MB.');
                         return;
                     }
-
-                    // Check file type
                     if (!file.type.match('image.*')) {
                         alert('Hanya file gambar yang diperbolehkan.');
                         return;
                     }
-
                     const reader = new FileReader();
-
                     reader.onload = function(event) {
-                        // Compress image for iOS
                         compressImageForIOS(event.target.result, function(compressedImage) {
                             document.getElementById(inputId).value = compressedImage;
                             document.getElementById(`${inputId}_img`).src = compressedImage;
                             document.getElementById(`${inputId}_preview`).classList.remove('hidden');
-
-                            // Disable the other input method
                             if (inputId === 'pengantar_rt_camera') {
                                 resetFileInput('pengantar_file');
                             } else if (inputId === 'ktp_camera') {
@@ -422,37 +358,25 @@
                             }
                         });
                     };
-
                     reader.readAsDataURL(file);
                 }
-
-                // Remove input after use
                 setTimeout(() => {
                     document.body.removeChild(fileInput);
                 }, 100);
             };
-
             document.body.appendChild(fileInput);
             fileInput.click();
         }
-
-        // Image compression for iOS
         function compressImageForIOS(imageData, callback) {
             const img = new Image();
             img.src = imageData;
-
             img.onload = function() {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-
-                // Set maximum dimensions
                 const MAX_WIDTH = 800;
                 const MAX_HEIGHT = 800;
-
                 let width = img.width;
                 let height = img.height;
-
-                // Calculate new dimensions maintaining aspect ratio
                 if (width > height) {
                     if (width > MAX_WIDTH) {
                         height *= MAX_WIDTH / width;
@@ -464,27 +388,17 @@
                         height = MAX_HEIGHT;
                     }
                 }
-
                 canvas.width = width;
                 canvas.height = height;
-
-                // Draw and compress image
                 ctx.drawImage(img, 0, 0, width, height);
-
-                // Convert to JPEG with 70% quality
                 callback(canvas.toDataURL('image/jpeg', 0.7));
             };
         }
-
-        // Standard camera implementation for non-iOS devices
         function handleStandardCamera(inputId, label) {
-            // Check if browser supports mediaDevices
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 alert('Browser Anda tidak mendukung akses kamera');
                 return;
             }
-
-            // Create modal container
             const modal = document.createElement('div');
             modal.style.position = 'fixed';
             modal.style.top = '0';
@@ -498,20 +412,14 @@
             modal.style.alignItems = 'center';
             modal.style.justifyContent = 'center';
             modal.style.padding = '20px';
-
-            // Create header
             const header = document.createElement('div');
             header.className = 'text-white text-xl font-bold mb-4';
             header.textContent = `Ambil Foto ${label}`;
             modal.appendChild(header);
-
-            // Create video container with responsive sizing
             const videoContainer = document.createElement('div');
             videoContainer.style.width = '100%';
             videoContainer.style.maxWidth = '500px';
             videoContainer.style.position = 'relative';
-
-            // Create video element for preview
             const video = document.createElement('video');
             video.setAttribute('autoplay', '');
             video.style.width = '100%';
@@ -519,16 +427,10 @@
             video.style.display = 'block';
             video.style.maxHeight = '70vh';
             videoContainer.appendChild(video);
-
-            // Create canvas for capturing
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
-
-            // Create button container
             const buttonContainer = document.createElement('div');
             buttonContainer.className = 'flex flex-col md:flex-row gap-4 mt-4';
-
-            // Create capture button
             const captureBtn = document.createElement('button');
             captureBtn.textContent = 'Ambil Foto';
             captureBtn.className =
@@ -538,20 +440,12 @@
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                // Convert to data URL with quality compression
                 const imageData = canvas.toDataURL('image/jpeg', 0.7);
-
-                // Set the value and show preview
                 document.getElementById(inputId).value = imageData;
                 document.getElementById(`${inputId}_img`).src = imageData;
                 document.getElementById(`${inputId}_preview`).classList.remove('hidden');
-
-                // Stop camera and remove modal
                 stream.getTracks().forEach(track => track.stop());
                 document.body.removeChild(modal);
-
-                // Disable the other input method
                 if (inputId === 'pengantar_rt_camera') {
                     resetFileInput('pengantar_file');
                 } else if (inputId === 'ktp_camera') {
@@ -560,8 +454,6 @@
                     resetFileInput('kk_file');
                 }
             };
-
-            // Create cancel button
             const cancelBtn = document.createElement('button');
             cancelBtn.textContent = 'Batal';
             cancelBtn.className =
@@ -573,15 +465,11 @@
                 }
                 document.body.removeChild(modal);
             };
-
-            // Add elements to modal
             buttonContainer.appendChild(captureBtn);
             buttonContainer.appendChild(cancelBtn);
             modal.appendChild(videoContainer);
             modal.appendChild(buttonContainer);
             document.body.appendChild(modal);
-
-            // Start camera
             let stream;
             navigator.mediaDevices.getUserMedia({
                     video: {
@@ -605,8 +493,6 @@
                     document.body.removeChild(modal);
                     alert('Gagal mengakses kamera: ' + err.message);
                 });
-
-            // Handle window resize
             const resizeHandler = function() {
                 if (video.videoWidth > 0) {
                     const aspectRatio = video.videoWidth / video.videoHeight;
@@ -616,53 +502,38 @@
                     video.style.height = `${height}px`;
                 }
             };
-
             window.addEventListener('resize', resizeHandler);
             video.addEventListener('loadedmetadata', resizeHandler);
             modal._resizeHandler = resizeHandler;
-
-            // Cleanup on modal removal
             modal._cleanup = function() {
                 window.removeEventListener('resize', this._resizeHandler);
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                 }
             };
-
-            // Override removeChild to ensure cleanup
             const originalRemoveChild = document.body.removeChild.bind(document.body);
             document.body.removeChild = function(node) {
                 if (node._cleanup) node._cleanup();
                 return originalRemoveChild(node);
             };
         }
-
-        // File preview functionality
         function previewFile(inputId, previewId) {
             const input = document.getElementById(inputId);
             const file = input.files[0];
-
             if (file) {
-                // Check file size (max 2MB)
                 if (file.size > 2 * 1024 * 1024) {
                     alert('Ukuran file terlalu besar. Maksimal 2MB.');
                     resetFileInput(previewId);
                     return;
                 }
-
-                // Check file type
                 if (!file.type.match('image.*') && !file.type.match('application/pdf')) {
                     alert('Hanya file gambar (JPG, PNG) atau PDF yang diperbolehkan.');
                     resetFileInput(previewId);
                     return;
                 }
-
-                // Tampilkan preview
                 document.getElementById(`${previewId}_placeholder`).classList.add('hidden');
                 document.getElementById(`${previewId}_preview`).classList.remove('hidden');
                 document.getElementById(`${previewId}_name`).textContent = file.name;
-
-                // Nonaktifkan input kamera yang lain
                 if (previewId === 'pengantar_file') {
                     resetCameraInput('pengantar_rt_camera');
                 } else if (previewId === 'ktp_file') {
@@ -672,36 +543,23 @@
                 }
             }
         }
-
-        // Reset input file
         function resetFileInput(type) {
             const inputId = type === 'pengantar_file' ? 'pengantar_rt_file' : (type === 'ktp_file' ? 'ktp_file' :
             'kk_file');
             const input = document.getElementById(inputId);
-
-            // Reset file input
             input.value = '';
-
-            // Sembunyikan preview dan tampilkan placeholder
             const placeholder = document.getElementById(`${type}_placeholder`);
             const preview = document.getElementById(`${type}_preview`);
-
             if (placeholder && preview) {
                 preview.classList.add('hidden');
                 placeholder.classList.remove('hidden');
             }
-
-            // Optional: cegah popup upload otomatis
-            input.dispatchEvent(new Event('change')); // agar tidak memicu ulang preview
+            input.dispatchEvent(new Event('change'));
         }
-
-        // Reset input kamera
         function resetCameraInput(inputId) {
             document.getElementById(inputId).value = '';
             document.getElementById(`${inputId}_preview`).classList.add('hidden');
         }
-
-        // Untuk pengantar
         document.getElementById('pengantar_file_container').addEventListener('click', function(e) {
             if (
                 e.target.closest('button') ||
@@ -712,8 +570,6 @@
             }
             document.getElementById('pengantar_rt_file').click();
         });
-
-        // Untuk KTP
         document.getElementById('ktp_file_container').addEventListener('click', function(e) {
             if (
                 e.target.closest('button') ||
@@ -724,8 +580,6 @@
             }
             document.getElementById('ktp_file').click();
         });
-
-        // Untuk KK
         document.getElementById('kk_file_container').addEventListener('click', function(e) {
             if (
                 e.target.closest('button') ||

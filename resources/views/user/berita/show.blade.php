@@ -70,9 +70,9 @@
                             <i class="fas fa-eye mr-1"></i>
                             {{ $post->views }} views
                         </span>
-                        <button onclick="copyToClipboard()" class="text-gray-500 hover:text-primary transition-colors">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
+                        <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" class="text-gray-500 hover:text-primary transition-colors" target="_blank">
+                            <i class="fas fa-share-alt text-gray-500"></i>
+                        </a>
                     </div>
                 </div>
             </header>

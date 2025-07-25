@@ -1,6 +1,5 @@
 @extends('user.layouts.app')
 @section('title', 'Berita - Sukowinangun')
-
 @section('content')
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary"data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -13,28 +12,43 @@
             </div>
         </div>
     </section>
-    <!-- Breaking News Section -->
-    <section class=" py-2 bg-black-500 border-b border-gray-200"data-aos="zoom-in" data-aos-duration="800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center overflow-hidden">
-            <span class="bg-white text-primary text-xs sm:text-sm font-bold px-3 py-1 rounded-full uppercase animate-pulse">
-                Breaking News :
-            </span>
-            <div class="relative overflow-hidden h-6 flex-1">
-                <div id="breakingNewsTicker" class="flex flex-col transition-transform duration-700 ease-in-out">
-                    @forelse ($breakingNews as $item)
-                        <div class="text-black text-sm sm:text-base line-clamp-1">
-                            <a href="{{ route('berita.show', $item->slug) }}" class="hover:underline">
-                                {{ $item->title }}
-                            </a>
-                        </div>
-                    @empty
-                        <div class="text-white text-sm">Tidak ada breaking news saat ini.</div>
-                    @endforelse
-                </div>
+   <section class="py-1 xs:py-1.5 sm:py-2 bg-black-500 border-b border-gray-200" data-aos="zoom-in" data-aos-duration="800">
+    <div class="max-w-7xl mx-auto px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8">
+        <div class="flex items-center overflow-hidden min-h-[24px] xs:min-h-[28px] sm:min-h-[32px]">
+            <!-- Breaking News Label -->
+            <div class="flex-shrink-0 mr-1.5 xs:mr-2 sm:mr-3">
+                <span class=" text-primary text-xs xs:text-xs sm:text-sm font-bold px-2 xs:px-2.5 sm:px-3 py-0.5 xs:py-1 rounded-full uppercase animate-pulse whitespace-nowrap">
+                    <span class="hidden xs:inline">Breaking News :</span>
+                    <span class="xs:hidden">News :</span>
+                </span>
             </div>
+
+            <!-- News Ticker Container -->
+            <div class="relative overflow-hidden flex-1 min-w-0">
+    <div class="relative h-5 xs:h-6 sm:h-6">
+        <div id="breakingNewsTicker" class="transition-transform duration-500 ease-in-out">
+            @forelse ($breakingNews as $item)
+                <div class="flex items-center h-5 xs:h-6 sm:h-6 w-full">
+                    <div class="text-black text-xs xs:text-sm sm:text-base w-full truncate">
+                        <a href="{{ route('berita.show', $item->slug) }}" class="hover:underline block">
+                            {{ $item->title }}
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <div class="flex items-center h-5 xs:h-6 sm:h-6 w-full">
+                    <div class="text-white text-xs xs:text-sm">
+                        <span class="hidden sm:inline">Tidak ada breaking news saat ini.</span>
+                        <span class="sm:hidden">Tidak ada berita terbaru.</span>
+                    </div>
+                </div>
+            @endforelse
         </div>
-    </section>
-    <!-- Featured News -->
+    </div>
+</div>
+        </div>
+    </div>
+</section>
     <section class="py-12 sm:py-16 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8 sm:mb-12">
@@ -80,8 +94,6 @@
             @endif
         </div>
     </section>
-
-    <!-- Latest News -->
     <section class="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-10">
             <div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
@@ -95,12 +107,10 @@
                         data-aos-delay="{{ $loop->index * 100 }}"
                         class="block group bg-white rounded-lg sm:rounded-xl shadow-sm xs:shadow-md sm:shadow-lg overflow-hidden border border-gray-100 hover:border-primary hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ease-in-out">
                         <article class="h-full flex flex-col">
-                            <!-- Image with proper aspect ratio -->
                             <div class="relative pt-[56.25%] overflow-hidden">
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
                                     class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
-                            <!-- Content -->
                             <div class="p-3 xs:p-4 sm:p-5 flex-grow flex flex-col">
                                 <div class="flex items-center text-xs xs:text-sm text-gray-500 mb-1 xs:mb-2">
                                     <i class="fas fa-calendar mr-1 xs:mr-2 text-xs"></i>
@@ -136,19 +146,56 @@
             </div>
         </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ticker = document.getElementById('breakingNewsTicker');
-            const items = ticker.querySelectorAll('div');
-            let currentIndex = 0;
-            const itemHeight = 24; // Height of one item in pixels
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ticker = document.getElementById('breakingNewsTicker');
+        if (!ticker) return;
 
-            if (items.length > 1) {
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % items.length;
-                    ticker.style.transform = `translateY(-${currentIndex * itemHeight}px)`;
-                }, 3000); // Change every 3 seconds
+        const items = ticker.children; // Gunakan children langsung
+        let currentIndex = 0;
+
+        // Jika tidak ada item atau hanya 1 item, tidak perlu ticker
+        if (items.length <= 1) return;
+
+        // Function to get actual item height dari DOM
+        function getActualItemHeight() {
+            if (items.length > 0) {
+                const rect = items[0].getBoundingClientRect();
+                return rect.height;
             }
+            return 24; // fallback
+        }
+
+        // Function to update ticker position
+        function updateTicker() {
+            const itemHeight = getActualItemHeight();
+            const translateY = -(currentIndex * itemHeight);
+            ticker.style.transform = `translateY(${translateY}px)`;
+
+            console.log(`Index: ${currentIndex}/${items.length}, Height: ${itemHeight}, TranslateY: ${translateY}`);
+        }
+
+        // Update on window resize
+        window.addEventListener('resize', function() {
+            setTimeout(() => {
+                updateTicker();
+            }, 100); // Delay untuk memastikan layout sudah update
         });
-    </script>
+
+        // Set initial position
+        setTimeout(() => {
+            updateTicker();
+        }, 100);
+
+        // Auto-rotate ticker dengan perfect loop
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateTicker();
+            setTimeout(nextItem, 3000);
+        }
+
+        // Start the ticker loop
+        setTimeout(nextItem, 3000);
+    });
+</script>
 @endsection
