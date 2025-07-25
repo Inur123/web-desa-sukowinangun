@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PopupBanner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +16,7 @@ class HomeController extends Controller
                      ->orderBy('published_at', 'desc')
                      ->take(6)
                      ->get();
-
-        return view('home', compact('posts'));
+        $popupBanner = PopupBanner::where('is_active', true)->latest()->first();
+        return view('home', compact('posts', 'popupBanner'));
     }
 }

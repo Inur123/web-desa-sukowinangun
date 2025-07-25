@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Pengaturan Sistem')
+@section('title', 'Pengaturan Notifikasi WhatsApp')
 
 @section('content')
     <!-- Notification Popups -->
@@ -46,7 +46,7 @@
                 <h2 class="text-base md:text-lg font-semibold text-gray-800">Pengaturan Notifikasi</h2>
             </div>
 
-            <form method="POST" action="{{ route('setting.update') }}" class="p-4 md:p-6">
+            <form method="POST" action="{{ route('admin.setting.BroadcastWa.update') }}" class="p-4 md:p-6">
                 @csrf
                 @method('PUT')
                 <!-- WhatsApp Admin -->

@@ -2,7 +2,7 @@
 @section('title', 'Beranda - Sukowinangun')
 
 @section('content')
-    <style>
+   <style>
         .typing-cursor {
             font-weight: bold;
             color: #f59e0b;
@@ -45,7 +45,81 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
+        /* Popup Banner Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .popup-image-only {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        .popup-overlay.active .popup-image-only {
+            transform: scale(1);
+        }
+
+        .image-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .image-close-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
     </style>
+     @if($popupBanner)
+    <div class="popup-overlay" id="popupBanner">
+        <div class="popup-container">
+            <img src="{{ asset('storage/' . $popupBanner->image) }}" alt="Banner" class="popup-image-only" id="popupImage">
+            <button class="image-close-btn" id="closePopup">×</button>
+        </div>
+    </div>
+@endif
     <section class="pt-16 bg-gradient-to-br from-primary to-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center" data-aos="zoom-in">
@@ -306,6 +380,64 @@
             }
             target.insertBefore(document.createTextNode(""), cursor);
             type();
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Typing animation code (existing)
+            const text = "Kelurahan Sukowinangun";
+            const target = document.getElementById("typing-text");
+            let index = 0;
+            let isDeleting = false;
+            let cursor;
+            cursor = document.createElement("span");
+            cursor.classList.add("typing-cursor");
+            cursor.textContent = "|";
+            target.appendChild(cursor);
+
+            function type() {
+                target.childNodes[0].nodeValue = text.substring(0, index);
+                if (isDeleting) {
+                    index--;
+                    cursor.classList.remove("blinking");
+                } else {
+                    index++;
+                    cursor.classList.remove("blinking");
+                }
+                if (index === text.length + 1) {
+                    isDeleting = true;
+                    cursor.classList.add("blinking");
+                    setTimeout(type, 1500);
+                } else if (index === 0) {
+                    isDeleting = false;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, isDeleting ? 50 : 100);
+                }
+            }
+            target.insertBefore(document.createTextNode(""), cursor);
+            type();
+
+            // Popup Banner Functionality
+            const popup = document.getElementById('popupBanner');
+            const closeBtn = document.getElementById('closePopup');
+
+            // Show popup after 1 second delay
+            setTimeout(() => {
+                popup.classList.add('active');
+            }, 1000);
+
+            // Close button functionality
+            closeBtn.addEventListener('click', () => {
+                popup.classList.remove('active');
+            });
+
+            // Close when clicking outside the image
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
         });
     </script>
 @endsection

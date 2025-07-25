@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Layanan\SkuController;
 
 use App\Http\Controllers\Layanan\SktmController;
-use App\Http\Controllers\Admin\SettingController;
+
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Layanan\LainnyaController;
 use App\Http\Controllers\Admin\ArsipSuratController;
@@ -27,8 +27,12 @@ use App\Http\Controllers\Layanan\KelahiranController;
 use App\Http\Controllers\Layanan\HargaTanahController;
 use App\Http\Controllers\Layanan\KehilanganController;
 use App\Http\Controllers\Layanan\PenghasilanController;
+use App\Http\Controllers\Admin\Setting\BannerController;
 use App\Http\Controllers\Layanan\BelumMenikahController;
 use App\Http\Controllers\Layanan\PengantarSkckController;
+use App\Http\Controllers\Admin\Setting\BroadcastWaController;
+
+
 
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 // Route::post('/register', [AuthController::class, 'register']);
@@ -114,8 +118,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
     Route::get('/layanan/lainnya/{id}/file/{fileId}', [LainnyaController::class, 'showFile'])->name('lainnya.showFile');
 
     // Setting
-    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
-    Route::put('/setting', [SettingController::class, 'update'])->name('setting.update');
+    Route::get('/BroadcastWa', [BroadcastWaController::class, 'index'])->name('admin.setting.BroadcastWa.index');
+    Route::put('/BroadcastWa', [BroadcastWaController::class, 'update'])->name('admin.setting.BroadcastWa.update');
+
+    Route::get('/banner', [BannerController::class, 'edit'])->name('admin.setting.banner');
+    Route::put('/banner', [BannerController::class, 'update'])->name('admin.setting.banner.update');
 });
 
 
