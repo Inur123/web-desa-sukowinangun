@@ -25,8 +25,8 @@
         <meta name="twitter:description" content="Website resmi Kelurahan Sukowinangun." />
         <meta name="twitter:image" content="{{ asset('images/logo-desa.png') }}" />
         <meta name="twitter:site" content="@KelurahanSukowinangun" />
-        <meta name="theme-color" content="#059669">
-        <meta name="msapplication-TileColor" content="#059669">
+        <meta name="theme-color" content="#3b82f6">
+        <meta name="msapplication-TileColor" content="#3b82f6">
         <meta name="msapplication-TileImage" content="{{ asset('images/logo-desa.png') }}">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -39,6 +39,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         #chat-messages {

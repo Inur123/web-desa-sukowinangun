@@ -111,3 +111,10 @@
         "description": "Website resmi Kelurahan Sukowinangun"
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  flatpickr("#ttl", {
+    dateFormat: "Y-m-d",
+    allowInput: true
+  });
+</script>

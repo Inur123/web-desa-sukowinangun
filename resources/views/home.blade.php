@@ -129,7 +129,7 @@
                         <span id="typing-text" class="text-accent text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold whitespace-nowrap"></span>
                     </h1>
                     <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-100 leading-relaxed">
-                        Desa yang berkembang dengan semangat gotong royong, teknologi
+                        Kelurahan yang berkembang dengan semangat gotong royong, teknologi
                         modern, dan pelayanan terbaik untuk seluruh warga.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">

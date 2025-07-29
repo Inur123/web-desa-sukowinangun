@@ -76,7 +76,7 @@
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
             <p class="text-gray-300">
-                &copy; {{ date('Y') }} Kelurahan Sukowangun | Developed by
+                &copy; {{ date('Y') }} Kelurahan Sukowinangun | Developed by
                 <a href="https://www.instagram.com/inurzainur87/" target="_blank" class="text-gray-300">
                     Zainur
                 </a>

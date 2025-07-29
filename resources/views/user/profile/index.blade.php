@@ -280,7 +280,7 @@
                 <div class="bg-white p-6 rounded-xl shadow-lg text-center"data-aos="zoom-in" data-aos-delay="100">
                     <img src="/placeholder.svg?height=120&width=120" alt="Tenaga Keamanan"
                         class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-                    <h4 class="text-lg font-bold text-gray-800 mb-2">Bambang Tri Kurniawa</h4>
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Bambang Tri Kurniawan</h4>
                     <p class="text-secondary font-semibold mb-1">Tenaga Keamanan</p>
                 </div>
                  <div class="bg-white p-6 rounded-xl shadow-lg text-center"data-aos="zoom-in" data-aos-delay="100">

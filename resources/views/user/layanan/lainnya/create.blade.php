@@ -77,7 +77,7 @@
                                         </div>
                                         <div>
                                             <label for="ttl" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Lahir</label>
-                                            <input type="date" id="ttl" name="ttl" required
+                                            <input type="date" id="ttl" name="ttl" required placeholder="YYYY-MM-DD"
                                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent">
                                         </div>
                                         <div>
