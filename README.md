@@ -2,8 +2,6 @@
 
 Website resmi Desa Sukowinangun yang dibangun dengan framework Laravel untuk menyediakan layanan digital kepada masyarakat desa.
 
-<img src="https://halosuko.zainur.my.id/#:~:text=Selamat%20Datang-,di,-K%7C" alt="Tampilan Website Desa Sukowinangun" style="max-width:100%; height:auto; border-radius: 10px;" />
-
 ## Fitur Utama
 
 Website ini menyediakan berbagai layanan administrasi desa dan informasi untuk masyarakat, meliputi:
