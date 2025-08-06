@@ -2,6 +2,8 @@
 
 Website resmi Desa Sukowinangun yang dibangun dengan framework Laravel untuk menyediakan layanan digital kepada masyarakat desa.
 
+<img src="images/web.jpeg" alt="Tampilan Website Desa Sukowinangun" style="max-width:100%; height:auto; border-radius: 10px;" />
+
 ## Fitur Utama
 
 Website ini menyediakan berbagai layanan administrasi desa dan informasi untuk masyarakat, meliputi:
