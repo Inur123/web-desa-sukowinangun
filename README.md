@@ -50,7 +50,7 @@ Website ini menyediakan berbagai layanan administrasi desa dan informasi untuk m
 1. Clone repository ini
 ```bash
 git clone [repository-url]
-cd web-desa-sukowinangun-kominfo
+cd web-desa-sukowinangun
 ```
 
 2. Install dependencies PHP
