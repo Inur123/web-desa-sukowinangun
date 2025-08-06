@@ -1,61 +1,188 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Website Desa Sukowinangun
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website resmi Desa Sukowinangun yang dibangun dengan framework Laravel untuk menyediakan layanan digital kepada masyarakat desa.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Website ini menyediakan berbagai layanan administrasi desa dan informasi untuk masyarakat, meliputi:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Layanan Administrasi
+- **Surat Keterangan Tidak Mampu (SKTM)** - Pelayanan pembuatan surat keterangan tidak mampu
+- **Surat Keterangan Usaha (SKU)** - Pelayanan surat keterangan usaha untuk warga
+- **Surat Domisili** - Pelayanan surat keterangan domisili
+- **Surat Keterangan Belum Menikah** - Layanan surat keterangan status belum menikah
+- **Surat Pengantar SKCK** - Pelayanan surat pengantar untuk SKCK
+- **Surat Keterangan Penghasilan** - Layanan surat keterangan penghasilan
+- **Surat Keterangan Kelahiran** - Pelayanan surat keterangan kelahiran
+- **Surat Keterangan Kematian** - Pelayanan surat keterangan kematian
+- **Surat Keterangan Kehilangan** - Layanan surat keterangan kehilangan
+- **Surat Keterangan Harga Tanah** - Informasi dan surat keterangan harga tanah
+- **Surat Keterangan Lainnya** - Pelayanan surat keterangan lainnya atau menyesuaikan kebutuhan warga
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Fitur Lainnya
+- **Arsip Surat** - Sistem penyimpanan dan pengelolaan arsip surat
+- **Manajemen Berita** - Sistem posting berita dan informasi desa
+- **Popup Banner** - Sistem notifikasi dan pengumuman
 
-## Learning Laravel
+## Teknologi yang Digunakan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Framework**: Laravel 12.0
+- **Database**: MySQL
+- **Frontend**: Vite 6.2.4 + JavaScript
+- **Styling**: TailwindCSS 4.0.0
+- **Animation**: AOS (Animate On Scroll) 2.3.4
+- **HTTP Client**: Axios 1.8.2
+- **Image Processing**: Intervention Image 2.7
+- **Server**: Apache/Nginx dengan PHP 8.2+
+- **Node.js**: >= 18.0.0
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Persyaratan Sistem
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **PHP**: 8.2 atau lebih tinggi
+- **Node.js**: 18.0.0 atau lebih tinggi
+- **MySQL**: 5.7 atau lebih tinggi
+- **Composer**: 2.0 atau lebih tinggi
 
-## Laravel Sponsors
+## Instalasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clone repository ini
+```bash
+git clone [repository-url]
+cd web-desa-sukowinangun-kominfo
+```
 
-### Premium Partners
+2. Install dependencies PHP
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. Install dependencies Node.js
+```bash
+npm install
+```
 
-## Contributing
+4. Setup environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Konfigurasi database di file `.env`
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=8889
+DB_DATABASE=db-desa-sukowinangun
+DB_USERNAME=root
+DB_PASSWORD=root
+```
 
-## Code of Conduct
+6. Jalankan migrasi database
+```bash
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7. Build assets untuk production
+```bash
+npm run build
+```
 
-## Security Vulnerabilities
+8. Atau untuk development
+```bash
+npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+9. Jalankan aplikasi
+```bash
+php artisan serve
+```
 
-## License
+## Scripts Development
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek ini menggunakan beberapa script untuk development:
+
+```bash
+# Menjalankan development server (Laravel + Queue + Logs + Vite)
+composer run dev
+
+# Menjalankan Vite development server saja
+npm run dev
+
+# Build assets untuk production
+npm run build
+
+# Menjalankan tests
+composer run test
+
+# Menjalankan Laravel server saja
+php artisan serve
+```
+
+## Dependencies
+
+### Production Dependencies
+- **Laravel Framework**: 12.0 - PHP framework
+- **Intervention Image**: 2.7 - Image manipulation library
+- **Laravel Tinker**: 2.10.1 - Interactive shell
+- **AOS**: 2.3.4 - Library animasi scroll
+
+### Development Dependencies
+- **@tailwindcss/vite**: 4.0.0 - TailwindCSS integration untuk Vite
+- **axios**: 1.8.2 - HTTP client
+- **concurrently**: 9.0.1 - Menjalankan multiple commands
+- **laravel-vite-plugin**: 1.2.0 - Laravel integration untuk Vite
+- **tailwindcss**: 4.0.0 - Utility-first CSS framework
+- **vite**: 6.2.4 - Build tool dan development server
+- **FakerPHP**: 1.23 - Data generator untuk testing
+- **Laravel Pail**: 1.2.2 - Log viewer
+- **Laravel Pint**: 1.13 - Code style fixer
+- **PHPUnit**: 11.5.3 - Testing framework
+
+## Development Server
+
+Proyek ini memiliki custom script `composer run dev` yang menjalankan:
+- **Laravel Server** - `php artisan serve`
+- **Queue Worker** - `php artisan queue:listen --tries=1`
+- **Log Viewer** - `php artisan pail --timeout=0`
+- **Vite Dev Server** - `npm run dev`
+
+Semua service akan berjalan secara bersamaan dengan warna berbeda untuk memudahkan monitoring.
+
+## Penggunaan
+
+Setelah instalasi selesai, akses aplikasi melalui browser di `http://localhost:8000`. Website menyediakan interface untuk:
+
+- Masyarakat dapat mengajukan berbagai jenis surat online
+- Admin desa dapat mengelola permohonan surat
+- Publikasi berita dan informasi desa
+- Manajemen arsip dokumen desa
+
+## Testing
+
+Untuk menjalankan tests:
+
+```bash
+# Menjalankan semua tests
+composer run test
+
+# Atau langsung dengan PHPUnit
+php artisan test
+```
+
+## Kontribusi
+
+Untuk berkontribusi pada pengembangan website ini:
+
+1. Fork repository
+2. Buat branch fitur baru (`git checkout -b fitur-baru`)
+3. Commit perubahan (`git commit -am 'Menambah fitur baru'`)
+4. Push ke branch (`git push origin fitur-baru`)
+5. Buat Pull Request
+
+## Lisensi
+
+Proyek ini menggunakan lisensi MIT. Lihat file [LICENSE](https://opensource.org/licenses/MIT) untuk detail lengkap.
+
+---
+
+**Catatan**: Pastikan semua persyaratan sistem terpenuhi sebelum melakukan instalasi. Untuk konfigurasi server production, disarankan menggunakan web server seperti Apache atau Nginx.
