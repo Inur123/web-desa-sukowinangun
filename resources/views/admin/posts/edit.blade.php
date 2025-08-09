@@ -7,7 +7,7 @@
         <div class="p-6 border-b border-gray-200">
             <div class="flex items-center justify-between">
                 <h2 class="text-xl font-bold text-gray-800">Edit Berita</h2>
-                <a href="{{ route('posts.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <a href="{{ route('posts.index') }}" class="text-primary hover:text-primary/90 transition-colors">
                     <i class="fas fa-times text-xl"></i>
                 </a>
             </div>
@@ -59,7 +59,7 @@
                     <div>
                         <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                         <select id="status" name="status"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
                             <option value="active" {{ old('status', $post->status) == 'active' ? 'selected' : '' }}>Aktif
                             </option>
                             <option value="nonactive" {{ old('status', $post->status) == 'nonactive' ? 'selected' : '' }}>
@@ -74,7 +74,7 @@
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
                         <select id="category" name="category"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
                             <option value="">Pilih Kategori</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat }}"
@@ -127,43 +127,54 @@
                         </div>
                     </div>
 
-                    {{-- Gambar Tambahan --}}
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tambahan</label>
 
-                        @if ($post->additional_images && count($post->additional_images) > 0)
-                            <div class="mb-4 space-y-3">
-                                <p class="text-sm text-gray-600">Gambar Saat Ini:</p>
-                                @foreach ($post->additional_images as $index => $image)
-                                    <div class="flex items-center space-x-3">
-                                        <div class="flex-1">
-                                            <img src="{{ asset('storage/' . $image) }}"
-                                                alt="Additional image {{ $index + 1 }}"
-                                                class="w-full h-24 object-cover rounded-lg border border-gray-200">
-                                        </div>
-                                        <button type="button" onclick="removeExistingImage(this, '{{ $image }}')"
-                                            class="text-red-500 hover:text-red-700">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                        <input type="hidden" name="existing_additional_images[]"
-                                            value="{{ $image }}">
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
+                        {{-- Container untuk gambar yang sudah ada --}}
+                        <div id="existing-additional-images" class="mb-4">
+                            @if ($post->additionalImages && count($post->additionalImages) > 0)
+                                <p class="text-sm text-gray-600 mb-3">Gambar Yang Sudah Ada:</p>
+                                <div class="space-y-3">
+                                    @foreach ($post->additionalImages as $index => $additionalImage)
+                                        <div class="mb-3 existing-image" data-image-id="{{ $additionalImage->id }}">
 
+                                            <div class="relative">
+                                                <img src="{{ asset('storage/' . $additionalImage->image) }}"
+                                                    alt="Additional image {{ $index + 1 }}"
+                                                    class="w-full h-48 object-cover rounded-lg shadow border border-gray-200">
+
+                                                <button type="button"
+                                                    onclick="removeExistingImage(this, {{ $additionalImage->id }}, '{{ $additionalImage->image }}')"
+                                                    class="absolute top-2 right-2 p-2 text-red-500 rounded-lg transition-colors"
+                                                    title="Hapus gambar ini">
+                                                    <i class="fas fa-trash text-sm"></i>
+                                                </button>
+                                            </div>
+                                            <input type="hidden" name="existing_additional_images[]"
+                                                value="{{ $additionalImage->id }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-center py-4 text-gray-500 text-sm">
+                                    <i class="fas fa-images text-2xl mb-2 text-gray-300"></i>
+                                    <p>Belum ada gambar tambahan</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        {{-- Container untuk gambar baru yang akan ditambahkan --}}
                         <div id="additional-images-wrapper" class="space-y-4">
                             {{-- Dynamic inputs will be added here --}}
                         </div>
 
                         <button type="button" onclick="addAdditionalImage()"
-                            class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors">
+                            class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors cursor-pointer">
                             <i class="fas fa-plus-circle mr-2 text-primary"></i>
-                            <span class="text-primary font-medium">Tambah Gambar Lainnya</span>
+                            <span class="text-primary font-medium">Tambah Gambar Baru</span>
                         </button>
                         <p class="text-xs text-gray-500 mt-2">Format: PNG, JPG (maksimal 2MB per gambar)</p>
                     </div>
-
                     {{-- Tags --}}
                     <div>
                         <label for="tags" class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
@@ -184,7 +195,7 @@
                     Batal
                 </a>
                 <button type="submit"
-                    class="px-6 py-2 bg-primary hover:bg-secondary text-white rounded-lg transition-colors">
+                    class="px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors cursor-pointer">
                     Perbarui
                 </button>
             </div>
@@ -311,96 +322,130 @@
             setTimeout(updateSummaryCount, 500);
         });
 
-        // Script untuk gambar tambahan
         let imageInputIndex = 0;
-        const existingImagesToDelete = [];
+
 
         function addAdditionalImage() {
-            const wrapper = document.getElementById('additional-images-wrapper');
+        const wrapper = document.getElementById('additional-images-wrapper');
 
-            const div = document.createElement('div');
-            div.classList.add('relative', 'group');
+        const div = document.createElement('div');
+        div.classList.add('relative', 'group', 'mb-4');
 
-            const inputDiv = document.createElement('div');
-            inputDiv.classList.add('flex', 'items-center', 'space-x-3');
+        const inputDiv = document.createElement('div');
+        inputDiv.classList.add('flex', 'items-center', 'space-x-3');
 
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.name = `additional_images[]`;
-            input.accept = 'image/*';
-            input.classList.add(
-                'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg',
-                'border-gray-300', 'focus:ring-2', 'focus:ring-primary',
-                'focus:border-transparent', 'file:mr-4', 'file:py-2',
-                'file:px-4', 'file:rounded-md', 'file:border-0',
-                'file:text-sm', 'file:font-medium', 'file:bg-gray-100',
-                'file:text-gray-700', 'hover:file:bg-gray-200'
-            );
+        // File input
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.name = 'additional_images[]';
+        input.accept = 'image/*';
+        input.classList.add(
+            'w-full', 'px-4', 'py-2.5', 'border', 'rounded-lg',
+            'border-gray-300', 'focus:ring-2', 'focus:ring-primary-500',
+            'focus:border-transparent', 'file:mr-4', 'file:py-2',
+            'file:px-4', 'file:rounded-md', 'file:border-0',
+            'file:text-sm', 'file:font-medium', 'file:bg-gray-100',
+            'file:text-gray-700', 'hover:file:bg-gray-200',
+            'cursor-pointer'
+        );
+        input.required = true;
 
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
-            removeBtn.classList.add('flex-shrink-0');
-            removeBtn.title = 'Hapus gambar ini';
-            removeBtn.onclick = function() {
-                wrapper.removeChild(div);
-            };
+        // Remove button - positioned inline with the input
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.innerHTML = '<i class="fas fa-times text-red-500 hover:text-red-700"></i>';
+        removeBtn.classList.add(
+            'flex-shrink-0', 'p-2', 'rounded-full',
+            'hover:bg-red-50', 'transition-colors'
+        );
+        removeBtn.title = 'Hapus gambar ini';
+        removeBtn.onclick = function() {
+            wrapper.removeChild(div);
+        };
 
-            inputDiv.appendChild(input);
-            inputDiv.appendChild(removeBtn);
-            div.appendChild(inputDiv);
+        inputDiv.appendChild(input);
+        inputDiv.appendChild(removeBtn);
+        div.appendChild(inputDiv);
 
-            // Tambahkan preview container
-            const previewDiv = document.createElement('div');
-            previewDiv.classList.add('mt-2', 'hidden', 'image-preview-container');
+        // Preview container
+        const previewDiv = document.createElement('div');
+        previewDiv.classList.add('mt-2', 'hidden', 'image-preview-container');
 
-            const previewLabel = document.createElement('p');
-            previewLabel.classList.add('text-sm', 'text-gray-600', 'mb-1');
-            previewLabel.textContent = 'Preview:';
+        const previewLabel = document.createElement('p');
+        previewLabel.classList.add('text-sm', 'text-gray-600', 'mb-1');
+        previewLabel.textContent = 'Preview:';
 
-            const previewImg = document.createElement('img');
-            previewImg.classList.add('w-full', 'h-24', 'object-cover', 'rounded-lg', 'border', 'border-gray-200');
+        const previewImg = document.createElement('img');
+        previewImg.classList.add(
+            'w-full', 'h-32', 'object-cover',
+            'rounded-lg', 'border', 'border-gray-200',
+            'shadow-sm'
+        );
 
-            previewDiv.appendChild(previewLabel);
-            previewDiv.appendChild(previewImg);
-            div.appendChild(previewDiv);
+        previewDiv.appendChild(previewLabel);
+        previewDiv.appendChild(previewImg);
+        div.appendChild(previewDiv);
 
-            // Event listener untuk preview gambar
-            input.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
-                        previewDiv.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(file);
-                } else {
+        // Image validation and preview
+        input.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Validate file size (2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Ukuran file melebihi 2MB');
+                    event.target.value = '';
                     previewDiv.classList.add('hidden');
+                    return;
                 }
-            });
 
-            wrapper.appendChild(div);
-            imageInputIndex++;
+                // Validate file type
+                if (!file.type.match('image.*')) {
+                    alert('Hanya file gambar yang diperbolehkan');
+                    event.target.value = '';
+                    previewDiv.classList.add('hidden');
+                    return;
+                }
+
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewDiv.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewDiv.classList.add('hidden');
+            }
+        });
+
+        wrapper.appendChild(div);
+        imageInputIndex++;
+    }
+
+        // Fungsi untuk menandai gambar existing yang akan dihapus
+        function removeExistingImage(button, imageId, imagePath) {
+            if (confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
+                // Tambahkan input hidden untuk menandai gambar yang dihapus
+                const deleteInput = document.createElement('input');
+                deleteInput.type = 'hidden';
+                deleteInput.name = 'deleted_additional_images[]';
+                deleteInput.value = imageId;
+                document.querySelector('form').appendChild(deleteInput);
+
+                // Langsung hapus container gambar
+                const container = button.closest('.existing-image');
+                container.remove();
+            }
         }
 
-        // Fungsi untuk menandai gambar yang akan dihapus
-        function removeExistingImage(button, imagePath) {
-            existingImagesToDelete.push(imagePath);
-            const container = button.closest('.flex.items-center.space-x-3');
-            container.remove();
 
-            // Tambahkan input hidden untuk menandai gambar yang dihapus
-            const deleteInput = document.createElement('input');
-            deleteInput.type = 'hidden';
-            deleteInput.name = 'deleted_additional_images[]';
-            deleteInput.value = imagePath;
-            document.querySelector('form').appendChild(deleteInput);
-        }
 
-        // Tambahkan input pertama secara otomatis saat halaman dimuat
+        // Auto-add input pertama jika belum ada gambar existing
         document.addEventListener('DOMContentLoaded', function() {
-            addAdditionalImage();
+            const existingImages = document.querySelectorAll('.existing-image').length;
+            if (existingImages === 0) {
+                addAdditionalImage();
+            }
         });
     </script>
 @endsection

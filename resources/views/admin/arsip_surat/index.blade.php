@@ -136,7 +136,7 @@
                     <div class="flex space-x-2">
                         <!-- Submit Button -->
                         <button type="submit"
-                            class="px-4 py-1 md:py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
+                            class="px-4 py-1 md:py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm cursor-pointer">
                             Filter
                         </button>
 
@@ -194,11 +194,11 @@
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 @if ($arsip->jenis === 'masuk')
                                     <span
-                                        class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Surat
+                                        class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">Surat
                                         Masuk</span>
                                 @elseif ($arsip->jenis === 'keluar')
                                     <span
-                                        class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-semibold">Surat
+                                        class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">Surat
                                         Keluar</span>
                                 @else
                                     <span class="text-gray-500 text-xs">-</span>
@@ -240,7 +240,7 @@
                                         onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
+                                        <button type="submit" class="text-red-600 hover:text-red-800 cursor-pointer" title="Hapus">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

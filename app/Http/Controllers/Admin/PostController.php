@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Post;
+use App\Models\AITraining;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -129,10 +132,10 @@ class PostController extends Controller
             'published_at'  => 'nullable|date',
             'image'         => 'nullable|image|max:10240',
             'tags'          => 'nullable|string',
-            'additional_images.*' => 'nullable|image|max:10240', // validasi gambar tambahan
+            'additional_images.*' => 'nullable|image|max:10240',
         ]);
 
-        // Ganti gambar utama jika diupload baru
+        // Update main image if uploaded
         if ($request->hasFile('image')) {
             if ($post->image) {
                 Storage::disk('public')->delete($post->image);
@@ -140,7 +143,38 @@ class PostController extends Controller
             $post->image = $request->file('image')->store('posts', 'public');
         }
 
-        // Update data utama
+        // Handle image deletions and updates in a transaction
+        DB::transaction(function () use ($request, $post) {
+            // Process deleted images
+            if ($request->has('deleted_additional_images')) {
+                foreach ($request->deleted_additional_images as $imageId) {
+                    $image = $post->additionalImages()->find($imageId);
+                    if ($image) {
+                        Storage::disk('public')->delete($image->image);
+                        $image->delete();
+                    }
+                }
+            }
+
+            // Process remaining existing images
+            $remainingIds = $request->existing_additional_images ?? [];
+            $post->additionalImages()
+                ->whereNotIn('id', $remainingIds)
+                ->each(function ($image) {
+                    Storage::disk('public')->delete($image->image);
+                    $image->delete();
+                });
+
+            // Add new images
+            if ($request->hasFile('additional_images')) {
+                foreach ($request->file('additional_images') as $image) {
+                    $path = $image->store('post-images', 'public');
+                    $post->additionalImages()->create(['image' => $path]);
+                }
+            }
+        });
+
+        // Update main post data
         $post->update([
             'title'         => $request->title,
             'content'       => $request->content,
@@ -148,22 +182,12 @@ class PostController extends Controller
             'status'        => $request->status,
             'category'      => $request->category,
             'published_at'  => $request->published_at,
-            'image'         => $post->image, // pastikan gambar utama tidak hilang saat update
         ]);
-
-        // Simpan gambar tambahan (jika ada)
-        if ($request->hasFile('additional_images')) {
-            foreach ($request->file('additional_images') as $image) {
-                $path = $image->store('post-images', 'public');
-                $post->additionalImages()->create(['image' => $path]);
-            }
-        }
 
         $this->syncTags($post, $request->tags);
 
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui!');
     }
-
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
@@ -205,5 +229,76 @@ class PostController extends Controller
         }
 
         $post->tags()->sync($tagIds);
+    }
+    public function generateContent(Request $request)
+    {
+        $request->validate([
+            'prompt' => 'required|string',
+        ]);
+
+        $apiKey = env('GEMINI_API_KEY');
+        $tanggal = now()->translatedFormat('j F Y');
+        $namaLurah = "Agus Dwi Aryanto";
+
+        // Ambil seluruh data sebagai contoh gaya penulisan
+        $examples = AITraining::latest()->get();
+        $exampleText = "";
+        foreach ($examples as $ex) {
+            $exampleText .= "Input: {$ex->prompt}\nOutput: {$ex->output}\n\n";
+        }
+
+        // Contoh tag yang ingin kamu masukkan (bisa diganti sesuai kebutuhan)
+        $exampleTags = "#magetan #sukowinangun";
+
+        $instruction = <<<EOT
+Tulis artikel berita resmi berdasarkan informasi berikut.
+Gunakan bahasa Indonesia yang formal, jelas, dan mengalir.
+Artikel harus memiliki:
+1. Judul berita yang menarik
+2. Paragraf pembuka
+3. Paragraf isi berita lengkap
+4. Paragraf penutup
+
+Tambahkan tag seperti contoh berikut di bawah paragraf penutup:
+$exampleTags
+
+Gunakan format berita tanpa tanda kurung atau placeholder, langsung masukkan tanggal $tanggal dan nama lurah $namaLurah di teks.
+
+Berikut contoh gaya penulisan sebelumnya:
+$exampleText
+EOT;
+
+        $finalPrompt = $instruction . "\n\nInformasi: " . $request->prompt;
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-goog-api-key' => $apiKey,
+        ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
+            'contents' => [
+                [
+                    'parts' => [
+                        ['text' => $finalPrompt]
+                    ]
+                ]
+            ]
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            $output = $data['candidates'][0]['content']['parts'][0]['text'] ?? '';
+
+            // Simpan ke DB tanpa tags input karena contoh tags cuma contoh instruksi
+            AITraining::create([
+                'prompt' => $request->prompt,
+                'output' => $output,
+            ]);
+
+            return response()->json([
+                'output' => $output,
+                'source' => null,
+            ]);
+        } else {
+            return response()->json(['output' => null, 'source' => null], 500);
+        }
     }
 }

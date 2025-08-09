@@ -161,7 +161,7 @@
                             <!-- Category Column -->
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 <span
-                                    class="bg-primary/10 text-primary px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">
+                                    class="bg-primary text-white px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">
                                     {{ $post->category }}
                                 </span>
                             </td>
@@ -170,10 +170,10 @@
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 @if ($post->status === 'active')
                                     <span
-                                        class="bg-green-100 text-green-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Active</span>
+                                        class="bg-green-500 text-white px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Active</span>
                                 @else
                                     <span
-                                        class="bg-yellow-100 text-yellow-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Nonactive</span>
+                                        class="bg-red-500 text-white px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold">Nonactive</span>
                                 @endif
                             </td>
 
@@ -191,7 +191,7 @@
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-1 md:space-x-2">
                                     <a href="{{ route('posts.edit', $post->id) }}"
-                                        class="text-blue-600 hover:text-blue-800 text-sm md:text-base" title="Edit">
+                                        class="text-primary hover:text-primary/90 text-sm md:text-base" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('posts.show', $post->slug) }}"
@@ -202,7 +202,7 @@
                                         onsubmit="return confirm('Yakin ingin menghapus?')" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 text-sm md:text-base"
+                                        <button type="submit" class="text-red-600 hover:text-red-800 text-sm md:text-base cursor-pointer"
                                             title="Delete">
                                             <i class="fas fa-trash"></i>
                                         </button>

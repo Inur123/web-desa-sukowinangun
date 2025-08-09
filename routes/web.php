@@ -45,6 +45,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/posts', PostController::class);
+    Route::post('/generate-content', [App\Http\Controllers\Admin\PostController::class, 'generateContent'])->name('generate.content');
     Route::resource('/arsip-surat',ArsipSuratController::class);
     Route::resource('/layanan/sku', SkuController::class)
         ->except(['store']);

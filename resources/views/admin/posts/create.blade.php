@@ -28,7 +28,20 @@
                         @enderror
                     </div>
 
-                    {{-- Konten --}}
+                    <div>
+                        <label for="ai_prompt" class="block text-sm font-medium text-gray-700 mb-2">Prompt AI</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="ai_prompt" name="ai_prompt"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                placeholder="Masukkan perintah untuk AI..." />
+                            <button type="button" id="generateBtn"
+                                class="px-4 py-2 bg-primary hover:bg-primary/90 transition-colors text-white rounded-lg cursor-pointer">Generate</button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Masukkan perintah, lalu klik Generate untuk mengisi konten
+                            otomatis.</p>
+                    </div>
+
+                    {{-- Textarea Content --}}
                     <div>
                         <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Konten Berita</label>
                         <textarea id="content" name="content" rows="12" required
@@ -57,7 +70,7 @@
                     <div>
                         <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
                         <select id="status" name="status"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
                             <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                             <option value="nonactive" {{ old('status') == 'nonactive' ? 'selected' : '' }}>Nonaktif</option>
                         </select>
@@ -70,7 +83,7 @@
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
                         <select id="category" name="category"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
                             <option value="">Pilih Kategori</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>
@@ -88,7 +101,7 @@
                         <label for="published_at" class="block text-sm font-medium text-gray-700 mb-2">Tanggal
                             Publikasi</label>
                         <input type="date" id="published_at" name="published_at"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent "
                             value="{{ old('published_at') }}">
                         @error('published_at')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -117,12 +130,12 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tambahan</label>
-                        <div id="additional-images-wrapper" class="space-y-4">
+                        <div id="additional-images-wrapper" class="space-y-4 ">
                             {{-- Input pertama akan ditambahkan secara otomatis --}}
                         </div>
                         <button type="button" onclick="addAdditionalImage()"
-                            class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors">
-                            <i class="fas fa-plus-circle mr-2 text-primary"></i>
+                            class="mt-3 w-full flex items-center justify-center px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors cursor-pointer">
+                            <i class="fas fa-plus-circle mr-2 text-primary "></i>
                             <span class="text-primary font-medium">Tambah Gambar Lainnya</span>
                         </button>
                         <p class="text-xs text-gray-500 mt-2">Format: PNG, JPG (maksimal 2MB per gambar)</p>
@@ -148,7 +161,7 @@
                     Batal
                 </a>
                 <button type="submit"
-                    class="px-6 py-2 bg-primary hover:bg-secondary text-white rounded-lg transition-colors">
+                    class="px-6 py-2 bg-primary hover:bg-secondary text-white rounded-lg transition-colors cursor-pointer">
                     Simpan
                 </button>
             </div>
@@ -362,4 +375,60 @@
             addAdditionalImage();
         });
     </script>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const prompt = document.getElementById('ai_prompt').value;
+            const generateBtn = this; // Simpan referensi tombol
+
+            if (!prompt) {
+                alert('Masukkan prompt terlebih dahulu!');
+                return;
+            }
+
+            // Tambahkan animasi loading
+            generateBtn.innerHTML = `
+        <span class="inline-flex items-center">
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Processing...
+        </span>
+    `;
+            generateBtn.disabled = true;
+            generateBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            generateBtn.classList.add('bg-green-400');
+
+            fetch("{{ route('generate.content') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.output) {
+                        CKEDITOR.instances['content'].setData(data.output);
+                    } else {
+                        alert("Gagal mendapatkan respon dari AI");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert("Terjadi kesalahan");
+                })
+                .finally(() => {
+                    // Kembalikan tombol ke keadaan semula
+                    generateBtn.innerHTML = 'Generate';
+                    generateBtn.disabled = false;
+                    generateBtn.classList.remove('bg-green-400');
+                    generateBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                });
+        });
+    </script>
+
 @endsection

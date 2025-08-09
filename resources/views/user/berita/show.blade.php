@@ -61,7 +61,7 @@
                             <i class="fas fa-user"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-800">{{ $post->author ?? 'Admin Desa' }}</p>
+                            <p class="text-sm font-medium text-gray-800">{{ $post->author ?? 'Admin Kelurahan' }}</p>
                             <p class="text-xs text-gray-500">Pemerintah Kelurahan Sukowinangun</p>
                         </div>
                     </div>

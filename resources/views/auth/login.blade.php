@@ -13,7 +13,7 @@
         <div class="p-8 text-center border-b border-gray-100">
              <div class="flex justify-center mb-4">
 
-                 <img class="h-15 w-20" src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa">
+                 <img class="h-18 w-20" src="{{ asset('images/logo-desa.png') }}" alt="Logo Desa">
 
             </div>
             <h1 class="text-2xl font-bold text-gray-800 mb-2">Login Admin</h1>

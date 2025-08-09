@@ -54,7 +54,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-600 mb-1">Layanan Aktif</p>
-                    <p class="text-3xl font-bold text-gray-800">10</p>
+                    <p class="text-3xl font-bold text-gray-800">11</p>
                     <p class="text-sm text-gray-500 mt-1">
                         <i class="fas fa-check mr-1"></i>
                         Semua berjalan

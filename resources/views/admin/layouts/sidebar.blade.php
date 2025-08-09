@@ -55,7 +55,7 @@
 
             <li class="dropdown-container">
                 <button onclick="toggleDropdown(this)"
-                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
+                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium cursor-pointer
         {{ $isLayananActive ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
                     <div class="flex items-center">
                         <i class="fas fa-concierge-bell mr-3"></i>
@@ -145,16 +145,16 @@
                     </li>
                 </ul>
             </li>
-          @php
-    $isSettingActive =
-        request()->routeIs('admin.setting.BroadcastWa.*')
-        || request()->routeIs('admin.setting.banner')
-        || request()->routeIs('admin.setting.banner.update');
-@endphp
+            @php
+                $isSettingActive =
+                    request()->routeIs('admin.setting.BroadcastWa.*') ||
+                    request()->routeIs('admin.setting.banner') ||
+                    request()->routeIs('admin.setting.banner.update');
+            @endphp
 
             <li class="dropdown-container">
                 <button onclick="toggleDropdown(this)"
-                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium
+                    class="flex items-center justify-between w-full px-4 py-3 rounded-lg font-medium cursor-pointer
         {{ $isSettingActive ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
                     <div class="flex items-center">
                         <i class="fas fa-cog mr-3"></i>
@@ -173,11 +173,11 @@
                         </a>
                     </li>
                     <li>
-                       <a href="{{ route('admin.setting.banner') }}"
-    class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
+                        <a href="{{ route('admin.setting.banner') }}"
+                            class="flex items-center px-4 py-2 rounded-lg text-sm font-medium
     {{ request()->routeIs('admin.setting.banner') || request()->routeIs('admin.setting.banner.update') ? 'text-primary bg-primary/10 font-semibold' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
-    <span>Banner</span>
-</a>
+                            <span>Banner</span>
+                        </a>
 
                     </li>
                 </ul>

@@ -106,7 +106,7 @@
                 <!-- Form Actions -->
                 <div class="flex justify-end space-x-3 mt-6">
                     <button type="submit"
-                        class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm">
+                        class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm cursor-pointer">
                         Simpan Perubahan
                     </button>
                 </div>

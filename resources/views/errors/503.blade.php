@@ -16,12 +16,6 @@
                     Terima kasih atas pengertian Anda.
                 </p>
             </div>
-            <div class="mt-8">
-                <a href="{{ url('/') }}"
-                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200">
-                    Kembali ke Beranda
-                </a>
-            </div>
         </div>
     </section>
 @endsection
