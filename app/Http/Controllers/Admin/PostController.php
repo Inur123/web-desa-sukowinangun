@@ -230,27 +230,20 @@ class PostController extends Controller
 
         $post->tags()->sync($tagIds);
     }
-    public function generateContent(Request $request)
-    {
-        $request->validate([
-            'prompt' => 'required|string',
-        ]);
+   public function generateContent(Request $request)
+{
+    $request->validate([
+        'prompt' => 'required|string',
+    ]);
 
-        $apiKey = env('GEMINI_API_KEY');
-        $tanggal = now()->translatedFormat('j F Y');
-        $namaLurah = "Agus Dwi Aryanto";
+    $apiKey = env('GEMINI_API_KEY');
+    $tanggal = now()->translatedFormat('j F Y');
+    $namaLurah = "Agus Dwi Aryanto";
 
-        // Ambil seluruh data sebagai contoh gaya penulisan
-        $examples = AITraining::latest()->get();
-        $exampleText = "";
-        foreach ($examples as $ex) {
-            $exampleText .= "Input: {$ex->prompt}\nOutput: {$ex->output}\n\n";
-        }
+    // Contoh tag yang ingin dimasukkan
+    $exampleTags = "#magetan #sukowinangun";
 
-        // Contoh tag yang ingin kamu masukkan (bisa diganti sesuai kebutuhan)
-        $exampleTags = "#magetan #sukowinangun";
-
-        $instruction = <<<EOT
+    $instruction = <<<EOT
 Tulis artikel berita resmi berdasarkan informasi berikut.
 Gunakan bahasa Indonesia yang formal, jelas, dan mengalir.
 Artikel harus memiliki:
@@ -263,42 +256,33 @@ Tambahkan tag seperti contoh berikut di bawah paragraf penutup:
 $exampleTags
 
 Gunakan format berita tanpa tanda kurung atau placeholder, langsung masukkan tanggal $tanggal dan nama lurah $namaLurah di teks.
-
-Berikut contoh gaya penulisan sebelumnya:
-$exampleText
 EOT;
 
-        $finalPrompt = $instruction . "\n\nInformasi: " . $request->prompt;
+    $finalPrompt = $instruction . "\n\nInformasi: " . $request->prompt;
 
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'X-goog-api-key' => $apiKey,
-        ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
-            'contents' => [
-                [
-                    'parts' => [
-                        ['text' => $finalPrompt]
-                    ]
+    $response = Http::withHeaders([
+        'Content-Type' => 'application/json',
+        'X-goog-api-key' => $apiKey,
+    ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
+        'contents' => [
+            [
+                'parts' => [
+                    ['text' => $finalPrompt]
                 ]
             ]
+        ]
+    ]);
+
+    if ($response->successful()) {
+        $data = $response->json();
+        $output = $data['candidates'][0]['content']['parts'][0]['text'] ?? '';
+
+        return response()->json([
+            'output' => $output,
+            'source' => null,
         ]);
-
-        if ($response->successful()) {
-            $data = $response->json();
-            $output = $data['candidates'][0]['content']['parts'][0]['text'] ?? '';
-
-            // Simpan ke DB tanpa tags input karena contoh tags cuma contoh instruksi
-            AITraining::create([
-                'prompt' => $request->prompt,
-                'output' => $output,
-            ]);
-
-            return response()->json([
-                'output' => $output,
-                'source' => null,
-            ]);
-        } else {
-            return response()->json(['output' => null, 'source' => null], 500);
-        }
+    } else {
+        return response()->json(['output' => null, 'source' => null], 500);
     }
+}
 }
