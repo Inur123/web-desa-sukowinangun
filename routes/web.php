@@ -14,15 +14,16 @@ use App\Http\Controllers\ProfileController;
 
 
 use App\Http\Controllers\Admin\PostController;
+
 use App\Http\Controllers\Layanan\SkuController;
 
 use App\Http\Controllers\Layanan\SktmController;
-
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Layanan\LainnyaController;
 use App\Http\Controllers\Admin\ArsipSuratController;
 use App\Http\Controllers\Layanan\DomisiliController;
 use App\Http\Controllers\Layanan\KematianController;
+use App\Http\Controllers\Admin\ContactFormController;
 use App\Http\Controllers\Layanan\KelahiranController;
 use App\Http\Controllers\Layanan\HargaTanahController;
 use App\Http\Controllers\Layanan\KehilanganController;
@@ -42,8 +43,13 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::post('/form-kontak', [ContactFormController::class, 'store'])->name('form-kontak.store');
+
 Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/form-kontak', [ContactFormController::class, 'index'])->name('form-kontak.index');
+    Route::delete('/form-kontak/{id}', [ContactFormController::class, 'destroy'])->name('form-kontak.destroy');
+    Route::get('/form-kontak/{id}', [ContactFormController::class, 'show'])->name('form-kontak.show');
     Route::resource('/posts', PostController::class);
     Route::post('/generate-content', [App\Http\Controllers\Admin\PostController::class, 'generateContent'])->name('generate.content');
     Route::resource('/arsip-surat',ArsipSuratController::class);

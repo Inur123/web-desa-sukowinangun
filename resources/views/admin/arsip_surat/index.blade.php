@@ -182,11 +182,13 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($arsipList as $index => $arsip)
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
-                                <p class="text-xs md:text-sm font-medium text-gray-800">{{ $index + 1 }}</p>
-                            </td>
+                  @forelse ($arsipList as $index => $arsip)
+    <tr class="hover:bg-gray-50">
+        <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
+            <p class="text-xs md:text-sm font-medium text-gray-800">
+                {{ ($arsipList->currentPage() - 1) * $arsipList->perPage() + $loop->iteration }}
+            </p>
+        </td>
                             <td class="px-3 py-3 md:px-6 md:py-4 whitespace-nowrap">
                                 <p class="text-xs md:text-sm font-medium text-gray-800">{{ $arsip->nomor_surat ?? '-' }}
                                 </p>

@@ -36,6 +36,14 @@
                     <span>Arsip Surat</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('form-kontak.index') }}"
+                    class="flex items-center px-4 py-3 rounded-lg font-medium
+                    {{ request()->routeIs('form-kontak.*') ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors' }}">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Formulir Kontak</span>
+                </a>
+            </li>
             <!-- Menu Layanan dengan Dropdown -->
             @php
                 // Cek apakah salah satu dari submenu aktif

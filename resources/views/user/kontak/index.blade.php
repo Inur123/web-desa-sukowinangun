@@ -3,6 +3,18 @@
 @section('title', 'Kontak - Sukowinangun')
 
 @section('content')
+  <!-- Notification Popups -->
+    @if (session('success'))
+        <div class="fixed top-4 right-4 z-50 notification-popup">
+            <div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in-down">
+                <i class="fas fa-check-circle mr-2"></i>
+                {{ session('success') }}
+                <button onclick="closeNotification(this)" class="ml-4">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    @endif
     <section class="pt-16 bg-gradient-to-r from-primary to-secondary" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
             <div class="text-center text-white">
@@ -79,18 +91,23 @@
                 <!-- Form Section -->
                 <div class="bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-md hover:shadow-lg transition-all">
                     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Formulir Kontak</h3>
-                    <form class="space-y-4 sm:space-y-5 md:space-y-6">
+
+
+
+                    <form method="POST" action="{{ route('form-kontak.store') }}"
+                        class="space-y-4 sm:space-y-5 md:space-y-6">
+                        @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                             <div>
-                                <label for="nama" class="block text-sm sm:text-base font-medium text-gray-700 mb-1">Nama
-                                    Lengkap</label>
-                                <input type="text" id="nama" name="nama" required
+                                <label for="nama_lengkap"
+                                    class="block text-sm sm:text-base font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                <input type="text" id="nama_lengkap" name="nama_lengkap" required
                                     class="w-full px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label for="telepon" class="block text-sm sm:text-base font-medium text-gray-700 mb-1">No.
-                                    Telepon</label>
-                                <input type="tel" id="telepon" name="telepon"
+                                <label for="no_telepon"
+                                    class="block text-sm sm:text-base font-medium text-gray-700 mb-1">No. Telepon</label>
+                                <input type="tel" id="no_telepon" name="no_telepon" required
                                     class="w-full px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                         </div>
@@ -103,22 +120,22 @@
                         </div>
 
                         <div>
-                            <label for="kebutuhan" class="block text-sm sm:text-base font-medium text-gray-700 mb-1">Jenis
-                                Kebutuhan</label>
-                            <select id="kebutuhan" name="kebutuhan" required
+                            <label for="jenis_kebutuhan"
+                                class="block text-sm sm:text-base font-medium text-gray-700 mb-1">Jenis Kebutuhan</label>
+                            <select id="jenis_kebutuhan" name="jenis_kebutuhan" required
                                 class="w-full px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="">Pilih kebutuhan Anda</option>
-                                <option value="administrasi">Pelayanan Administrasi</option>
-                                <option value="pengaduan">Pengaduan Masyarakat</option>
-                                <option value="informasi">Permintaan Informasi</option>
-                                <option value="lainnya">Lainnya</option>
+                                <option value="Pelayanan Administrasi">Pelayanan Administrasi</option>
+                                <option value="Pengaduan Masyarakat">Pengaduan Masyarakat</option>
+                                <option value="Permintaan Informasi">Permintaan Informasi</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>
 
                         <div>
                             <label for="pesan" class="block text-sm sm:text-base font-medium text-gray-700 mb-1">Pesan
                                 Anda</label>
-                            <textarea id="pesan" name="pesan" rows="4"
+                            <textarea id="pesan" name="pesan" rows="4" required
                                 class="w-full px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
                         </div>
 
@@ -319,4 +336,30 @@
             </div>
         </div>
     </section>
+      <script>
+        // Fungsi untuk menutup notifikasi
+        function closeNotification(button) {
+            const notification = button.closest('.notification-popup');
+            if (notification) {
+                notification.remove();
+            }
+        }
+
+        // Set timeout untuk menghilangkan notifikasi setelah 3 detik
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifications = document.querySelectorAll('.notification-popup');
+
+            notifications.forEach(notification => {
+                setTimeout(() => {
+                    notification.style.transition = 'opacity 0.5s ease-out';
+                    notification.style.opacity = '0';
+
+                    // Hapus elemen setelah animasi selesai
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                }, 2000);
+            });
+        });
+    </script>
 @endsection
