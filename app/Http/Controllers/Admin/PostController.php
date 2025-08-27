@@ -230,7 +230,7 @@ class PostController extends Controller
 
         $post->tags()->sync($tagIds);
     }
-   public function generateContent(Request $request)
+  public function generateContent(Request $request)
 {
     $request->validate([
         'prompt' => 'required|string',
@@ -239,36 +239,70 @@ class PostController extends Controller
     $apiKey = env('GEMINI_API_KEY');
     $tanggal = now()->translatedFormat('j F Y');
     $namaLurah = "Agus Dwi Aryanto";
-
-    // Contoh tag yang ingin dimasukkan
-    $exampleTags = "#magetan #sukowinangun";
+    $namaKelurahan = "Sukowinangun";
+    $alamatKelurahan = "Kelurahan $namaKelurahan, Kecamatan Magetan, Kabupaten Magetan, Jawa Timur";
 
     $instruction = <<<EOT
-Tulis artikel berita resmi berdasarkan informasi berikut.
-Gunakan bahasa Indonesia yang formal, jelas, dan mengalir.
-Artikel harus memiliki:
-1. Judul berita yang menarik
-2. Paragraf pembuka
-3. Paragraf isi berita lengkap
-4. Paragraf penutup
+    Anda adalah penulis berita resmi Kelurahan Sukowinangun. Tulis artikel berita formal berdasarkan informasi yang diberikan dengan ketentuan:
 
-Tambahkan tag seperti contoh berikut di bawah paragraf penutup:
-$exampleTags
+    1. FORMAT PENULISAN:
+    - Judul berita (1 baris)
+    - 1 baris kosong
+    - Paragraf pembuka (mengandung 5W+1H)
+    - 1 baris kosong
+    - Paragraf isi (uraian lengkap kegiatan/konten)
+    - 1 baris kosong
+    - Paragraf penutup (kesimpulan/harapan)
+    - 1 baris kosong
+    - Tagar (diawali #)
 
-Gunakan format berita tanpa tanda kurung atau placeholder, langsung masukkan tanggal $tanggal dan nama lurah $namaLurah di teks.
-EOT;
+    2. KETENTUM KHUSUS:
+    - Gunakan bahasa Indonesia formal dan profesional
+    - Selalu sebut alamat lengkap: $alamatKelurahan
+    - Cantumkan nama Lurah: $namaLurah
+    - Tanggal kegiatan: $tanggal
+    - Tidak perlu tanda bintang (**) atau format markdown
+    - Fokus pada informasi faktual dan positif
 
-    $finalPrompt = $instruction . "\n\nInformasi: " . $request->prompt;
+    3. CONTOH STRUKTUR:
+    [Judul Berita]
+
+    [Pembuka] Kelurahan Sukowinangun menggelar...[jelaskan kegiatan secara ringkas].
+
+    [Isi] Kegiatan dimulai dengan...[uraian lengkap]. Menurut $namaLurah...[kutipan/reaksi]. Peserta kegiatan...[deskripsi partisipasi].
+
+    [Penutup] Dengan terselenggaranya acara ini...[harapan/kesimpulan].
+
+    EOT;
+
+    $finalPrompt = $instruction . "\n\nBuat berita tentang: " . $request->prompt;
 
     $response = Http::withHeaders([
         'Content-Type' => 'application/json',
         'X-goog-api-key' => $apiKey,
-    ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', [
+    ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', [
         'contents' => [
             [
                 'parts' => [
                     ['text' => $finalPrompt]
                 ]
+            ]
+        ],
+        'generationConfig' => [
+            'temperature' => 0.7,
+            'topP' => 0.9,
+            'topK' => 40,
+            'maxOutputTokens' => 2048,
+            'stopSequences' => []
+        ],
+        'safetySettings' => [
+            [
+                'category' => 'HARM_CATEGORY_HARASSMENT',
+                'threshold' => 'BLOCK_ONLY_HIGH'
+            ],
+            [
+                'category' => 'HARM_CATEGORY_HATE_SPEECH',
+                'threshold' => 'BLOCK_ONLY_HIGH'
             ]
         ]
     ]);
@@ -277,12 +311,21 @@ EOT;
         $data = $response->json();
         $output = $data['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
+        // Post-processing to ensure format consistency
+        $output = str_replace(['**', '*', '• '], '', $output);
+        $output = preg_replace('/\n{3,}/', "\n\n", $output);
+
         return response()->json([
-            'output' => $output,
+            'output' => trim($output),
             'source' => null,
         ]);
     } else {
-        return response()->json(['output' => null, 'source' => null], 500);
+        $errorDetails = $response->json();
+        return response()->json([
+            'output' => null,
+            'source' => null,
+            'error' => $errorDetails ?? 'Gagal menghubungi API Gemini'
+        ], 500);
     }
 }
 }
